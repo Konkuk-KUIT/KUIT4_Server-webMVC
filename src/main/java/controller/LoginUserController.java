@@ -3,6 +3,7 @@ package controller;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +24,18 @@ public class LoginUserController extends HttpServlet {
             session.setAttribute("user", user);
             resp.sendRedirect("/index.jsp");
         } else {
-            resp.sendRedirect("/user/login_failed.jsp");
+            RequestDispatcher rd = req.getRequestDispatcher("/user/login_failed.jsp");
+            rd.forward(req, resp);
         }
+
+        /*if (user != null && user.getPassword().equals(req.getParameter("password"))) {
+            HttpSession session = req.getSession();
+            session.setAttribute("user", user);
+            RequestDispatcher rd = req.getRequestDispatcher("/index.jsp");
+            rd.forward(req, resp);
+        } else {
+            RequestDispatcher rd = req.getRequestDispatcher("/user/login_failed.jsp");
+            rd.forward(req, resp);
+        }*/
     }
 }
