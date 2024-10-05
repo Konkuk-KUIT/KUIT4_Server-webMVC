@@ -19,7 +19,7 @@ public class LoginUserController implements Controller {
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
 
-            return "redirect:/index.jsp";
+            return "redirect:/";
         } else {
             return "/user/login_failed.jsp";
         }

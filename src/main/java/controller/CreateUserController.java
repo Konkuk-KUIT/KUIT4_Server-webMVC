@@ -27,7 +27,7 @@ public class CreateUserController implements Controller {
         MemoryUserRepository.getInstance().addUser(user);
         System.out.println("User created");
         //redirect
-        return "redirect:/index.jsp";
+        return "redirect:/";
     }
 
 

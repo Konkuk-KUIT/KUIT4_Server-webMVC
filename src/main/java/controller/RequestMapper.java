@@ -9,6 +9,7 @@ public class RequestMapper {
 
     public RequestMapper() {
         mappings = new HashMap<>();
+        mappings.put("/", new HomeController());
         mappings.put("/user/logout", new LogoutUserController());   //완료
         mappings.put("/user/update", new UpdateUserController());   //완료
         mappings.put("/user/updateForm", new UpdateUserFormController());   //완료

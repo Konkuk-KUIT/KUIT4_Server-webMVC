@@ -13,7 +13,7 @@ public class LogoutUserController implements Controller {
         HttpSession session = req.getSession();
         session.removeAttribute("user");
 
-        return "redirect:/index.jsp";
+        return "redirect:/";
     }
 
     /*@Override
