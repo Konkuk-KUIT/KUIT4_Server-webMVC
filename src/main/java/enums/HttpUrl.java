@@ -1,11 +1,13 @@
 package enums;
 
 public enum HttpUrl {
-    INDEX_JSP("/index.jsp"),
-    REGISTER_FORM_HTML("/user/form.jsp"),
-    LOGIN_HTML("/user/login.jsp"),
-    LIST_HTML("/user/list.jsp"),
-    LOGIN_FAILD("/user/login_failed.jsp"),
+    HOME("/"),
+    LOGIN("/user/login"),
+    LOGOUT("/user/logout"),
+    LIST("/user/list"),
+    UPDATE("/user/update"),
+    UPDATE_FORM("/user/updateForm"),
+    LOGIN_FAILED("/user/login_failed"),
     USER_LIST("/user/userlist"),
     USER_SIGNUP("/user/signup");
 

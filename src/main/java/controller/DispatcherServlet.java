@@ -37,7 +37,6 @@ public class DispatcherServlet extends HttpServlet {
         }
 
         Controller controller = requestMapper.getController(url);
-
         if (controller == null) {
             resp.sendError(404);
             return;
