@@ -18,6 +18,11 @@ public class LoginController extends HttpServlet {
     Repository repository = MemoryUserRepository.getInstance();
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/user/login.jsp").forward(req, resp);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userId = req.getParameter("userId");
         String password = req.getParameter("password");
@@ -32,7 +37,7 @@ public class LoginController extends HttpServlet {
         HttpSession session = req.getSession();
         session.setAttribute("user", findUser);
 
-        req.getRequestDispatcher("/home.jsp").forward(req, resp);
+        resp.sendRedirect("/");
 
     }
 }

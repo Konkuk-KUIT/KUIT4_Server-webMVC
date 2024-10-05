@@ -32,7 +32,7 @@
             </div>
             <div style="height:10px;">
             </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign up</button>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Update</button>
         </form>
     </main>
 </div>
