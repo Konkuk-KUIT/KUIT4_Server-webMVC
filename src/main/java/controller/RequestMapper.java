@@ -9,11 +9,12 @@ public class RequestMapper {
 
     public RequestMapper() {
         mappings = new HashMap<>();
-        mappings.put("/user/logout", new LogoutUserController());
-        mappings.put("/user/update", new UpdateUserController());
-        mappings.put("/user/updateForm", new UpdateUserFormController());
-        mappings.put("/user/signup", new CreateUserController());
-        mappings.put("/user/login", new LogoutUserController());
+        mappings.put("/user/logout", new LogoutUserController());   //완료
+        mappings.put("/user/update", new UpdateUserController());   //완료
+        mappings.put("/user/updateForm", new UpdateUserFormController());   //완료
+        mappings.put("/user/signup", new CreateUserController()); //완료
+        mappings.put("/user/login", new LoginUserController()); //완료
+        mappings.put("/user/list", new ListUserController()); //완료
     }
 
     public Controller getController(String url) {
