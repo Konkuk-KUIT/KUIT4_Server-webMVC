@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/user/update")
+@WebServlet("/user/updateForm")
 public class UpdateUserFormController extends HttpServlet {
 
     Repository repository = MemoryUserRepository.getInstance();
@@ -27,17 +27,5 @@ public class UpdateUserFormController extends HttpServlet {
 
         RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
         rd.forward(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        User newUser = new User(req.getParameter("userId"),
-                req.getParameter("password"),
-                req.getParameter("name"),
-                req.getParameter("email"));
-
-        repository.addUser(newUser);
-
-        resp.sendRedirect("/user/userList");
     }
 }
