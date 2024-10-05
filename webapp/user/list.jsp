@@ -22,7 +22,7 @@
                 <th class="col-md-3">${user.name}</th>
                 <th class="col-md-3">${user.email}</th>
                 <th class="col-md-3">
-                    <c:if test="${sessionScope.user.userId eq user.userId}">
+                    <c:if test="${sessionScope.user.userId == user.userId}">
                         <a href="/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a>
                     </c:if>
                 </th>
