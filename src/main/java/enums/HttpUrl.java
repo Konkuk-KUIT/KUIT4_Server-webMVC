@@ -4,11 +4,9 @@ public enum HttpUrl {
     HOME("/"),
     LOGIN("/user/login"),
     LOGOUT("/user/logout"),
-    LIST("/user/list"),
     UPDATE("/user/update"),
     UPDATE_FORM("/user/updateForm"),
-    LOGIN_FAILED("/user/login_failed"),
-    USER_LIST("/user/userlist"),
+    USER_LIST("/user/userList"),
     USER_SIGNUP("/user/signup");
 
     private final String value;

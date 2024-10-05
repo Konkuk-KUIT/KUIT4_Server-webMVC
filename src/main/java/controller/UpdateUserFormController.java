@@ -18,7 +18,7 @@ public class UpdateUserFormController implements Controller {
             return "/user/updateForm.jsp";
         }
 
-        return "redirect:/user/list";
+        return "/user/userList";
     }
 
     /*@Override

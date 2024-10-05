@@ -17,7 +17,7 @@ public class RequestMapper {
         mappings.put(UPDATE_FORM.getValue(), new UpdateUserFormController());   //완료
         mappings.put(USER_SIGNUP.getValue(), new CreateUserController()); //완료
         mappings.put(LOGIN.getValue(), new LoginUserController()); //완료
-        mappings.put(LIST.getValue(), new ListUserController()); //완료
+        mappings.put(USER_LIST.getValue(), new ListUserController()); //완료
     }
 
     public Controller getController(String url) {
