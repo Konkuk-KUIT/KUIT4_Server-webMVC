@@ -43,6 +43,14 @@ public class ResourceFilter implements Filter {
     }
 
     private boolean isResourceUrl(String url) {
+        // 정적 리소스 파일 확장자 체크 임시 추가
+        String[] staticExtensions = {".css", ".js", ".html", ".jpg", ".png", ".ico", ".svg", ".woff", ".ttf"};
+        for (String extension : staticExtensions) {
+            if (url.endsWith(extension)) {
+                return true;
+            }
+        }
+
         for (String prefix : resourcePrefixs) {
             if (url.startsWith(prefix)) {
                 return true;
