@@ -14,7 +14,6 @@
 
         <form name="user-update" method="post" action="/user/update">
             <div class="form-floating">
-<%--                <input type="text" class="form-control" id="userId" name="userId" placeholder="Id">--%>
                 <input type="text" class="form-control" value="${user.userId}" id="userId" name="userId" placeholder="Id" readonly>
                 <label for="userId">User Id</label>
             </div>
