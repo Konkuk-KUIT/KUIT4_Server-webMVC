@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.util.Collection" %>
 <%@ page import="jwp.model.User" %>
 
@@ -69,22 +70,30 @@
             </tr>
             </thead>
             <tbody>
-            <%
-                Collection<User> users = (Collection<User>) request.getAttribute("users");
-                for (User user : users) {
-            %>
+<%--            <%--%>
+<%--                Collection<User> users = (Collection<User>) request.getAttribute("users");--%>
+<%--                for (User user : users) {--%>
+<%--            %>--%>
+<%--            <tr>--%>
+<%--                <th class="col-md-3"><%= user.getUserId() %>--%>
+<%--                </th>--%>
+<%--                <th class="col-md-3"><%= user.getName() %>--%>
+<%--                </th>--%>
+<%--                <th class="col-md-3"><%= user.getEmail() %>--%>
+<%--                </th>--%>
+<%--                <th class="col-md-3"><a href="#" class="btn btn-success" role="button">수정</a></th>--%>
+<%--            </tr>--%>
+            <c:forEach var="user" items="${users}">
             <tr>
-                <th class="col-md-3"><%= user.getUserId() %>
-                </th>
-                <th class="col-md-3"><%= user.getName() %>
-                </th>
-                <th class="col-md-3"><%= user.getEmail() %>
-                </th>
-                <th class="col-md-3"><a href="#" class="btn btn-success" role="button">수정</a></th>
+                <td class="col-md-3">${user.userId}</td>
+                <td class="col-md-3">${user.name}</td>
+                <td class="col-md-3">${user.email}</td>
+                <td class="col-md-3"><a href="#" class="btn btn-success" role="button">수정</a></td>
             </tr>
-            <%
-                }
-            %>
+            </c:forEach>
+<%--            <%--%>
+<%--                }--%>
+<%--            %>--%>
             </tbody>
         </table>
     </div>
