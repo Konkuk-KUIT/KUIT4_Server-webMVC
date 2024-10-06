@@ -1,3 +1,8 @@
+<!--jsp-->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!--jstl-->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!doctype html>
 <html lang="ko">
 <head>
