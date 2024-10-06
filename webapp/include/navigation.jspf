@@ -42,7 +42,7 @@
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
                     <a href="/user/logout" role="button" class="btn btn-outline-primary me-2">Log-Out</a>
-                    <a href="/user/updateForm?userId=${sessionScope.user.userId}" role="button" class="btn btn-primary">Info-Modify</a>
+                    <a href="/user/updateForm?userId=${sessionScope.user.userId}" role="button" class="btn btn-primary">회원정보수정</a>
 <%--                                                                                                                        한글인코딩계속깨져서 일단은 영어로수정한뒤에 방법 더 찾아보기        --%>
                 </c:when>
                 <c:otherwise>

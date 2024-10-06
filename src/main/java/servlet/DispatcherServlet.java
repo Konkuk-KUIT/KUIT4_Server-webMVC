@@ -25,9 +25,9 @@ public class DispatcherServlet extends HttpServlet {
 
         if (viewName.startsWith("redirect:")) {
             resp.sendRedirect(viewName.substring(9)); // "redirect:" 제거 후 리다이렉트
+            return;
         }
         req.getRequestDispatcher(viewName).forward(req, resp);
-
 
     }
 

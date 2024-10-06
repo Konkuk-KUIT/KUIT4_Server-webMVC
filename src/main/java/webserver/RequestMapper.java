@@ -1,6 +1,6 @@
 package webserver;
 
-import controller.*;
+import servlet.*;
 import core.db.MemoryUserRepository;
 import servlet.controller.*;
 
@@ -19,13 +19,17 @@ public class RequestMapper {
        controllers.put("/user/logout", new LogoutController());
        controllers.put("/user/update", new UpdateUserController(MemoryUserRepository.getInstance()));
        controllers.put("/user/updateForm", new UpdateUserFormController(MemoryUserRepository.getInstance()));
-       controllers.put("/user/create", new CreateUserController(MemoryUserRepository.getInstance()));
        controllers.put("/user/signup", new CreateUserController(MemoryUserRepository.getInstance()));
 
     }
 
     public String map(HttpServletRequest req) {
         Controller controller = controllers.get(req.getRequestURI());
+
+        if (controller == null) {
+            controller = controllers.get("/");
+        }
+
         return controller.execute(req);
     }
 
