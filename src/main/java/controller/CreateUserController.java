@@ -1,31 +1,40 @@
 package controller;
 
+import constants.HttpMethod;
+import constants.QueryKey;
+import constants.RequestURL;
 import core.db.MemoryUserRepository;
 import core.db.Repository;
 import jwp.model.User;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
-@WebServlet("/user/signup")  // url 매핑
-public class CreateUserController extends HttpServlet {
+import static constants.HttpMethod.*;
+import static constants.QueryKey.*;
+import static constants.RequestURL.*;
+
+public class CreateUserController extends HttpServlet implements Controller {
 
     Repository repository = MemoryUserRepository.getInstance();
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = new User(req.getParameter("userId"),
-                req.getParameter("password"),
-                req.getParameter("name"),
-                req.getParameter("email"));
+    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+
+        if(req.getMethod().equals(GET.getMethod())) {
+            // GET 방식으로 요청이 들어올 경우 form.jsp 파일로 forward하도록 url 반환
+            return FORM_JSP.getUrl();
+        }
+
+        User user = new User(req.getParameter(ID.getKey()),
+                req.getParameter(PASSWORD.getKey()),
+                req.getParameter(NAME.getKey()),
+                req.getParameter(EMAIL.getKey()));
 
         repository.addUser(user);
-        System.out.println("user 회원가입 완료");
 
-        resp.sendRedirect("/user/userList");
+        // 회원 가입이 완료되고 나면 홈 화면으로 redirect
+        return "redirect:/";
     }
 }

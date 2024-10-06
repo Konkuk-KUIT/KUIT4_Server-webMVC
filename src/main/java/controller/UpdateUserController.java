@@ -1,32 +1,35 @@
 package controller;
 
+import constants.QueryKey;
+import constants.RequestURL;
 import core.db.MemoryUserRepository;
 import core.db.Repository;
 import jwp.model.User;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
-@WebServlet("/user/update")
-public class UpdateUserController extends HttpServlet {
+import static constants.QueryKey.*;
+import static constants.RequestURL.*;
+
+
+public class UpdateUserController extends HttpServlet implements Controller{
 
     Repository repository = MemoryUserRepository.getInstance();
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User newUser = new User(req.getParameter("userId"),
-                req.getParameter("password"),
-                req.getParameter("name"),
-                req.getParameter("email"));
+    public String execute(HttpServletRequest req, HttpServletResponse resp) {
+        User newUser = new User(req.getParameter(ID.getKey()),
+                req.getParameter(PASSWORD.getKey()),
+                req.getParameter(NAME.getKey()),
+                req.getParameter(EMAIL.getKey()));
 
-        User findUser = repository.findUserById(req.getParameter("userId"));
+        User findUser = repository.findUserById(req.getParameter(ID.getKey()));
 
         findUser.update(newUser);
 
-        resp.sendRedirect("/user/userList");
+        // update 완료시 다시 리스트 화면으로 redirect할 수 있도록 url 반환
+        return "redirect:" + USER_LIST.getUrl();
     }
 }
