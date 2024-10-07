@@ -19,7 +19,11 @@ import static constants.RequestURL.*;
 
 public class LoginController extends HttpServlet implements Controller{
 
-    Repository repository = MemoryUserRepository.getInstance();
+    Repository repository;
+
+    public LoginController(Repository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {

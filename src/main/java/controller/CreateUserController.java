@@ -17,7 +17,11 @@ import static constants.RequestURL.*;
 
 public class CreateUserController extends HttpServlet implements Controller {
 
-    Repository repository = MemoryUserRepository.getInstance();
+    Repository repository;
+
+    public CreateUserController(Repository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {

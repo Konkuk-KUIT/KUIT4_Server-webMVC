@@ -1,4 +1,5 @@
 import controller.*;
+import core.db.MemoryUserRepository;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,12 +24,12 @@ public class RequestMapper extends HttpServlet {
     }
     static {
         // 정적 초기화 블럭
-        controllers.put(SIGNUP.getUrl(), new CreateUserController());
-        controllers.put(LOGIN.getUrl(), new LoginController());
-        controllers.put(USER_LIST.getUrl(), new ListUserController());
+        controllers.put(SIGNUP.getUrl(), new CreateUserController(MemoryUserRepository.getInstance()));
+        controllers.put(LOGIN.getUrl(), new LoginController(MemoryUserRepository.getInstance()));
+        controllers.put(USER_LIST.getUrl(), new ListUserController(MemoryUserRepository.getInstance()));
         controllers.put(HOME.getUrl(), new HomeController());
-        controllers.put(UPDATE.getUrl(), new UpdateUserController());
-        controllers.put(UPDATE_FORM.getUrl(), new UpdateUserFormController());
+        controllers.put(UPDATE.getUrl(), new UpdateUserController(MemoryUserRepository.getInstance()));
+        controllers.put(UPDATE_FORM.getUrl(), new UpdateUserFormController(MemoryUserRepository.getInstance()));
         controllers.put(LOGOUT.getUrl(), new LogoutController());
         controllers.put("/", new HomeController());
     }
