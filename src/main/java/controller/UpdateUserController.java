@@ -1,10 +1,13 @@
 package controller;
 
+import controller.constant.URI;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import static controller.constant.URI.USER_LIST;
 
 public class UpdateUserController implements Controller {
 
@@ -16,6 +19,6 @@ public class UpdateUserController implements Controller {
                 req.getParameter("email"));
 
         MemoryUserRepository.getInstance().changeUserInfo(user);
-        return "redirect:/user/userList";
+        return USER_LIST.getRedirectURI();
     }
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import controller.constant.URI;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Collection;
 
 import static controller.constant.SessionKey.USER_SESSION_KEY;
+import static controller.constant.URI.*;
 
 public class ListUserController implements Controller {
 
@@ -21,10 +23,10 @@ public class ListUserController implements Controller {
             req.setAttribute("users", users);
 
             //jsp에게 화면 출력에 대한 요청 처리
-            return "/user/list.jsp";
+            return USER_LIST.getJSPPath();
         } else {
             //로그인이 되어있지 않은 상태
-            return "/user/login.jsp";
+            return LOGIN.getJSPPath();
         }
     }
 

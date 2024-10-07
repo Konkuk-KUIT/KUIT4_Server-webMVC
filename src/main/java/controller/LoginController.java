@@ -1,5 +1,6 @@
 package controller;
 
+import controller.constant.URI;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
@@ -17,10 +18,10 @@ public class LoginController implements Controller {
             //로그인 성공
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
-            return "redirect:/";
+            return URI.ROOT.getRedirectURI();
         } else {
             //로그인 실패
-            return "/user/login_failed.jsp";
+            return URI.LOGIN_FAILED.getJSPPath();
         }
     }
 }

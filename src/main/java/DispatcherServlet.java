@@ -1,4 +1,5 @@
 import controller.*;
+import controller.constant.URI;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,19 +10,21 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static controller.constant.URI.*;
+
 @WebServlet("/")
 public class DispatcherServlet extends HttpServlet {
 
     private static final Map<String, Controller> controllerMap = new HashMap<>();
 
     static{
-        controllerMap.put("/", new HomeController());
-        controllerMap.put("/user/signup", new CreateUserController());
-        controllerMap.put("/user/login", new LoginController());
-        controllerMap.put("/user/logout", new LogOutController());
-        controllerMap.put("/user/updateForm", new UpdateUserFormController());
-        controllerMap.put("/user/update", new UpdateUserController());
-        controllerMap.put("/user/userList", new ListUserController());
+        controllerMap.put(ROOT.getURI(), new HomeController());
+        controllerMap.put(SIGNUP.getURI(), new CreateUserController());
+        controllerMap.put(LOGIN.getURI(), new LoginController());
+        controllerMap.put(LOGOUT.getURI(), new LogOutController());
+        controllerMap.put(UPDATE_FORM.getURI(), new UpdateUserFormController());
+        controllerMap.put(UPDATE.getURI(), new UpdateUserController());
+        controllerMap.put(USER_LIST.getURI(), new ListUserController());
     }
 
     @Override
