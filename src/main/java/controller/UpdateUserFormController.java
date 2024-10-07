@@ -3,45 +3,44 @@ package controller;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation .WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/user/update.jsp")
-public class UpdateUserFormController extends HttpServlet {
+import static controller.constant.SessionKey.*;
 
-    private final String USER_SESSION_KEY = "user";
+public class UpdateUserFormController implements Controller {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
         // 세션에 저장된 정보 가져오기
         HttpSession session = req.getSession();
-        Object value = session.getAttribute(USER_SESSION_KEY);
+        Object value = session.getAttribute(USER_SESSION_KEY.getKey());
 
-        checkSession(value, resp);
+        if (isValidSession(value, resp)) { return "redirect:/";}
 
         User loginUser = (User) value;
-        if(loginUser.getUserId().equals(user.getUserId())) {
+        if(isValidUser(loginUser, user)) {
             //로그인 되어있는 user와 같은 user의 수정버튼 클릭
             req.setAttribute("user", user);
-            req.getRequestDispatcher("/user/updateForm.jsp").forward(req, resp);
-            return;
+            return "/user/updateForm.jsp";
         }
-
-        resp.sendRedirect("/user/userList");
+        return "redirect:/user/userList";
     }
 
-    private void checkSession(Object value, HttpServletResponse resp) throws IOException {
+    private boolean isValidUser(User loginUser, User user) {
+        return loginUser.getUserId().equals(user.getUserId());
+    }
+
+    private boolean isValidSession(Object value, HttpServletResponse resp) throws IOException {
         if (value == null) {
             //로그인하지 않았는데 UserList에 접근한 상황
             System.out.println("잘못된 접근권한입니다!");
-            resp.sendRedirect("/");
+            return true;
         }
+        return false;
     }
 
 }

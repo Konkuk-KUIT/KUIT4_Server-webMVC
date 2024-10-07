@@ -39,7 +39,7 @@
                 <td class="col-md-3">${user.userId}</td>
                 <td class="col-md-3">${user.name}</td>
                 <td class="col-md-3">${user.email}</td>
-                <td class="col-md-3"><a href="/user/update.jsp?userId=${user.userId}" class="btn btn-success" role="button">수정</a></td>
+                <td class="col-md-3"><a href="/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a></td>
             </tr>
             </c:forEach>
 <%--            <%--%>

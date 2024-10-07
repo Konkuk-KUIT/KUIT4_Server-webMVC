@@ -3,29 +3,24 @@ package controller;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
-@WebServlet("/user/login")
-public class LoginController extends HttpServlet {
+public class LoginController implements Controller {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String process(HttpServletRequest req, HttpServletResponse resp) {
         User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
 
         if (user != null && user.getPassword().equals(req.getParameter("password"))) {
             //로그인 성공
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
-            resp.sendRedirect("/");
+            return "redirect:/";
         } else {
             //로그인 실패
-            req.getRequestDispatcher("/user/login_failed.jsp").forward(req, resp);
+            return "/user/login_failed.jsp";
         }
     }
 }
