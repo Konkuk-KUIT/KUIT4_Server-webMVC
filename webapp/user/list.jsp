@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.util.Collection" %>
 <%@ page import="jwp.model.User" %>
+
 <%@ include file="./navigation.jspf" %>
 <%@ include file="./header.jspf" %>
 
@@ -39,7 +40,8 @@
                 </th>
                 <th class="col-md-3">${user.email}
                 </th>
-                <th class="col-md-3"><a href="#" class="btn btn-success" role="button">수정</a></th>
+                <th class="col-md-3"><a href="/user/updateForm?userId=${user.userId}" class="btn btn-success" role="button">수정</a></th>
+
             </tr>
             </c:forEach>
             </tbody>
