@@ -1,6 +1,5 @@
 package controller;
 
-import controller.constant.URI;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
@@ -14,9 +13,15 @@ import static controller.constant.URI.*;
 
 public class UpdateUserFormController implements Controller {
 
+    protected MemoryUserRepository memoryUserRepository;
+
+    public UpdateUserFormController(MemoryUserRepository memoryUserRepository) {
+        this.memoryUserRepository = memoryUserRepository;
+    }
+
     @Override
     public String process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
+        User user = memoryUserRepository.findUserById(req.getParameter("userId"));
         // 세션에 저장된 정보 가져오기
         HttpSession session = req.getSession();
         Object value = session.getAttribute(USER_SESSION_KEY.getKey());
@@ -24,7 +29,8 @@ public class UpdateUserFormController implements Controller {
         if (isValidSession(value, resp)) { return ROOT.getRedirectURI();}
 
         User loginUser = (User) value;
-        if(isValidUser(loginUser, user)) {
+
+        if(isCheckUser(loginUser, user)) {
             //로그인 되어있는 user와 같은 user의 수정버튼 클릭
             req.setAttribute("user", user);
             return UPDATE_FORM.getJSPPath();
@@ -32,7 +38,7 @@ public class UpdateUserFormController implements Controller {
         return USER_LIST.getRedirectURI();
     }
 
-    private boolean isValidUser(User loginUser, User user) {
+    private boolean isCheckUser(User loginUser, User user) {
         return loginUser.getUserId().equals(user.getUserId());
     }
 

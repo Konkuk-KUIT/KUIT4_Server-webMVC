@@ -14,12 +14,18 @@ import static controller.constant.URI.*;
 
 public class ListUserController implements Controller {
 
+    protected MemoryUserRepository memoryUserRepository;
+
+    public ListUserController(MemoryUserRepository memoryUserRepository) {
+        this.memoryUserRepository = memoryUserRepository;
+    }
+
     @Override
     public String process(HttpServletRequest req, HttpServletResponse resp) {
         // 세션에 저장된 정보 가져와서 Login 정보 체크
         if (isLogin(req.getSession())) {
             //로그인되어 있는 상태라면
-            Collection<User> users = MemoryUserRepository.getInstance().findAll();
+            Collection<User> users = memoryUserRepository.findAll();
             req.setAttribute("users", users);
 
             //jsp에게 화면 출력에 대한 요청 처리

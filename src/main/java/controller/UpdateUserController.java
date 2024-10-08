@@ -11,6 +11,12 @@ import static controller.constant.URI.USER_LIST;
 
 public class UpdateUserController implements Controller {
 
+    protected MemoryUserRepository memoryUserRepository;
+
+    public UpdateUserController(MemoryUserRepository memoryUserRepository) {
+        this.memoryUserRepository = memoryUserRepository;
+    }
+
     @Override
     public String process(HttpServletRequest req, HttpServletResponse resp) {
         User user = new User(req.getParameter("userId"),
@@ -18,7 +24,7 @@ public class UpdateUserController implements Controller {
                 req.getParameter("name"),
                 req.getParameter("email"));
 
-        MemoryUserRepository.getInstance().changeUserInfo(user);
+        memoryUserRepository.changeUserInfo(user);
         return USER_LIST.getRedirectURI();
     }
 }
