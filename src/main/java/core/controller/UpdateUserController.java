@@ -9,16 +9,19 @@ import jwp.model.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CreateUserController implements Controller {
-    private Repository userRepository = MemoryUserRepository.getInstance();
 
+
+public class UpdateUserController implements Controller {
+    private Repository userRepository = MemoryUserRepository.getInstance();
     @Override
     public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+        String userId = request.getParameter(UserAttribute.USER_ID.getKey());
+        String password = request.getParameter(UserAttribute.PASSWORD.getKey());
         User user = new User(request.getParameter(UserAttribute.USER_ID.getKey()),
                 request.getParameter(UserAttribute.PASSWORD.getKey()),
                 request.getParameter(UserAttribute.NAME.getKey()),
                 request.getParameter(UserAttribute.EMAIL.getKey()));
         userRepository.addUser(user);
-        return "redirect:" + URLPath.INDEX.getPath();
+        return "redirect:" + URLPath.LIST.getPath();
     }
 }

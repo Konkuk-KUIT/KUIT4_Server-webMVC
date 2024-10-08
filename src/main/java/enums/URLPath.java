@@ -2,11 +2,11 @@ package enums;
 
 
 public enum URLPath {
-    INDEX("/index.html"),
+    INDEX("/home.jsp"),
     LOGIN("/user/login"),
     SIGNUP("/user/signup"),
-    LIST("/user/list.html"),
-    LOGINFAIL("/user/login_failed.html");
+    LIST("/user/list.jsp"),
+    LOGINFAIL("/user/login_failed.jsp");
 
 
     private final String path;

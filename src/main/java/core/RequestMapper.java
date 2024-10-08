@@ -10,8 +10,7 @@ public class RequestMapper {
 
     private static final Map<String, Controller> controllers = new HashMap<>();
 
-    // DI 주입!!!
-    private static final Repository userRepository = (Repository) MemoryUserRepository.getInstance();
+    private static final ForwardController forwardController = new ForwardController();
 
     public RequestMapper() {
         // 컨트롤러 등록
@@ -19,13 +18,10 @@ public class RequestMapper {
     }
 
     private void initializeControllers() {
-        // DI 완료!!!
-        LoginController loginController = new LoginController(userRepository);
-        CreateUserController createUserController = new CreateUserController(userRepository);
-
         // controllers 맵에 등록
-        controllers.put("/user/signup", createUserController);
-        controllers.put("/user/login", loginController);
+        controllers.put("/user/update", new UpdateUserController());
+        controllers.put("/user/signup", new CreateUserController());
+        controllers.put("/user/login", new LoginController());
         controllers.put("/user/userList", new ListUserController());
         controllers.put("/", new HomeController());
     }
@@ -35,7 +31,7 @@ public class RequestMapper {
         if (controller != null) {
             return controller;
         } else {
-            return null;
+            return forwardController;
         }
     }
 
