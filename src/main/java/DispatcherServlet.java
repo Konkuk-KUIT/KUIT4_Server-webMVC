@@ -15,23 +15,11 @@ import static controller.constant.URI.*;
 @WebServlet("/")
 public class DispatcherServlet extends HttpServlet {
 
-    private static final Map<String, Controller> controllerMap = new HashMap<>();
-
-    static{
-        controllerMap.put(ROOT.getURI(), new HomeController());
-        controllerMap.put(SIGNUP.getURI(), new CreateUserController());
-        controllerMap.put(LOGIN.getURI(), new LoginController());
-        controllerMap.put(LOGOUT.getURI(), new LogOutController());
-        controllerMap.put(UPDATE_FORM.getURI(), new UpdateUserFormController());
-        controllerMap.put(UPDATE.getURI(), new UpdateUserController());
-        controllerMap.put(USER_LIST.getURI(), new ListUserController());
-    }
-
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String requestURI = req.getRequestURI();
-
-        Controller controller = controllerMap.get(requestURI);
+        RequestMapper requestMapper = new RequestMapper();
+        Controller controller = requestMapper.getController(requestURI);
 
         if(controller == null){
             resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
