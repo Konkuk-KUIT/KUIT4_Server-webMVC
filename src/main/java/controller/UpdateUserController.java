@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/user/signup")
-public class CreateUserController extends HttpServlet {
+@WebServlet("/user/update")
+public class UpdateUserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = new User(req.getParameter("userId"),
@@ -21,7 +21,7 @@ public class CreateUserController extends HttpServlet {
         );
 
         MemoryUserRepository.getInstance().addUser(user);
-        System.out.println("user  회원가입 완료");
+        System.out.println("user  업데이트 완료");
         resp.sendRedirect("/user/userList");
     }
 }
