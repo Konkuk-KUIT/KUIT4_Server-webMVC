@@ -14,7 +14,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-  
+
         <div class="collapse navbar-collapse" id="navbarsExample04">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item dropdown">
@@ -87,12 +87,12 @@
                                 </form>
                             </li>
                             <li>
-                                <a class="link-modify-article" href="../index.html">목록</a>
+                                <a class="link-modify-article" href="../home.jsp">목록</a>
                             </li>
                         </ul>
                     </div>
                 </article>
-  
+
                 <div class="qna-comment">
                     <div class="qna-comment-kuit">
                         <p class="qna-comment-count"><strong>2</strong>개의 의견</p>
@@ -174,7 +174,7 @@
           </div>
       </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/scripts.js"></script>
   </body>
