@@ -8,17 +8,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/user/logout")
-public class LogoutController extends HttpServlet {
+
+public class LogoutController implements Controller  {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute (HttpServletRequest req, HttpServletResponse resp) {
         // 세션 데이터 삭제
         HttpSession session = req.getSession(false); // 세션이 존재할 때만 가져옴
         if (session != null) {
             session.invalidate(); // 세션 무효화
+            return "redirect:/";
         }
-
-        resp.sendRedirect("/");
+        return "/user/login.jsp";
     }
 }

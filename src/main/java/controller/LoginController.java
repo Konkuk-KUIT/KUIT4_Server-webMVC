@@ -15,7 +15,7 @@ public class LoginController implements Controller {
     private final MemoryUserRepository userRepository = MemoryUserRepository.getInstance();
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
         String userId = request.getParameter("userId");
         String password = request.getParameter("password");
 
@@ -27,7 +27,7 @@ public class LoginController implements Controller {
             session.setAttribute("user", user);
             return "redirect:/";
         } else {
-            return "/user/login_failed";
+            return "/user/login_failed.jsp";
         }
     }
 }
