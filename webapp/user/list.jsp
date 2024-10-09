@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%@ page import="java.util.Collection" %>
 <%@ page import="jwp.model.User" %>
 
@@ -69,26 +71,17 @@
             </tr>
             </thead>
             <tbody>
-            <%
-                Collection<User> users = (Collection<User>) request.getAttribute("users");
-                for (User user : users) {
-            %>
+            <c:forEach var="user" items="${users}">
             <tr>
-                <th class="col-md-3"><%= user.getUserId() %>
-                </th>
-                <th class="col-md-3"><%= user.getName() %>
-                </th>
-                <th class="col-md-3"><%= user.getEmail() %>
-                </th>
+                <th class="col-md-3">${user.userId}</th>
+                <th class="col-md-3">${user.name}</th>
+                <th class="col-md-3">${user.email}</th>
                 <th class="col-md-3"><a href="#" class="btn btn-success" role="button">수정</a></th>
             </tr>
-            <%
-                }
-            %>
+            </c:forEach>>
             </tbody>
         </table>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/scripts.js"></script>
 </body>
