@@ -20,6 +20,12 @@ public class DispatcherServlet extends HttpServlet {
         if (controller == null) {
             req.getRequestDispatcher(req.getRequestURI()).forward(req, resp);
         }
+        send(req, resp, controller);
+
+
+    }
+
+    private void send(HttpServletRequest req, HttpServletResponse resp, Controller controller) {
         String viewName;
         try {
             viewName = controller.execute(req, resp);
@@ -31,7 +37,5 @@ public class DispatcherServlet extends HttpServlet {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
     }
 }

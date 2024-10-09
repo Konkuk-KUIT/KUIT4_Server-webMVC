@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Collection;
 
+import static jwp.constant.Path.LIST_FORWARD;
+import static jwp.constant.Path.LOGIN_FORWARD;
+
 public class ListUserController implements Controller {
 
     @Override
@@ -17,8 +20,8 @@ public class ListUserController implements Controller {
         if (value != null) {
             Collection<User> users = MemoryUserRepository.getInstance().findAll();
             req.setAttribute("users", users);
-            return "/user/list.jsp";
+            return LIST_FORWARD.getPath();
         }
-        return "redirect:/user/login.jsp";
+        return LOGIN_FORWARD.getRedirectPath();
     }
 }

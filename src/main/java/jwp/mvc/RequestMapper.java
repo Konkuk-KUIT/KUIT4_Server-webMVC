@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
+import static jwp.constant.Path.*;
+
 public class RequestMapper {
     private static final Map<String, Controller> requestMap = new HashMap<>();
     private final HttpServletRequest req;
@@ -17,16 +19,16 @@ public class RequestMapper {
         this.req = req;
         this.resp = resp;
         controller = requestMap.get(req.getRequestURI());
-        requestMap.put("/user/loginuser", new ForwardController("/user/login.jsp"));
-        requestMap.put("/user/createuser", new ForwardController("/user/form.jsp"));
+        requestMap.put(USER_LOGIN.getPath(), new ForwardController(LOGIN_FORWARD.getPath()));
+        requestMap.put(USER_CREATE.getPath(), new ForwardController(FORM_FORWARD.getPath()));
 
-        requestMap.put("/user/signup", new CreateUserController());
-        requestMap.put("/", new HomeController());
-        requestMap.put("/user/userList", new ListUserController());
-        requestMap.put("/user/login", new LogInController());
-        requestMap.put("/user/logout", new LogOutController());
-        requestMap.put("/user/update", new UpdateUserController());
-        requestMap.put("/user/updateForm", new UpdateUserFormController());
+        requestMap.put(SIGNUP.getPath(), new CreateUserController());
+        requestMap.put(ROOT.getPath(), new HomeController());
+        requestMap.put(LIST.getPath(), new ListUserController());
+        requestMap.put(LOGIN.getPath(), new LogInController());
+        requestMap.put(LOGOUT.getPath(), new LogOutController());
+        requestMap.put(UPDATE.getPath(), new UpdateUserController());
+        requestMap.put(UPDATEFORM.getPath(), new UpdateUserFormController());
 
     }
 
