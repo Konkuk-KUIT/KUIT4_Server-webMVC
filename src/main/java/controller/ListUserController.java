@@ -17,10 +17,15 @@ import java.util.Collection;
 public class ListUserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Collection<User> users = MemoryUserRepository.getInstance().findAll();
+        if(req.getSession().getAttribute("user") != null){
+            Collection<User> users = MemoryUserRepository.getInstance().findAll();
 
-        req.setAttribute("users", users);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/user/list.jsp");
-        dispatcher.forward(req, resp);
+            req.setAttribute("users", users);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/user/list.jsp");
+            dispatcher.forward(req, resp);
+        } else {
+            resp.sendRedirect("/");
+        }
+
     }
 }
