@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Fourth navbar example">
     <div class="container-fluid">
         <a class="navbar-brand" href="/"> KUIT </a>
@@ -6,7 +9,7 @@
             <c:choose>
                 <c:when test="${not empty sessionScope.user}">
                     <a href="/user/logout" role="button" class="btn btn-outline-primary me-2">Log-Out</a>
-                    <a href="/user/updateForm?userId=${sessionScope.user.userId}" role="button" class="btn btn-primary">Edit-UserInfo</a>
+                    <a href="/user/updateForm?userId=${sessionScope.user.userId}" role="button" class="btn btn-primary">개인정보 수정</a>
                 </c:when>
                 <c:otherwise>
                     <a href="/user/login.jsp" type="button" class="btn btn-outline-primary me-2">Log-In</a>
