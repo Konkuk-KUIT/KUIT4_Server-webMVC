@@ -1,7 +1,9 @@
 package controller;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,10 +21,13 @@ public class RequestMapper {
     }
 
     static {
-        controllers.put();
+        controllers.put(ResponseURL.HOME.getPath(), new HomeController());
     }
 
-    public void proceed() {
-
+    public void proceed() throws ServletException, IOException {
+        if(controller != null) {
+            controller.execute(this.request,this.response);
+            return;
+        }
     };
 }
