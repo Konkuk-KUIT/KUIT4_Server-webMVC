@@ -8,26 +8,37 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/user/logout")
-public class LogoutController extends HttpServlet {
+//@WebServlet("/user/logout")
+public class LogoutController implements Controller {
+
+//    @Override
+//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        //세션 데이터 삭제
+//        HttpSession session = req.getSession();
+//        session.removeAttribute("user");
+//
+//        System.out.println("로그아웃");
+//        resp.sendRedirect("/");
+//    }
+//
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        //세션 데이터 삭제
+//        HttpSession session = req.getSession();
+//        session.removeAttribute("user");
+//
+//        System.out.println("로그아웃");
+//        resp.sendRedirect("/");
+//    }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         //세션 데이터 삭제
         HttpSession session = req.getSession();
         session.removeAttribute("user");
 
         System.out.println("로그아웃");
-        resp.sendRedirect("/");
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //세션 데이터 삭제
-        HttpSession session = req.getSession();
-        session.removeAttribute("user");
-
-        System.out.println("로그아웃");
-        resp.sendRedirect("/");
+//        resp.sendRedirect("/");
+        return("/");
     }
 }

@@ -14,21 +14,37 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Objects;
 
-@WebServlet("/user/userList")
-public class ListUserController extends HttpServlet {
+//@WebServlet("/user/userList")
+public class ListUserController implements Controller {
+
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        HttpSession session = req.getSession();
+//        Object value = session.getAttribute("user");
+//        if (value == null) {
+//            resp.sendRedirect("/");
+//            return;
+//        }
+//
+//        Collection<User> users = MemoryUserRepository.getInstance().findAll();
+//        req.setAttribute("users", users);
+//        RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
+//        rd.forward(req,resp);
+//    }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         HttpSession session = req.getSession();
         Object value = session.getAttribute("user");
         if (value == null) {
-            resp.sendRedirect("/");
-            return;
+//            resp.sendRedirect("/");
+            return("/");
         }
 
         Collection<User> users = MemoryUserRepository.getInstance().findAll();
         req.setAttribute("users", users);
-        RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
-        rd.forward(req,resp);
+//        RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
+//        rd.forward(req,resp);
+        return("/user/list.jsp");
     }
 }
