@@ -13,11 +13,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collection;
 
-@WebServlet("/user/updateForm")
-public class UpdateUserFormController extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+public class UpdateUserFormController implements Controller {
 
+
+    @Override
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         HttpSession session = req.getSession();
         Object value = session.getAttribute("user");
         if (value != null) {
@@ -29,14 +29,13 @@ public class UpdateUserFormController extends HttpServlet {
                 req.setAttribute("user",user);
                 RequestDispatcher rd =req.getRequestDispatcher("/user/updateForm.jsp");
                 rd.forward(req,resp);
+                return "/user/updateForm.jsp";
             }
             resp.sendRedirect("/user/userList");
-
-
-
+            return "redirect:/user/userList";
         }
-
-
+        //todo: value부분 에러 던지게 처리?
+        return "/";
 
     }
 }

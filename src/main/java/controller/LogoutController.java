@@ -9,14 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/user/logout")
-public class LogoutController extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+public class LogoutController  implements Controller{
 
+    @Override
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         HttpSession session = req.getSession();
         session.removeAttribute("user");
-        resp.sendRedirect("/");
-
+        //resp.sendRedirect("/");
+        return "redirect:/";
     }
 }

@@ -12,13 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collection;
 
-@WebServlet("/")
-public class HomeController extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+public class HomeController  implements Controller {
 
-        RequestDispatcher rd =req.getRequestDispatcher("/home.jsp");
-        rd.forward(req,resp);
-        //forward는 다른 jsp 파일로 요청을 보내는 것?
+    @Override
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+//        RequestDispatcher rd =req.getRequestDispatcher("/home.jsp");
+//        rd.forward(req,resp);
+        return "/home.jsp";
     }
 }

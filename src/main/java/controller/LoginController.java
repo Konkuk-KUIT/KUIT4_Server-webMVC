@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/user/login")
-public class LoginController extends HttpServlet {
+public class LoginController  implements Controller {
+
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String userId = req.getParameter("userId");
         String password = req.getParameter("password");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
@@ -24,12 +24,14 @@ public class LoginController extends HttpServlet {
         if (user != null && user.getPassword().equals(password)) {
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
-            //키 user로 저장
-            resp.sendRedirect("/"); // 로그인 후 메인화면
+            //resp.sendRedirect("/"); // 로그인 후 메인화면
+            return "redirect:/";
 
-        } else {
-            RequestDispatcher rd = req.getRequestDispatcher("/user/login_failed.jsp");
-            rd.forward(req, resp);
         }
+        RequestDispatcher rd = req.getRequestDispatcher("/user/login_failed.jsp");
+        rd.forward(req, resp);
+        return "/user/login_failed.jsp";
+
+
     }
 }
