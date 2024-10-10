@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import static enums.Route.USER_LIST;
 import static enums.UserQueryKey.USERID;
-import static enums.ViewPath.FORM_JSP;
+import static enums.ViewPath.UPDATE_FORM_JSP;
 
 public class UpdateUserFormController implements Controller {
 
@@ -28,6 +28,6 @@ public class UpdateUserFormController implements Controller {
 
         User user = MemoryUserRepository.getInstance().findUserById(sessionUserId);
         req.setAttribute("user", user);
-        return FORM_JSP.getPath();
+        return UPDATE_FORM_JSP.getPath();
     }
 }

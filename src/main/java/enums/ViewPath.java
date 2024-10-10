@@ -5,7 +5,8 @@ public enum ViewPath {
     LOGIN_JSP("/user/login.jsp"),
     LOGIN_FAILED_JSP("/user/login_failed.jsp"),
     LIST_JSP("/user/list.jsp"),
-    FORM_JSP("/user/form.jsp");
+    FORM_JSP("/user/form.jsp"),
+    UPDATE_FORM_JSP("/user/updateForm.jsp");
 
     private final String path;
 
