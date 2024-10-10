@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class UpdateUserController implements Controller {
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         User userGiven = new User(req.getParameter("userId"),
                 req.getParameter("password"),
@@ -23,6 +23,7 @@ public class UpdateUserController implements Controller {
 
         System.out.println("수정 완료");
 
-        resp.sendRedirect("/user/list");
+//        resp.sendRedirect("/user/list");
+        return "redirect:/user/list";
     }
 }

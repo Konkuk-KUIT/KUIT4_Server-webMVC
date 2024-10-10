@@ -13,26 +13,26 @@ import java.io.IOException;
 public class LoginController implements Controller {
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User userFromRequest = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
         if(!isIdExist(userFromRequest)) {
             System.err.println("아이디의 계정이 존재하지 않음.");
-            resp.sendRedirect("/user/login_failed.jsp");
-            return;
+//            resp.sendRedirect("/user/login_failed.jsp");
+            return "redirect:/user/login_failed.jsp";
         }
 
         if(!isPasswordMatchUser(req, userFromRequest)) {
             System.err.println("비밀번호가 일치하지 않음.");
-            resp.sendRedirect("/user/login_failed.jsp");
-            return;
+//            resp.sendRedirect("/user/login_failed.jsp");
+            return "redirect:/user/login_failed.jsp";
         }
 
         // 로그인 성공
         HttpSession session = req.getSession();
         session.setAttribute("user", userFromRequest);
-        resp.sendRedirect("/");
+//        resp.sendRedirect("/");
         System.out.println("로그인 성공");
-
+        return "redirect:/";
     }
 
     private boolean isIdExist(User userFromRequest) {

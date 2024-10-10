@@ -10,10 +10,11 @@ import java.io.IOException;
 public class LogoutController implements Controller {
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         session.removeAttribute("user");
-        resp.sendRedirect("/");
+//        resp.sendRedirect("/");
+        return "redirect:/";
     }
 
 }

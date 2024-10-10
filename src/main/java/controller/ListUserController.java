@@ -13,15 +13,18 @@ import java.util.Collection;
 
 public class ListUserController implements Controller {
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // 로그인이 되어있을 경우
         if(req.getSession().getAttribute("user") != null){
             Collection<User> users = MemoryUserRepository.getInstance().findAll();
 
             req.setAttribute("users", users);
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/user/list.jsp");
-            dispatcher.forward(req, resp);
+//            RequestDispatcher dispatcher = req.getRequestDispatcher("/user/list.jsp");
+//            dispatcher.forward(req, resp);
+            return "/user/list.jsp";
         } else {
-            resp.sendRedirect("/");
+//            resp.sendRedirect("/");
+            return "redirect:/";
         }
 
     }
