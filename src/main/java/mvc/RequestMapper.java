@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
+import static constants.RequestURI.*;
+
 public class RequestMapper {
 
     private final HttpServletRequest request;
@@ -20,23 +22,18 @@ public class RequestMapper {
         this.request = request;
         this.response = response;
 
-        controller = controllers.get(request.getRequestURI());
         initControllers();
+        controller = controllers.get(request.getRequestURI());
     }
 
     private void initControllers() {
-        controllers.put("/user/signup", new CreateUserController());
-        controllers.put("/", new HomeController());
-        controllers.put("/user/userList", new ListUserController());
-        controllers.put("/user/login", new LoginController());
-        controllers.put("/user/logout", new LogoutController());
-        controllers.put("/user/update", new UpdateUserController());
-        controllers.put("/user/updateForm", new UpdateUserFormController());
-
-    }
-
-    public Controller getController(HttpServletRequest request) {
-        return controllers.get(request.getRequestURI());
+        controllers.put(SIGNUP.getUri(), new CreateUserController());
+        controllers.put(ROOT.getUri(), new HomeController());
+        controllers.put(USER_LIST.getUri(), new ListUserController());
+        controllers.put(LOGIN.getUri(), new LoginController());
+        controllers.put(LOGOUT.getUri(), new LogoutController());
+        controllers.put(UPDATE.getUri(), new UpdateUserController());
+        controllers.put(UPDATE_FORM.getUri(), new UpdateUserFormController());
     }
 
     public String dispatch() {

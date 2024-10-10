@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static constants.RedirectPrefix.REDIRECT;
+
 @WebServlet("/")
 public class DispatcherServlet extends HttpServlet {
     @Override
@@ -20,8 +22,8 @@ public class DispatcherServlet extends HttpServlet {
             return;
         }
 
-        if (uri.startsWith("redirect:")) {
-            String redirectUrl = uri.substring("redirect:".length());
+        if (uri.startsWith(REDIRECT.getRedirectPrefix())) {
+            String redirectUrl = uri.substring(REDIRECT.getRedirectPrefix().length());
 
             resp.sendRedirect(redirectUrl);
             return;
