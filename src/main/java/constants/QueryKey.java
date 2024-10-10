@@ -1,7 +1,7 @@
 package constants;
 
 public enum QueryKey {
-    USER_ID("userID"),
+    USER_ID("userId"),
     PASSWORD("password"),
     NAME("name"),
     EMAIL("email");

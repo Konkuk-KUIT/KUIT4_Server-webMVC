@@ -28,6 +28,7 @@ public class RequestMapper {
 
     private void initControllers() {
         controllers.put(SIGNUP.getUri(), new CreateUserController());
+        controllers.put(HOME_JSP.getUri(), new HomeController());
         controllers.put(ROOT.getUri(), new HomeController());
         controllers.put(USER_LIST.getUri(), new ListUserController());
         controllers.put(LOGIN.getUri(), new LoginController());

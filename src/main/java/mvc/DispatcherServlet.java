@@ -17,11 +17,6 @@ public class DispatcherServlet extends HttpServlet {
         RequestMapper requestMapper = new RequestMapper(req, resp);
         String uri = requestMapper.dispatch();
 
-        if (uri == null || uri.equals(req.getRequestURI())) {
-            resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Page Not Found");
-            return;
-        }
-
         if (uri.startsWith(REDIRECT.getRedirectPrefix())) {
             String redirectUrl = uri.substring(REDIRECT.getRedirectPrefix().length());
 
@@ -29,8 +24,12 @@ public class DispatcherServlet extends HttpServlet {
             return;
         }
 
-        req.getRequestDispatcher(uri).forward(req, resp);
+        if (getServletContext().getResource(uri) != null) {
+            req.getRequestDispatcher(uri).forward(req, resp);
+            return;
+        }
 
+        resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Page Not Found");
 
     }
 }

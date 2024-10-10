@@ -17,7 +17,9 @@ public class UpdateUserController implements Controller {
                 req.getParameter(NAME.getQueryKey()),
                 req.getParameter(EMAIL.getQueryKey()));
 
-        MemoryUserRepository.getInstance().addUser(user);
+        User findUser = MemoryUserRepository.getInstance().findUserById(req.getParameter(USER_ID.getQueryKey()));
+        findUser.update(user);
+
         System.out.println("user  업데이트 완료");
         return USER_LIST.getRedirectUri();
     }

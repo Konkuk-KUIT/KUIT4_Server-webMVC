@@ -27,6 +27,6 @@ public enum RequestURI {
     }
 
     public String getRedirectUri() {
-        return REDIRECT + uri;
+        return REDIRECT.getRedirectPrefix() + uri;
     }
 }
