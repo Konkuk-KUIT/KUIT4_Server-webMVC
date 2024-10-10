@@ -22,6 +22,12 @@ public class RequestMapper {
 
     static {
         controllers.put(ResponseURL.HOME.getPath(), new HomeController());
+        controllers.put(ResponseURL.USER_LIST.getPath(), new ListUserController());
+        controllers.put(ResponseURL.USER_SIGNUP.getPath(), new CreateUserController());
+        controllers.put(ResponseURL.USER_LOGIN.getPath(), new LoginController());
+        controllers.put(ResponseURL.USER_LOGOUT.getPath(), new LogoutController());
+        controllers.put(ResponseURL.USER_UPDATE.getPath(), new UpdateUserController());
+        controllers.put(ResponseURL.USER_UPDATE_FORM.getPath(), new UpdateUserFormController());
     }
 
     public void proceed() throws ServletException, IOException {
