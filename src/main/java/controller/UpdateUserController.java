@@ -10,15 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/user/update")
-public class UpdateUserController extends HttpServlet {
+public class UpdateUserController extends HttpServlet implements Controller {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
         user.update(new User(req.getParameter("userId"),
                 req.getParameter("password"),
                 req.getParameter("name"),
                 req.getParameter("email")));
-        resp.sendRedirect("/user/userList");
+        return "redirect:/user/userList";
     }
 }

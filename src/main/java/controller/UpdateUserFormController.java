@@ -11,14 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/user/updateForm")
-public class UpdateUserFormController extends HttpServlet {
+public class UpdateUserFormController extends HttpServlet implements Controller{
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userId = req.getParameter("userId");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
         req.setAttribute("user", user);
-        RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
-        rd.forward(req, resp);
+        return "/user/updateForm.jsp";
     }
 }
