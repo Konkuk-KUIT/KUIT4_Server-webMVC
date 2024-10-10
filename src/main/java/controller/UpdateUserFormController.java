@@ -2,23 +2,16 @@ package controller;
 
 import core.db.MemoryUserRepository;
 import jwp.model.User;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
+import servlet.Controller;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
-@WebServlet("/user/updateForm")
-public class UpdateUserFormController extends HttpServlet {
+public class UpdateUserFormController implements Controller {
 
     private static final String USER_SESSION_KEY = "user";
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String execute(HttpServletRequest req) {
         User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
         HttpSession session = req.getSession();
         Object value = session.getAttribute(USER_SESSION_KEY);
@@ -26,11 +19,10 @@ public class UpdateUserFormController extends HttpServlet {
 
         if(currentUser.getUserId().equals(user.getUserId())) {
             req.setAttribute("user", user);
-            RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
-            rd.forward(req, resp);
-            return;
+
+            return "/user/updateForm.jsp";
         }
 
-        resp.sendRedirect("/user/userList");
+        return "redirect:/user/userList";
     }
 }
