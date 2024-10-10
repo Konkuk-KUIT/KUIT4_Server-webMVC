@@ -16,8 +16,36 @@ public class RequestMapper {
     public RequestMapper(HttpServletRequest request, HttpServletResponse response) {
         this.request = request;
         this.response = response;
+
         System.out.println(request.getRequestURI());
-        controller = controllers.get(request.getRequestURI());
+
+        if(isUpdateForm(request)){
+            controller = controllers.get(excludeId(request.getRequestURI()));
+        } else {
+            controller = controllers.get(request.getRequestURI());
+        }
+
+    }
+
+    private static String excludeId(String path){
+        String[] splitted = path.split("/");
+        String result = "";
+
+        for(int i=0;i<splitted.length-1;i++){
+            result += splitted[i];
+            result += "/";
+        }
+        return result;
+    }
+
+    private static boolean isUpdateForm(HttpServletRequest req) {
+        String[] splitted = req.getRequestURI().split("/");
+
+        if(splitted.length >= 3){
+            return splitted[2].equals("updateForm");
+        } else {
+            return false;
+        }
     }
 
     static {

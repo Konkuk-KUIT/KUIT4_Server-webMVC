@@ -7,7 +7,7 @@ public enum ResponseURL {
     USER_LOGIN("/user/login"),
     USER_LOGOUT("/user/logout"),
     USER_UPDATE("/user/update"),
-    USER_UPDATE_FORM("/user/updateForm/*");
+    USER_UPDATE_FORM("/user/updateForm/");
 
     private String path;
 
