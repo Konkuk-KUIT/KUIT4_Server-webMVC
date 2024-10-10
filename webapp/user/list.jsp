@@ -35,10 +35,16 @@
                 </th>
                 <th class="col-md-3"><%= user.getEmail() %>
                 </th>
+                <th class="col-md-3">
                 <%
-
+                    User loginedUser = (User) session.getAttribute("user");
+                    if(loginedUser.getUserId().equals(user.getUserId())){
+                        %>
+                <a href="/user/updateForm/<%= user.getUserId() %>" class="btn btn-success" role="button">수정</a>
+                <%
+                    }
                 %>
-                <th class="col-md-3"><a href="/user/updateForm/<%= user.getUserId() %>" class="btn btn-success" role="button">수정</a></th>
+                </th>
             </tr>
             <%
                 }
