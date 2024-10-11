@@ -13,14 +13,13 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collection;
 
-@WebServlet("/user/login")
-public class LoginController extends HttpServlet {
+public class LoginController extends HttpServlet implements Controller{
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/user/login.jsp").forward(request, response);
+    public String atGet(HttpServletRequest request, HttpServletResponse response) {
+        return "/user/login.jsp";
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String atPost(HttpServletRequest request, HttpServletResponse response) {
 
         String userId = request.getParameter("userId");
         String password = request.getParameter("password");
@@ -32,10 +31,10 @@ public class LoginController extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
 
-            response.sendRedirect(request.getContextPath() + "/home.jsp");
+            return "redirect:" + request.getContextPath() + "/home.jsp";
         } else {
             request.setAttribute("errorMsg", "아이디 또는 비밀번호가 올바르지 않습니다.");
-            request.getRequestDispatcher("/user/login_failed.jsp").forward(request, response);
+            return "/user/login_failed.jsp";
         }
     }
 }

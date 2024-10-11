@@ -10,21 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/user/signup")
-public class CreateUserController extends HttpServlet {
+public class CreateUserController implements Controller {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/user/form.jsp").forward(request, response);
+
+    public String atGet(HttpServletRequest request, HttpServletResponse response) {
+        return "/user/form.jsp";
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public String atPost(HttpServletRequest req, HttpServletResponse resp) {
         User user = new User(req.getParameter("userId"),
                 req.getParameter("password"),
                 req.getParameter("name"),
                 req.getParameter("email"));
         MemoryUserRepository.getInstance().addUser(user);
         System.out.println("user 회원가입 완료");
-        resp.sendRedirect("/");
+        return "redirect:/";
     }
 }

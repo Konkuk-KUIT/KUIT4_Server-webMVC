@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/user/updateForm")
-public class UpdateUserFormController extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+public class UpdateUserFormController implements Controller{
+
+    public String atGet(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String USER_SESSION_KEY = "user";       // loggedInUser 판별
         String accessId = request.getParameter("userId");
@@ -29,21 +28,18 @@ public class UpdateUserFormController extends HttpServlet {
             String userId = user.getUserId();
 
             if (userId.equals(accessId)) {
-                request.getRequestDispatcher("/user/updateForm.jsp").forward(request, response);
-                return;
+                return "/user/updateForm.jsp";
             }
             else {
-                response.sendRedirect("/user/userList");
-                return;
+                return "redirect:/user/userList";
             }
         }
         else {
-            response.sendRedirect("/");
+            return "redirect:/";
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String atPost(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String USER_SESSION_KEY = "user";       // loggedInUser 판별
 
@@ -66,7 +62,8 @@ public class UpdateUserFormController extends HttpServlet {
             session.setAttribute("user", newUser);
 
             System.out.println("user 정보 수정 완료");
-            response.sendRedirect("/user/userList");
+            return "redirect:/user/userList";
         }
+        return null;
     }
 }

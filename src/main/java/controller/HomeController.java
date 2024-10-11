@@ -7,12 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/")
-public class HomeController extends HttpServlet {
+public class HomeController implements Controller{
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String atGet(HttpServletRequest request, HttpServletResponse response) {
 
-        request.getRequestDispatcher("/home.jsp").forward(request, response);
+        return "/home.jsp";
+    }
+
+    public String atPost(HttpServletRequest request, HttpServletResponse response) {
+        return null;
     }
 }

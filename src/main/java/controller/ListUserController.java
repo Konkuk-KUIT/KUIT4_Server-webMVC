@@ -13,21 +13,22 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collection;
 
-@WebServlet("/user/userList")
-public class ListUserController extends HttpServlet {
+public class ListUserController implements Controller{
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public String atGet(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("user");
 
         if (loggedInUser == null) {
-            response.sendRedirect("/");
-            return;
+            return "redirect:/";
         }
 
         Collection<User> users = MemoryUserRepository.getInstance().findAll();
         request.setAttribute("users", users);
-        RequestDispatcher rd = request.getRequestDispatcher("/user/list.jsp");
-        rd.forward(request, response);
+        return "/user/list.jsp";
+    }
+
+    public String atPost(HttpServletRequest request, HttpServletResponse response) {
+        return null;
     }
 }
