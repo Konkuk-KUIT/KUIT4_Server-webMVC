@@ -45,7 +45,7 @@
                     <a href="/user/updateForm?userId=${sessionScope.user.userId}" role="button" class="btn btn-primary">Change-UserInfo</a>
                 </c:when>
                 <c:otherwise>
-                    <!-- 로그아웃 상태: Log-In 및 Sign-up 버튼 표시 -->
+                    <!-- 로그아웃 상태: Log-In 및 Sign-up 버튼 표시 get 메시지 생성함 -->
                     <a href="/user/login.jsp" role="button" class="btn btn-outline-primary me-2">Log-In</a>
                     <a href="/user/form.jsp" role="button" class="btn btn-primary">Sign-up</a>
                 </c:otherwise>

@@ -20,8 +20,9 @@ public class CreateUserController extends HttpServlet {
                 req.getParameter("name"),
                 req.getParameter("email"));
 
-        MemoryUserRepository.getInstance().addUser(user);
         System.out.println("user 회원가입 완료");
-        resp.sendRedirect("/user/userList");
+
+        MemoryUserRepository.getInstance().addUser(user);
+        resp.sendRedirect("/");
     }
 }

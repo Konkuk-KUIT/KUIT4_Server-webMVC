@@ -13,6 +13,10 @@ import java.io.IOException;
 
 @WebServlet("/user/login")
 public class LoginController extends HttpServlet {
+    @Override           //로그인되지 않은 상태에서 list 접근 시 처리 위함
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/user/login.jsp").forward(req, resp);
+    }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userId = req.getParameter("userId");

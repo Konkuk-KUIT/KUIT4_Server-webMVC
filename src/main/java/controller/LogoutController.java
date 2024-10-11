@@ -16,6 +16,7 @@ public class LogoutController extends HttpServlet {
 
         if (session != null) {
             session.removeAttribute("user");           // 세션 삭제 (로그아웃 처리)
+            System.out.println("logout 성공");
         }
 
         resp.sendRedirect("/");
