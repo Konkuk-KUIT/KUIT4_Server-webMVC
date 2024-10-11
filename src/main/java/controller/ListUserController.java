@@ -1,6 +1,7 @@
 package controller;
 
 
+import Constants.ResponseType;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
@@ -19,12 +20,9 @@ public class ListUserController implements Controller {
             Collection<User> users = MemoryUserRepository.getInstance().findAll();
 
             req.setAttribute("users", users);
-//            RequestDispatcher dispatcher = req.getRequestDispatcher("/user/list.jsp");
-//            dispatcher.forward(req, resp);
-            return "/user/list.jsp";
+            return ResponseType.FORWARD.getType() + "/user/list.jsp";
         } else {
-//            resp.sendRedirect("/");
-            return "redirect:/";
+            return ResponseType.REDIRECT.getType() + "/";
         }
 
     }

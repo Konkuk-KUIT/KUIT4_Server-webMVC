@@ -1,4 +1,4 @@
-package controller;
+package Constants;
 
 public enum ResponseURL {
     HOME("/"),

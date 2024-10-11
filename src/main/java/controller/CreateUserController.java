@@ -1,5 +1,6 @@
 package controller;
 
+import Constants.ResponseType;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
@@ -19,9 +20,6 @@ public class CreateUserController implements Controller {
                 req.getParameter("email"));
 
         MemoryUserRepository.getInstance().addUser(user);
-        System.out.println("user 회원가입 완료");
-
-//        resp.sendRedirect("/user/list");
-        return "redirect:/user/list";
+        return ResponseType.REDIRECT.getType() + "/user/list";
     }
 }

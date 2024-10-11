@@ -1,5 +1,7 @@
 package controller;
 
+import Constants.ResponseType;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,8 +15,7 @@ public class LogoutController implements Controller {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         session.removeAttribute("user");
-//        resp.sendRedirect("/");
-        return "redirect:/";
+        return ResponseType.REDIRECT.getType() + "/";
     }
 
 }

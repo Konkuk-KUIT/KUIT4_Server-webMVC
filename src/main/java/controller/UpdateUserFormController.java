@@ -1,5 +1,6 @@
 package controller;
 
+import Constants.ResponseType;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
@@ -23,8 +24,6 @@ public class UpdateUserFormController implements Controller {
             req.setAttribute("user", foundUser);
         }
 
-//        RequestDispatcher dispatcher = req.getRequestDispatcher("/user/updateForm.jsp");
-//        dispatcher.forward(req, resp);
-        return "/user/updateForm.jsp";
+        return ResponseType.FORWARD.getType() + "/user/updateForm.jsp";
     }
 }

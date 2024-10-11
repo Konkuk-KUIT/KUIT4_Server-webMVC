@@ -1,4 +1,6 @@
-package controller;
+package Response;
+
+import Constants.ResponseType;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,7 +17,7 @@ public class ResponseExecutor {
         String path = infoString.substring(index);
 
         // redirect 시
-        if(actionType.equals("redirect:")){
+        if(actionType.equals(ResponseType.REDIRECT.getType())){
             resp.sendRedirect(path);
         } else { // forward 시
             RequestDispatcher dispatcher = req.getRequestDispatcher(path);

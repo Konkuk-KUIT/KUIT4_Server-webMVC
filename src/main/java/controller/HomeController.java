@@ -1,5 +1,7 @@
 package controller;
 
+import Constants.ResponseType;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -9,9 +11,6 @@ import java.io.IOException;
 public class HomeController implements Controller {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        RequestDispatcher dispatcher = req.getRequestDispatcher("/home.jsp");
-//        dispatcher.forward(req, resp);
-
-        return "/home.jsp";
+        return ResponseType.FORWARD.getType() + "/home.jsp";
     }
 }
