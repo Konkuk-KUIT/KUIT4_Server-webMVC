@@ -1,7 +1,5 @@
 package controller;
 
-import MVC.Controller;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

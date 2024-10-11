@@ -1,6 +1,5 @@
 package controller;
 
-import MVC.Controller;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
