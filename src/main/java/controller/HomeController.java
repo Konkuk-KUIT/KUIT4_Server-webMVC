@@ -1,25 +1,21 @@
 package controller;
 
-import core.db.MemoryUserRepository;
-import jwp.model.User;
+import MVC.Controller;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
 
-@WebServlet("/")
-public class HomeController extends HttpServlet {
+public class HomeController implements Controller {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("home.jsp로 forward");
+    public String handleRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         // "/" url 받아서 home.jsp를 forward 하도록 하기
-        RequestDispatcher rd = req.getRequestDispatcher("home.jsp");
-        rd.forward(req, resp);
+
+        //RequestDispatcher rd = req.getRequestDispatcher("home.jsp");
+        //rd.forward(req, resp);
+
+        return "/home.jsp";
     }
 }
