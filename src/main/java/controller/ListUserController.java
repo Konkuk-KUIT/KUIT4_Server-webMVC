@@ -1,11 +1,13 @@
 package controller;
 
 
-import Constants.ResponseType;
+import Response.Constants.ResponseJSPFile;
+import Response.Constants.ResponseType;
+import Response.Constants.ResponseURL;
+import Response.ResponseStringCreator;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,9 +22,9 @@ public class ListUserController implements Controller {
             Collection<User> users = MemoryUserRepository.getInstance().findAll();
 
             req.setAttribute("users", users);
-            return ResponseType.FORWARD.getType() + "/user/list.jsp";
+            return ResponseStringCreator.create(ResponseType.FORWARD, ResponseJSPFile.USER_LIST);
         } else {
-            return ResponseType.REDIRECT.getType() + "/";
+            return ResponseStringCreator.create(ResponseType.REDIRECT, ResponseURL.HOME);
         }
 
     }

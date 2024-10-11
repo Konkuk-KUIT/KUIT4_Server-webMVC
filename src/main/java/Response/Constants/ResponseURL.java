@@ -1,6 +1,6 @@
-package Constants;
+package Response.Constants;
 
-public enum ResponseURL {
+public enum ResponseURL implements ResponsePath{
     HOME("/"),
     USER_SIGNUP("/user/signup"),
     USER_LIST("/user/list"),
@@ -15,6 +15,7 @@ public enum ResponseURL {
         this.path = path;
     }
 
+    @Override
     public String getPath() {
         return path;
     }

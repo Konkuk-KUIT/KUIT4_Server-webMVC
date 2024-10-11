@@ -1,6 +1,8 @@
 package controller;
 
-import Constants.ResponseType;
+import Response.Constants.ResponseType;
+import Response.Constants.ResponseURL;
+import Response.ResponseStringCreator;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
@@ -20,6 +22,6 @@ public class CreateUserController implements Controller {
                 req.getParameter("email"));
 
         MemoryUserRepository.getInstance().addUser(user);
-        return ResponseType.REDIRECT.getType() + "/user/list";
+        return ResponseStringCreator.create(ResponseType.REDIRECT, ResponseURL.USER_LIST);
     }
 }

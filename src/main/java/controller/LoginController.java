@@ -1,6 +1,9 @@
 package controller;
 
-import Constants.ResponseType;
+import Response.Constants.ResponseJSPFile;
+import Response.Constants.ResponseType;
+import Response.Constants.ResponseURL;
+import Response.ResponseStringCreator;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
@@ -18,18 +21,18 @@ public class LoginController implements Controller {
         User userFromRequest = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
 
         if(!isIdExist(userFromRequest)) {
-            return ResponseType.REDIRECT.getType() + "/user/login_failed.jsp";
+            return ResponseStringCreator.create(ResponseType.REDIRECT, ResponseJSPFile.LOGIN_FAILED);
         }
 
         if(!isPasswordMatchUser(req, userFromRequest)) {
-            return ResponseType.REDIRECT.getType() + "/user/login_failed.jsp";
+            return ResponseStringCreator.create(ResponseType.REDIRECT, ResponseJSPFile.LOGIN_FAILED);
         }
 
         // 로그인 성공
         HttpSession session = req.getSession();
         session.setAttribute("user", userFromRequest);
 
-        return ResponseType.REDIRECT.getType() + "/";
+        return ResponseStringCreator.create(ResponseType.REDIRECT, ResponseURL.HOME);
     }
 
     private boolean isIdExist(User userFromRequest) {

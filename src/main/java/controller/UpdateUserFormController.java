@@ -1,10 +1,11 @@
 package controller;
 
-import Constants.ResponseType;
+import Response.Constants.ResponseJSPFile;
+import Response.Constants.ResponseType;
+import Response.ResponseStringCreator;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,6 @@ public class UpdateUserFormController implements Controller {
             req.setAttribute("user", foundUser);
         }
 
-        return ResponseType.FORWARD.getType() + "/user/updateForm.jsp";
+        return ResponseStringCreator.create(ResponseType.FORWARD, ResponseJSPFile.USER_UPDATEFORM);
     }
 }

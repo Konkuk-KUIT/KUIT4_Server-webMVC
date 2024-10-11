@@ -1,6 +1,6 @@
 package Response;
 
-import Constants.ResponseType;
+import Response.Constants.ResponseType;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

@@ -1,4 +1,4 @@
-import Constants.ResponseURL;
+import Response.Constants.ResponseURL;
 import controller.*;
 
 import javax.servlet.ServletException;

@@ -1,6 +1,8 @@
 package controller;
 
-import Constants.ResponseType;
+import Response.Constants.ResponseType;
+import Response.Constants.ResponseURL;
+import Response.ResponseStringCreator;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
@@ -22,6 +24,6 @@ public class UpdateUserController implements Controller {
 
         editingUser.update(userGiven);
 
-        return ResponseType.REDIRECT.getType() + "/user/list";
+        return ResponseStringCreator.create(ResponseType.REDIRECT, ResponseURL.USER_LIST);
     }
 }
