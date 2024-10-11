@@ -23,8 +23,16 @@
         </ul>
 
         <div class="col-md-3 text-end">
-            <a href="/user/login.jsp" type="button" class="btn btn-outline-primary me-2">Login</a>
-            <a href="/user/form.jsp" type="button" class="btn btn-primary">Sign-up</a>
+            <c:choose>
+                <c:when test="${not empty sessionScope.user}">
+                    <a href="/user/logout" role="button" class="btn btn-outline-primary me-2">Log-Out</a>
+                    <a href="/user/updateForm?userId=${sessionScope.user.userId}" role="button" class="btn btn-primary" >개인정보수정</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/user/login" type="button" class="btn btn-outline-primary me-2">Log-In</a>
+                    <a href="/user/singup" type="button" class="btn btn-primary">Sign-up</a>
+                </c:otherwise>
+            </c:choose>
         </div>
     </header>
 
@@ -51,7 +59,7 @@
                 </th>
                 <th class="col-md-3"><%= user.getEmail() %>
                 </th>
-                <th class="col-md-3"><a href="/user/updateForm.jsp?userId=<%= user.getUserId() %>" class="btn btn-success" role="button">수정</a></th>
+                <th class="col-md-3"><a href="/user/updateForm?userId=<%= user.getUserId() %>" class="btn btn-success" role="button">수정</a></th>
             </tr>
             <%
                 }

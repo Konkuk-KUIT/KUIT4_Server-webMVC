@@ -18,11 +18,6 @@
             <li><a href="/user/userList" class="nav-link px-2 link-dark">User List</a></li>
             <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
         </ul>
-
-        <div class="col-md-3 text-end">
-            <a href="/user/login.jsp" type="button" class="btn btn-outline-primary me-2">Login</a>
-            <a href="/user/form.jsp" type="button" class="btn btn-primary">Sign-up</a>
-        </div>
     </header>
 </div>
 
@@ -30,7 +25,7 @@
 
     <main class="form-signin">
 
-        <form name="sign-up" method="post" action="/user/edit">
+        <form name="sign-up" method="post" action="/user/updateForm">
             <div class="form-floating">
                 <input type="text" class="form-control" id="userId" name="userId" placeholder="Id" value="<%= request.getParameter("userId") %>" readonly>
                 <label for="userId">User Id</label>
