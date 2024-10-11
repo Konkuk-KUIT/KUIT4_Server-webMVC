@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Fourth navbar example">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"> KUIT </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04"
+                aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample04">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown"
+                       aria-expanded="false">Home</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown04">
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form>
+                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="navbar-default">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+        </a>
+
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="/" class="nav-link px-2 link-secondary">Q&A</a></li>
+            <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
+            <li><a href="/user/userList" class="nav-link px-2 link-dark">User List</a></li>
+            <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
+        </ul>
+
+        <!-- 로그인 상태에 따른 버튼 표시 -->
+        <div class="col-md-3 text-end">
+            <c:choose>
+                <c:when test="${not empty sessionScope.user}">
+                    <!-- 로그인 상태: Log-Out 및 개인정보 수정 버튼 표시 -->
+                    <a href="/user/logout" role="button" class="btn btn-outline-primary me-2">Log-Out</a>
+                    <a href="/user/updateForm?userId=${sessionScope.user.userId}" role="button" class="btn btn-primary">Change-UserInfo</a>
+                </c:when>
+                <c:otherwise>
+                    <!-- 로그아웃 상태: Log-In 및 Sign-up 버튼 표시 get 메시지 생성함 -->
+                    <a href="/user/login" role="button" class="btn btn-outline-primary me-2">Log-In</a>
+                    <a href="/user/signup" role="button" class="btn btn-primary">Sign-up</a>
+                </c:otherwise>
+            </c:choose>
+        </div>
+    </header>
+</div>
