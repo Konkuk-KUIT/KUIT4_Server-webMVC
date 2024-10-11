@@ -25,7 +25,7 @@ public class RequestMapper {
         controllers.put("/user/login", new LoginController());
         controllers.put("/user/logout", new LogoutController());
         controllers.put("/user/userList", new ListUserController());
-        controllers.put("/user/update", new CreateUserController());
+        controllers.put("/user/update", new UpdateUserFormController());
         controllers.put("/", new HomeController());
     }
 

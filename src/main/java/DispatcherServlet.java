@@ -21,8 +21,6 @@ public class DispatcherServlet extends HttpServlet {
                 } else {
                     req.getRequestDispatcher(url).forward(req, resp);
                 }
-            } else {
-                resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Controller url not found.");
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

@@ -13,53 +13,18 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Objects;
 
-//@WebServlet("/user/update")
 public class UpdateUserFormController implements Controller {
-
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String userId = req.getParameter("userId");
-//        // 세션에 저장된 정보 가져오기
-//        HttpSession session = req.getSession();
-//        Object value = session.getAttribute("user");
-//        User user = MemoryUserRepository.getInstance().findUserById(userId);
-//        if (value == null) {
-//            return;
-//        }
-//
-//        User loginedUser = (User) value;
-//        if (!Objects.equals(user.getUserId(), loginedUser.getUserId())) {
-//            System.out.println("다르다!");
-//            return;
-//        }
-//
-//        req.setAttribute("user", user);
-//        RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
-//        rd.forward(req,resp);
-//    }
-//
-//    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        User user = new User(req.getParameter("userId"),
-//                req.getParameter("password"),
-//                req.getParameter("name"),
-//                req.getParameter("email"));
-//        MemoryUserRepository.getInstance().changeUserInfo(user);
-//        System.out.println("user 정보 수정 완료");
-//        resp.sendRedirect("/user/userList");
-//    }
 
     @Override
     public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         String method = req.getMethod();
-
         if (method.equalsIgnoreCase("GET")) {
             return handleGet(req, resp);  // GET 요청 처리
         } else if (method.equalsIgnoreCase("POST")) {
             return handlePost(req, resp);  // POST 요청 처리
         }
-//        resp.sendRedirect("/");
-        return("/");
+
+        return("redirect:/");
     }
 
     private String handleGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -69,19 +34,17 @@ public class UpdateUserFormController implements Controller {
         Object value = session.getAttribute("user");
         User user = MemoryUserRepository.getInstance().findUserById(userId);
         if (value == null) {
-            return null;
+            return("redirect:/");
         }
 
         User loginedUser = (User) value;
         if (!Objects.equals(user.getUserId(), loginedUser.getUserId())) {
-            System.out.println("다르다!");
-            return null;
+            System.out.println("다른 계정 수정 접근!");
+            return("redirect:/user/userList");
         }
 
         req.setAttribute("user", user);
-//        RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
-//        rd.forward(req,resp);
-        return("/user/update");
+        return("/user/updateForm.jsp");
     }
 
     private String handlePost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -91,7 +54,6 @@ public class UpdateUserFormController implements Controller {
                 req.getParameter("email"));
         MemoryUserRepository.getInstance().changeUserInfo(user);
         System.out.println("user 정보 수정 완료");
-//        resp.sendRedirect("/user/userList");
-        return("redirect:/user/userLis");
+        return("redirect:/user/userList");
     }
 }
