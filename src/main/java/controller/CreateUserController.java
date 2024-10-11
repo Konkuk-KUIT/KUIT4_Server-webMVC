@@ -3,26 +3,25 @@ package controller;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
-@WebServlet("/user/signup")
-public class CreateUserController extends HttpServlet {
+import static constants.URL.*;
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = new User(req.getParameter("userId"),
-                req.getParameter("password"),
-                req.getParameter("name"),
-                req.getParameter("email"));
+public class CreateUserController extends HttpServlet implements Controller {
+    @Override       //회원가입 진행
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        if (req.getMethod().equalsIgnoreCase("POST")) {
+            User user = new User(req.getParameter("userId"),
+                    req.getParameter("password"),
+                    req.getParameter("name"),
+                    req.getParameter("email"));
 
-        System.out.println("user 회원가입 완료");
+            MemoryUserRepository.getInstance().addUser(user);
+            return "redirect:"+ROOT.getUrl();            // redirect
+        }
 
-        MemoryUserRepository.getInstance().addUser(user);
-        resp.sendRedirect("/");
+        return FORM_JSP.getUrl();      // forward (회원가입 페이지 출력)
     }
 }
