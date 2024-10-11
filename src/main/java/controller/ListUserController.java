@@ -17,7 +17,7 @@ public class ListUserController implements Controller {
         Object value = session.getAttribute(USER_SESSION_KEY);
 
         if (value == null) {
-            return "redirect:/user/login.jsp";
+            return "redirect:/user/login";
         }
 
         Collection<User> users = MemoryUserRepository.getInstance().findAll();

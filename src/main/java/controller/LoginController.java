@@ -12,7 +12,7 @@ public class LoginController implements Controller {
     public String execute(HttpServletRequest req) {
         User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
 
-        if (user == null || user.getPassword() == null || !user.getPassword().equals(req.getParameter("password"))) {
+        if (user == null || !user.getPassword().equals(req.getParameter("password"))) {
             System.out.println("로그인 실패");
             return "/user/login_failed.jsp";
         }
