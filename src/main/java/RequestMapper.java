@@ -23,8 +23,6 @@ public class RequestMapper {
         if (url.equals(URLs.UPDATE.getUrl())) {
             return new UpdateUserFormController();
         }
-        else {
-            return new HomeController();
-        }
+        return null;
     }
 }

@@ -35,7 +35,9 @@ public class DispatcherServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Controller controller = RequestMapper.map(req.getRequestURI());
 
-        if (controller == null) return;
+        if (controller == null) {
+            resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Controller not found");
+        }
 
         String url = controller.atPost(req, resp);
 
