@@ -36,12 +36,12 @@ public class RequestMapper extends HttpServlet {
 
 
     public String proceed() throws Exception {
-        // 매핑되는 컨트롤러가 있다면 execute 실행
+        // 매핑되는 컨트롤러가 있는 경우
         if(controller != null) {
             return controller.execute(httpServletRequest, httpServletResponse);
         }
 
-        // 매핑되는 컨트롤러가 없다면
+        // 매핑되는 컨트롤러가 없는 경우
         return httpServletRequest.getRequestURI();
     }
 }
