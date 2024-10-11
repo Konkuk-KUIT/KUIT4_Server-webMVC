@@ -16,14 +16,22 @@ public class UpdateUserController implements Controller {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        User userGiven = new User(req.getParameter("userId"),
-                req.getParameter("password"),
-                req.getParameter("name"),
-                req.getParameter("email"));
-        User editingUser = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
+        User userGiven = getUserinRequest(req);
+        User editingUser = getRequestedUserinRepository(req);
 
         editingUser.update(userGiven);
 
         return ResponseStringCreator.create(ResponseType.REDIRECT, ResponseURL.USER_LIST);
+    }
+
+    private User getUserinRequest(HttpServletRequest req) {
+        return new User(req.getParameter("userId"),
+                req.getParameter("password"),
+                req.getParameter("name"),
+                req.getParameter("email"));
+    }
+
+    private User getRequestedUserinRepository(HttpServletRequest req) {
+        return MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
     }
 }

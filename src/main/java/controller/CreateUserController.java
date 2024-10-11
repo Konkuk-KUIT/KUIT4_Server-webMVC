@@ -16,12 +16,17 @@ public class CreateUserController implements Controller {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = new User(req.getParameter("userId"),
+        User user = getUserInRequest(req);
+
+        MemoryUserRepository.getInstance().addUser(user);
+
+        return ResponseStringCreator.create(ResponseType.REDIRECT, ResponseURL.USER_LIST);
+    }
+
+    private User getUserInRequest(HttpServletRequest req) {
+        return new User(req.getParameter("userId"),
                 req.getParameter("password"),
                 req.getParameter("name"),
                 req.getParameter("email"));
-
-        MemoryUserRepository.getInstance().addUser(user);
-        return ResponseStringCreator.create(ResponseType.REDIRECT, ResponseURL.USER_LIST);
     }
 }

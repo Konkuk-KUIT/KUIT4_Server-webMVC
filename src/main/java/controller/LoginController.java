@@ -18,21 +18,26 @@ public class LoginController implements Controller {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         User userFromRequest = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
-
-        if(!isIdExist(userFromRequest)) {
-            return ResponseStringCreator.create(ResponseType.REDIRECT, ResponseJSPFile.LOGIN_FAILED);
-        }
-
-        if(!isPasswordMatchUser(req, userFromRequest)) {
+        if (isInvalidUser(req, userFromRequest)) {
             return ResponseStringCreator.create(ResponseType.REDIRECT, ResponseJSPFile.LOGIN_FAILED);
         }
 
         // 로그인 성공
-        HttpSession session = req.getSession();
-        session.setAttribute("user", userFromRequest);
-
+        req.getSession().setAttribute("user", userFromRequest);
         return ResponseStringCreator.create(ResponseType.REDIRECT, ResponseURL.HOME);
+    }
+
+    private boolean isInvalidUser(HttpServletRequest req, User userFromRequest) {
+        if(!isIdExist(userFromRequest)) {
+            return true;
+        }
+
+        if(!isPasswordMatchUser(req, userFromRequest)) {
+            return true;
+        }
+        return false;
     }
 
     private boolean isIdExist(User userFromRequest) {

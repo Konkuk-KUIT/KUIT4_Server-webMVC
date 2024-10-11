@@ -15,8 +15,7 @@ public class LogoutController implements Controller {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        session.removeAttribute("user");
+        req.getSession().removeAttribute("user");
         return ResponseStringCreator.create(ResponseType.REDIRECT, ResponseURL.HOME);
     }
 

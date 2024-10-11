@@ -18,14 +18,23 @@ public class ListUserController implements Controller {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 로그인이 되어있을 경우
-        if(req.getSession().getAttribute("user") != null){
-            Collection<User> users = MemoryUserRepository.getInstance().findAll();
+        if(isLoggined(req)){
 
-            req.setAttribute("users", users);
+            addAllUsersToRequest(req);
+
             return ResponseStringCreator.create(ResponseType.FORWARD, ResponseJSPFile.USER_LIST);
         } else {
             return ResponseStringCreator.create(ResponseType.REDIRECT, ResponseURL.HOME);
         }
 
+    }
+
+    private void addAllUsersToRequest(HttpServletRequest req) {
+        Collection<User> users = MemoryUserRepository.getInstance().findAll();
+        req.setAttribute("users", users);
+    }
+
+    private boolean isLoggined(HttpServletRequest req) {
+        return req.getSession().getAttribute("user") != null;
     }
 }
