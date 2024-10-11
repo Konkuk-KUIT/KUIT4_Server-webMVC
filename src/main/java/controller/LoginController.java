@@ -11,20 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-//@WebServlet("/user/login")
 public class LoginController implements Controller {
-
-//    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String userId = req.getParameter("userId");
-//        User user = MemoryUserRepository.getInstance().findUserById(userId);
-//        // 세션 정보 저장
-//        HttpSession session = req.getSession();
-//        session.setAttribute("user", user);
-//
-//        System.out.println("로그인");
-//        resp.sendRedirect("/");
-//    }
 
     @Override
     public String process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
@@ -34,8 +21,7 @@ public class LoginController implements Controller {
         HttpSession session = req.getSession();
         session.setAttribute("user", user);
 
-        System.out.println("로그인");
-//        resp.sendRedirect("/");
+        System.out.println("로그인 완료");
         return("redirect:/");
     }
 }
