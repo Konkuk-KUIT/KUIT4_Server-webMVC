@@ -13,13 +13,20 @@ import java.io.IOException;
 import java.util.Collection;
 
 @WebServlet("/user/userList")
-public class ListUserController extends HttpServlet {
+public class ListUserController implements Controller{
 
-    @Override
+    /*@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Collection<User> users = MemoryUserRepository.getInstance().findAll();
         req.setAttribute("users", users);
         RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
         rd.forward(req,resp);
+    }*/
+
+    @Override
+    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        Collection<User> users = MemoryUserRepository.getInstance().findAll();
+        req.setAttribute("users", users);
+        return "/user/list.jsp"; // forward 처리
     }
 }
