@@ -16,11 +16,4 @@ public class LogoutUserController implements Controller {
         return "redirect:/";
     }
 
-    /*@Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        session.removeAttribute("user");
-
-        resp.sendRedirect("/");
-    }*/
 }

@@ -20,15 +20,4 @@ public class UpdateUserFormController implements Controller {
 
         return "/user/userList";
     }
-
-    /*@Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = MemoryUserRepository.getInstance().findUserById(req.getParameter("userId"));
-
-        if (user != null) {
-            req.setAttribute("users", user);
-            RequestDispatcher rd = req.getRequestDispatcher("/user/updateForm.jsp");
-            rd.forward(req, resp);
-        }
-    }*/
 }

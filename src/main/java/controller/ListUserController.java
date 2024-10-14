@@ -24,21 +24,4 @@ public class ListUserController implements Controller {
             return "redirect:/user/login.jsp";
         }
     }
-
-
-    /*@Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-
-        if(session.getAttribute("user") != null) {
-            Collection<User> users = MemoryUserRepository.getInstance().findAll();
-            req.setAttribute("users", users);
-
-            RequestDispatcher rd = req.getRequestDispatcher("/user/list.jsp");
-            rd.forward(req, resp);
-        } else {
-            resp.sendRedirect("/user/login.jsp");
-        }
-
-    }*/
 }

@@ -20,16 +20,4 @@ public class UpdateUserController implements Controller {
 
         return "redirect:/user/userList";
     }
-
-    /*@Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = new User(req.getParameter("userId"),
-                req.getParameter("password"),
-                req.getParameter("name"),
-                req.getParameter("email"));
-
-        MemoryUserRepository.getInstance().changeUserInfo(user);
-        System.out.println("User Edited");
-        resp.sendRedirect("/user/list");
-    }*/
 }
