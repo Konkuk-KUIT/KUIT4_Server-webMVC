@@ -11,14 +11,14 @@ import java.io.IOException;
 
 @WebServlet("/")
 public class DispatcherServlet extends HttpServlet {
-    private final String REDIRECT = "redirect:";
+    private static final String REDIRECT = "redirect:";
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestMapper requestMapper = new RequestMapper(req, resp);
         Controller controller = requestMapper.getController(req);
         if (controller == null) {
-            req.getRequestDispatcher(req.getRequestURI()).forward(req, resp);
+            return;
         }
         send(req, resp, controller);
 

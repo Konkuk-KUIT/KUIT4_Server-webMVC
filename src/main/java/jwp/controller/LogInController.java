@@ -31,6 +31,6 @@ public class LogInController implements Controller {
     }
 
     private boolean isLoginedUser(String password, User user) {
-        return password.equals(user.getPassword());
+        return user.getPassword().equals(password); // password가 null일 가능성이 높기 때문에 equals 안으로 넣음.
     }
 }
