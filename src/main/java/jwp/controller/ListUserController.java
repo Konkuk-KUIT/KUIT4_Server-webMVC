@@ -1,5 +1,6 @@
 package jwp.controller;
 
+import core.db.DBUserRepository;
 import core.db.MemoryUserRepository;
 import core.mvc.Controller;
 import jwp.util.UserSessionUtils;
@@ -14,7 +15,7 @@ public class ListUserController implements Controller {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         HttpSession session = req.getSession();
         if (UserSessionUtils.isLogined(session)) {
-            req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
+            req.setAttribute("users", DBUserRepository.getInstance().findAll());
             return "/user/list.jsp";
         }
         return "redirect:/user/loginForm";

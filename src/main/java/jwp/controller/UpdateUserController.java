@@ -1,5 +1,6 @@
 package jwp.controller;
 
+import core.db.DBUserRepository;
 import core.db.MemoryUserRepository;
 import core.mvc.Controller;
 import jwp.model.User;
@@ -16,7 +17,7 @@ public class UpdateUserController implements Controller {
                 req.getParameter("password"),
                 req.getParameter("name"),
                 req.getParameter("email"));
-        MemoryUserRepository.getInstance().update(modifiedUser);
+        DBUserRepository.getInstance().update(modifiedUser);
         return "redirect:/user/list";
     }
 }
