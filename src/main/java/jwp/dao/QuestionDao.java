@@ -4,7 +4,6 @@ import core.jdbc.JdbcTemplate;
 import core.jdbc.PreparedStatementSetter;
 import core.jdbc.RowMapper;
 import jwp.model.Question;
-import jwp.model.User;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -13,7 +12,7 @@ public class QuestionDao {
     private final JdbcTemplate<Question> jdbcTemplate = new JdbcTemplate();
 
     public void insert(Question question) throws SQLException {
-        String sql = "INSERT INTO QUESTIONS VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO QUESTIONS (writer, title, contents, createdDate, countOfAnswer) VALUES (?, ?, ?, ?, ?)";
 
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, question.getWriter());
@@ -63,11 +62,11 @@ public class QuestionDao {
         return jdbcTemplate.query(sql, rowMapper);
     }
 
-    public Question findByQuestionId(String questionId) throws SQLException {
-        String sql = "SELECT questionId, writer, title, contents, createdDate, countOfAnswer FROM Question WHERE questionId = ?";
+    public Question findByQuestionId(Long questionId) throws SQLException {
+        String sql = "SELECT questionId, writer, title, contents, createdDate, countOfAnswer FROM QUESTIONS WHERE questionId = ?";
 
         PreparedStatementSetter pstmtSetter = pstmt -> {
-            pstmt.setString(1, questionId);
+            pstmt.setLong(1, questionId);
         };
 
         RowMapper rowMapper = rs -> new Question(rs.getLong("questionId"),

@@ -1,6 +1,9 @@
 package core.mvc;
 
 import jwp.controller.*;
+import jwp.controller.question.CreateQuestionController;
+import jwp.controller.question.QuestionFormController;
+import jwp.controller.question.ShowController;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,13 +21,16 @@ public class RequestMapping {
         controllers.put("/user/update", new UpdateUserController());
         controllers.put("/user/updateForm", new UpdateUserFormController());
 
+        controllers.put("/qna/show", new ShowController());
+        controllers.put("/qna/form", new QuestionFormController());
+        controllers.put("/qna/create", new CreateQuestionController());
+
         controllers.put("/user/form", new ForwardController("/user/form.jsp"));
         controllers.put("/user/loginForm", new ForwardController("/user/login.jsp"));
         controllers.put("/user/loginFailed", new ForwardController("/user/loginFailed.jsp"));
 
-        controllers.put("/qna/form", new ForwardController("/qna/form.jsp"));
-        controllers.put("/qna/show", new ForwardController("/qna/show.jsp"));
-
+        //controllers.put("/qna/form", new ForwardController("/qna/form.jsp"));
+        //controllers.put("/qna/show", new ForwardController("/qna/show.jsp"));
     }
 
     public Controller getController(String url) {
