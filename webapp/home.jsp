@@ -26,7 +26,7 @@
                             </div>
                             <div class="reply" title="댓글">
                                 <i class="icon-reply"></i>
-                                <span class="point">12</span>
+                                <span class="point">${question.questionId}</span>
                             </div>
                         </div>
                     </div>

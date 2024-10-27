@@ -24,6 +24,7 @@ public class QnaCreateController implements Controller {
 
         questionDao.insert(question);
 
+        // question 생성 후 redirect
         return "redirect:/";
     }
 }

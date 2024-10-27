@@ -15,7 +15,7 @@
             <form name="question" method="post" action="/qna/create">
                 <div class="form-group">
                     <label for="writer">글쓴이</label>
-                    <input type="text" class="form-control" value="${sessionScope.user.userId}" id="writer" name="writer" placeholder="글쓴이"/>
+                    <input type="text" class="form-control" value="${sessionScope.user.userId}" id="writer" name="writer" placeholder="글쓴이" readonly/>
                 </div>
                 <div class="form-group">
                     <label for="title">제목</label>

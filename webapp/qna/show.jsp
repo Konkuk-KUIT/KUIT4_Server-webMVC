@@ -30,7 +30,7 @@
                     </div>
                     <div class="article-util">
                         <ul class="article-util-list">
-                            <c:set var="user" value="${sessionScope.user.name}"/>
+                            <c:set var="user" value="${sessionScope.user.userId}"/>
                             <c:set var="writer" value="${question.writer}"/>
                             <c:if test="${user eq writer}">
                                 <li>

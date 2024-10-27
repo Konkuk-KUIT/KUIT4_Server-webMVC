@@ -14,7 +14,7 @@ public class QnaFormController implements Controller {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         HttpSession session = req.getSession();
         if (UserSessionUtils.isLogined(session)) {
-            return "/qna/form.jsp";
+            return "/qna/form.jsp";   // 로그인 되어있다면 qna form 화면으로 forward
         }
         return "redirect:/user/loginForm";
     }
