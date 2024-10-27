@@ -23,8 +23,8 @@ public class RequestMapping {
         controllers.put("/user/loginFailed", new ForwardController("/user/loginFailed.jsp"));
 
         controllers.put("/qna/form", new QnaFormController()); // 변경
-        controllers.put("/qna/show", new ForwardController("/qna/show.jsp"));
         controllers.put("/qna/create", new QnaCreateController());
+        controllers.put("/qna/show", new ShowController());
 
     }
 
