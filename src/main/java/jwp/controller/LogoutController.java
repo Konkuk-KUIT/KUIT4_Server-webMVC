@@ -11,7 +11,8 @@ public class LogoutController implements Controller {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         HttpSession session = req.getSession();
-        session.removeAttribute("user");
+        // 현재 세션에서 삭제
+        session.removeAttribute("user"); // <-> setAttribute
         return "redirect:/";
     }
 }

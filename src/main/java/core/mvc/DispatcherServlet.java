@@ -23,7 +23,9 @@ public class DispatcherServlet extends HttpServlet {
         String url = req.getRequestURI();
         Controller controller = requestMapping.getController(url);
         try {
+            // 각 컨트롤러는 String을 반환한다.
             String viewName = controller.execute(req, resp);
+            // viewresolver로 찾자
             move(viewName, req, resp);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -33,6 +35,7 @@ public class DispatcherServlet extends HttpServlet {
 
     private void move(String viewName, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         if (viewName.startsWith(REDIRECT_PREFIX)) {
+            // redirect : URL변경 / 데이터 수정 작업 후 특정페이지로 이동
             resp.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));
             return;
         }

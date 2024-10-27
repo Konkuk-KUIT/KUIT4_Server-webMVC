@@ -14,6 +14,7 @@ public class ListUserController implements Controller {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         HttpSession session = req.getSession();
         if (UserSessionUtils.isLogined(session)) {
+            // 모든 사용자 목록으로
             req.setAttribute("users", MemoryUserRepository.getInstance().findAll());
             return "/user/list.jsp";
         }

@@ -15,6 +15,7 @@ public class CreateUserController implements Controller {
                 req.getParameter("password"),
                 req.getParameter("name"),
                 req.getParameter("email"));
+        // 하나 만들고, addUser로 추가
         MemoryUserRepository.getInstance().addUser(user);
         System.out.println("user 회원가입 완료");
         return "redirect:/user/list";

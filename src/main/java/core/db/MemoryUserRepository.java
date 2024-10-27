@@ -13,6 +13,7 @@ public class MemoryUserRepository {
     private MemoryUserRepository() {
     }
 
+    // 하나 만들어서 반환
     public static MemoryUserRepository getInstance() {
         if (memoryUserRepository == null) {
             memoryUserRepository = new MemoryUserRepository();
