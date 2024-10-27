@@ -1,6 +1,9 @@
 package jwp.dao;
 
 import core.jdbc.ConnectionManager;
+import core.jdbc.JdbcTemplate;
+import core.jdbc.PreparedStatementSetter;
+import core.jdbc.RowMapper;
 import jwp.model.User;
 
 import java.sql.Connection;
@@ -11,156 +14,86 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Dao : Data access object
+// JdbcTemplate을 이용해서 DB 추가, 삭제, 수정
+// => 데이터 접근 객체
 public class UserDao {
     // Todo 1. addUser -> insert / update, delete 메소드 제작
 
+    private final JdbcTemplate<User> jdbcTemplate = new JdbcTemplate();
+
     // insert method
     public void insert(User user) throws SQLException {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        // DB에 실행 할 SQL쿼리 담기
+        // db에 보낼 sql문
+        // ? : 쿼리문의 파라미터
+        // DB에 보낼 SQL 쿼리 준비
+        // 쿼리 컴파일 및 DB에 준비
+        String sql = "INSERT INTO USERS VALUES (?, ?, ?, ?)";
 
-        try {
-            // connection을 가져온다 (DB와의 연결)
-            conn = ConnectionManager.getConnection();
-            // db에 보낼 sql문
-            // ? : 쿼리문의 파라미터
-            String sql = "INSERT INTO USERS VALUES (?, ?, ?, ?)";
-            // DB에 보낼 SQL 쿼리 준비
-            // 쿼리 컴파일 및 DB에 준비
-            pstmt = conn.prepareStatement(sql);
-
+        // pstmtSetter의 setParameters 구현 (by익명함수, 람다식)
+        // pstmt : PreparedStatement타입의 매개변수 (setParameters 원형의)
+        // Pstmt를 받으면 괄호처럼 행동해라
+        PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, user.getUserId());
             pstmt.setString(2, user.getPassword());
             pstmt.setString(3, user.getName());
             pstmt.setString(4, user.getEmail());
-            // 배열과 다르게 1부터 시작
+        };
+        // 람다식으로 (익명클래스로 구현해도 된다)
 
+        // SQL문에 데이터 설정된 인터페이스 객체 전달
+        jdbcTemplate.update(sql, pstmtSetter);
 
-            // 쿼리문 실행 (sql변수)
-            // db가 지금까지의 데이터 저장
-            pstmt.executeUpdate();
-        } finally {
-            // close하여 자원 해제
-            if(pstmt != null)
-                pstmt.close();
-            if (conn != null)
-                conn.close();
-        }
     }
 
     // update method
     public void update(User user) throws SQLException {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-
-        try {
-            conn = ConnectionManager.getConnection();
-            // ? : 쿼리문의 파라미터
-            String sql = "UPDATE USERS SET password = ?, name = ?, email = ? WHERE userId = ?";
-            // ?의 위치에 맞게 바꾼다.
-            pstmt = conn.prepareStatement(sql);
+        String sql = "UPDATE USERS SET password = ?, name = ?, email = ? WHERE userId = ?";
+        PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, user.getPassword());
             pstmt.setString(2, user.getName());
             pstmt.setString(3, user.getEmail());
             pstmt.setString(4, user.getUserId());
-
-            // db가 지금까지의 데이터 저장
-            pstmt.executeUpdate();
-        } finally {
-            if(pstmt != null)
-                pstmt.close();
-            if (conn != null)
-                conn.close();
-        }
+        };
+        jdbcTemplate.update(sql, pstmtSetter);
     }
 
     // delete method
     public void delete(User user) throws SQLException {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-
-        try {
-            conn = ConnectionManager.getConnection();
-            // ? : 쿼리문의 파라미터
-            String sql = "DELETE FROM USERS WHERE userId = ?";
-            // INSERT가 SQLExeption을 던지게 바꾼다..
-            pstmt = conn.prepareStatement(sql);
+        String sql = "DELETE FROM USERS WHERE userId = ?";
+        PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, user.getUserId());
+        };
+        jdbcTemplate.update(sql, pstmtSetter);
 
-            // db가 지금까지의 데이터 저장
-            pstmt.executeUpdate();
-        } finally {
-            if(pstmt != null)
-                pstmt.close();
-            if (conn != null)
-                conn.close();
-        }
     }
 
     // Todo 2. findAll, findByUserId
     public List<User> findAll() throws SQLException {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        // sql 쿼리의 결과를 저장
-        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM USERS";
 
-        try {
-            conn = ConnectionManager.getConnection();
-            String sql = "SELECT * FROM USERS";
-            pstmt = conn.prepareStatement(sql);
+        RowMapper rowMapper = rs -> new User(rs.getString("userId"),
+                rs.getString("password"),
+                rs.getString("name"),
+                rs.getString("email")
+        );
 
-            rs = pstmt.executeQuery();
-            // 정보를 update X / 정보를 조회하고 가져온다 (1명씩)
-            // <-> executeUpdate()
-
-            while (rs.next()) { // 여러명이 저장되있을 수 있으므로
-                User user = new User(rs.getString("userId"),
-                        rs.getString("password"),
-                        rs.getString("name"),
-                        rs.getString("email"));
-                users.add(user);
-            }
-        } finally {
-            if (conn != null)
-                conn.close();
-            if (pstmt != null)
-                pstmt.close();
-            if (rs != null)
-                rs.close();
-        }
-        return users;
+        return jdbcTemplate.query(sql, rowMapper);
     }
 
     public User findByUserId(String userId) throws SQLException {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        User user = null;
+        String sql = "SELECT userId password, name, email FROM USERS WHERE userId = ?";
 
-        try {
-            conn = ConnectionManager.getConnection();
-            String sql = "SELECT userId password, name, email FROM USERS WHERE userId = ?";
-            pstmt = conn.prepareStatement(sql);
+        PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, userId);
+        };
 
-            rs = pstmt.executeQuery();
-            if (rs.next()) { // 여러명이 저장되있을 수 있으므로
-                user = new User(rs.getString("userId"),
-                        rs.getString("password"),
-                        rs.getString("name"),
-                        rs.getString("email"));
-            }
-        } finally {
-            if (conn != null)
-                conn.close();
-            if (pstmt != null)
-                pstmt.close();
-            if (rs != null)
-                rs.close();
-        }
-        return user;
+        RowMapper rowMapper = rs -> new User(rs.getString("userId"),
+                rs.getString("password"),
+                rs.getString("name"),
+                rs.getString("email")
+        );
+
+        return jdbcTemplate.queryForObject(sql, pstmtSetter, rowMapper);
     }
 
 }
