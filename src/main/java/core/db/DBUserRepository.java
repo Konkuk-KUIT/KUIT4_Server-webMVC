@@ -5,9 +5,8 @@ import jwp.model.User;
 
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.List;
 
-public class DBUserRepository implements Repository{
+public class DBUserRepository implements UserRepository {
 
     private UserDao userDao;
     private static DBUserRepository dbUserRepository;
