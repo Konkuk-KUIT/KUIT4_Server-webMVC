@@ -2,10 +2,7 @@ package core.jdbc;
 
 import jwp.model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +16,29 @@ public class JdbcTemplate<T> {
 
         try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmtSetter.setParameters(pstmt);
-
             pstmt.executeUpdate();
             // executeUpdate()라는 메서드를 활용하면 쿼리문이 실행된다.
         }
         // try 문에서 사용한 Connection, PreparedStatement 자원을 close 해준다.
     }
+
+    // Question 용 -> 오버로딩 활용
+    public void update(String sql, PreparedStatementSetter pstmtSetter, KeyHolder holder) {
+        try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            pstmtSetter.setParameters(pstmt);
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                holder.setId(rs.getLong(1));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
     public <T> List<T> query(String sql, RowMapper<T> rowMapper) throws SQLException {
 
