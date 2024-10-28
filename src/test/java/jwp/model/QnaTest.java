@@ -46,7 +46,8 @@ public class QnaTest {
         String writer = "testUser";
         String title = "KeyHolder 테스트";
         String contents = "KeyHolder를 통한 ID 검증";
-        Question question = new Question(writer, title, contents);
+        LocalDateTime now = LocalDateTime.now();
+        Question question = new Question(writer, title, contents, now, 0);
 
         // when
         Question savedQuestion = questionDao.insert(question);
@@ -98,7 +99,9 @@ public class QnaTest {
                     Question question = new Question(
                             "user" + index,
                             "title" + index,
-                            "content" + index
+                            "content" + index,
+                            LocalDateTime.now(),
+                            0
                     );
                     savedQuestions[index] = questionDao.insert(question);
                 } catch (Exception e) {

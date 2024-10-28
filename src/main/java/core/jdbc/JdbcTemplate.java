@@ -21,11 +21,11 @@ public class JdbcTemplate<T> {
             pstmtSetter.setParameters(pstmt);
             pstmt.executeUpdate();
 
-            try (ResultSet rs = pstmt.getGeneratedKeys()) {
-                if (rs.next()) {
-                    keyHolder.setId((int)rs.getLong(1));
-                }
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                keyHolder.setId((int)rs.getLong(1));
             }
+            rs.close();
         }
     }
 
