@@ -39,7 +39,7 @@ public class JdbcTemplate<T> {
     }
 
 
-
+    // UserDao, QuestionDao 에서 사용할 query 메소드
     public <T> List<T> query(String sql, RowMapper<T> rowMapper) throws SQLException {
 
         List<T> objects = new ArrayList<>();
@@ -54,6 +54,25 @@ public class JdbcTemplate<T> {
         }
         return objects;
     }
+
+    // AnswerDao 에서 사용할 query 메소드
+    public <T> List<T> query(String sql, PreparedStatementSetter pstmtSetter, RowMapper<T> rowMapper) throws SQLException {
+        List<T> objects = new ArrayList<>();
+        ResultSet rs = null;
+
+        try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            pstmtSetter.setParameters(pstmt);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                T object = rowMapper.mapRow(rs);
+                objects.add(object);
+            }
+        }
+        return objects;
+    }
+
+
 
     public T queryForObject(String sql, PreparedStatementSetter pstmtSetter, RowMapper<T> rowMapper) throws SQLException {
         ResultSet rs = null;
