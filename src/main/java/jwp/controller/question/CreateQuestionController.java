@@ -15,6 +15,7 @@ public class CreateQuestionController implements Controller {
                 req.getParameter("title"),
                 req.getParameter("contents"));
 
+        // addQuestion에서는 Question 객체의 writer, title, contents 만 사용하니까
         DBQuestionRepository.getInstance().addQuestion(question);
         System.out.println("question 추가 완료");
         return "redirect:/";

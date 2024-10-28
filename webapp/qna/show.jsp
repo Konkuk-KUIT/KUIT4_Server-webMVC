@@ -33,12 +33,14 @@
                         <ul class="article-util-list">
                             <li>
                               <!-- 수정, 삭제 API 연결 필요 -->
-                                <a class="link-modify-article" href="/questions/423/form">수정</a>
+                                <a class="link-modify-article" href="/question/updateForm?questionId=${question.questionId}&writer=${question.writer}">수정</a>
                             </li>
                             <li>
                               <!-- 수정, 삭제 API 연결 필요 -->
-                                <form class="form-delete" action="/questions/423" method="POST">
+                                <form class="form-delete" action="/question/delete" method="POST">
                                     <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="writer" value="${question.writer}">
+                                    <input type="hidden" name="questionId" value="${question.questionId}">
                                     <button class="link-delete-article" type="submit">삭제</button>
                                 </form>
                             </li>

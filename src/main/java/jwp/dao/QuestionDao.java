@@ -38,12 +38,11 @@ public class QuestionDao {
         jdbcTemplate.update(sql, pstmtSetter);
     }
 
-    // todo id값을 인자로 받도록 변경?
     public void delete(Question question) throws SQLException {
         String sql = "DELETE FROM QUESTIONS WHERE questionId = ?";
 
         PreparedStatementSetter pstmtSetter = pstmt -> {
-            pstmt.setLong(4, question.getQuestionId());
+            pstmt.setLong(1, question.getQuestionId());
         };
 
         jdbcTemplate.update(sql, pstmtSetter);

@@ -41,4 +41,9 @@ public class DBQuestionRepository implements QuestionRepository {
     public void update(Question question) throws SQLException {
         questionDao.update(question);
     }
+
+    public void delete(Long questionId) throws SQLException {
+        Question foundQuestion = questionDao.findByQuestionId(questionId);
+        if(foundQuestion != null) questionDao.delete(foundQuestion);
+    }
 }

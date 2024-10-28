@@ -14,7 +14,6 @@ public class JdbcTemplate<T> {
         // try-with-resouces 문법 사용
         try(Connection conn = ConnectionManager.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)){
-
             pstmtSetter.setParameters(pstmt);
             pstmt.executeUpdate();
         }

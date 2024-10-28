@@ -10,20 +10,21 @@
 <div class="container" id="main">
       <div class="col-md-12 col-sm-12 col-lg-10 col-lg-offset-1">
          <div class="panel panel-default content-main">
-             <form name="question" method="post" action="/question/create">
+             <form name="question" method="post" action="/question/update">
+                 <input type="hidden" name="questionId" value="${question.questionId}">
                  <div class="form-group">
                      <label for="writer">글쓴이</label>
                      <input type="text" class="form-control" value="${sessionScope.user.userId}" id="writer" name="writer" placeholder="글쓴이" readonly/>
                  </div>
                  <div class="form-group">
                      <label for="title">제목</label>
-                     <input type="text" class="form-control" id="title" name="title" placeholder="제목"/>
+                     <input type="text" class="form-control" value="${question.title}" id="title" name="title" placeholder="제목"/>
                  </div>
                  <div class="form-group">
                      <label for="contents">내용</label>
-                     <textarea name="contents" id="contents" rows="5" class="form-control"></textarea>
+                     <textarea name="contents" id="contents" rows="5" class="form-control">${question.contents}</textarea>
                  </div>
-                 <button type="submit" class="btn btn-primary clearfix pull-right" style="margin-top:10px;">질문하기</button>
+                 <button type="submit" class="btn btn-primary clearfix pull-right" style="margin-top:10px;">글 수정</button>
                  <div class="clearfix" />
              </form>
          </div>
