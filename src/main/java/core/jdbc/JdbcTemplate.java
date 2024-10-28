@@ -15,7 +15,7 @@ public class JdbcTemplate<T> {
         }
     }
 
-    public void update(String sql, PreparedStatementSetter pstmtSetter, KeyHolder keyHolder) throws SQLException {
+    public void update(String sql, PreparedStatementSetter pstmtSetter, KeyHolder holder) throws SQLException {
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pstmtSetter.setParameters(pstmt);
@@ -23,7 +23,7 @@ public class JdbcTemplate<T> {
 
             ResultSet rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
-                keyHolder.setId((int)rs.getLong(1));
+                holder.setId((int)rs.getLong(1));
             }
             rs.close();
         }

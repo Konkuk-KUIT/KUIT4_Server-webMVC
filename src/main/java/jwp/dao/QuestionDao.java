@@ -16,13 +16,17 @@ public class QuestionDao {
 
     public List<Question> findAll() throws SQLException {
         String sql = "SELECT * FROM QUESTIONS";
-        RowMapper<Question> rowMapper = rs -> new Question(
-                rs.getString("writer"),
-                rs.getString("title"),
-                rs.getString("contents"),
-                rs.getTimestamp("createdDate").toLocalDateTime(),
-                rs.getInt("countOfAnswer")
-        );
+        RowMapper<Question> rowMapper = rs -> {
+            Question question = new Question(
+                    rs.getString("writer"),
+                    rs.getString("title"),
+                    rs.getString("contents"),
+                    rs.getTimestamp("createdDate").toLocalDateTime(),
+                    rs.getInt("countOfAnswer")
+            );
+            question.setQuestionId(rs.getInt("questionId")); // 이 줄을 추가
+            return question;
+        };
         return jdbcTemplate.query(sql, rowMapper);
     }
 
