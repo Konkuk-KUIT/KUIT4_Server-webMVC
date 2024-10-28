@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Question {
-    private Long questionId;
+    private int questionId;
     private String writer;
     private String title;
     private String contents;
@@ -27,7 +27,7 @@ public class Question {
     }
 
     // Getters
-    public Long getQuestionId() {
+    public int getQuestionId() {
         return questionId;
     }
 
@@ -52,7 +52,7 @@ public class Question {
     }
 
     // Setters
-    public void setQuestionId(Long questionId) {
+    public void setQuestionId(int questionId) {
         this.questionId = questionId;
     }
 
