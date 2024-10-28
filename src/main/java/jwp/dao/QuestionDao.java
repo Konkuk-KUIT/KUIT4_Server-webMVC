@@ -5,6 +5,7 @@ import core.jdbc.KeyHolder;
 import core.jdbc.PreparedStatementSetter;
 import core.jdbc.RowMapper;
 import jwp.model.Question;
+import jwp.model.User;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -43,6 +44,18 @@ public class QuestionDao {
         jdbcTemplate.update(sql, pstmtSetter, keyHolder);
 
         return findByQuestionId(keyHolder.getId());
+    }
+
+    public void update(Question question) throws SQLException {
+
+        String sql = "UPDATE QUESTIONS SET writer = ?, title = ?, contents = ? WHERE questionId = ?";
+        PreparedStatementSetter pstmtSetter = pstmt -> {
+            pstmt.setString(1, question.getWriter());
+            pstmt.setString(2, question.getTitle());
+            pstmt.setString(3, question.getContents());
+            pstmt.setLong(4, question.getQuestionId());
+        };
+        jdbcTemplate.update(sql, pstmtSetter);
     }
 
 

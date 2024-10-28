@@ -35,7 +35,7 @@
                             <c:if test="${user eq writer}">
                                 <li>
                                     <!-- 수정, 삭제 API 연결 필요 -->
-                                    <a class="link-modify-article" href="/questions/423/form">수정</a>
+                                    <a class="link-modify-article" href="/qna/updateForm?questionId=${question.questionId}">수정</a>
                                 </li>
                                 <li>
                                     <!-- 수정, 삭제 API 연결 필요 -->
