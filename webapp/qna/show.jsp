@@ -1,15 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <!doctype html>
 <html lang="ko">
-<%@ include file="/include/header.jspf"%>
+<%@ include file="/include/header.jspf" %>
 <body>
 <%@ include file="/include/navigation.jspf" %>
 
 <div class="container" id="main">
     <header class="qna-header">
-        <h2 class="qna-title">객체지향을 가장 잘 다룬 책이 뭐가 있나요?</h2>
+        <h2 class="qna-title">${question.title}</h2>
     </header>
     <div class="content-main">
         <article class="article">
@@ -19,28 +20,37 @@
                 </div>
                 <div class="article-header-text">
                     <!-- 사용자 프로필 추가 할거면 span -> a 태그로 바꾸고 API 연결 -->
-                    <span class="article-author-name">이영선</span>
+                    <span class="article-author-name">${question.writer}</span>
                     <span class="article-header-time">
-                              2024-09-29 22:11
-                            </span>
+                        ${question.createdDate}
+                    </span>
                 </div>
             </div>
             <div class="article-doc">
-                <p>저는 지금 '객체지향의 사실과 오해' 라는 책을 읽고 있는데 정말 좋아요</p>
-                <p>이해가 쏙쏙 됩니다!</p>
+                <p>${question.contents}</p>
             </div>
             <div class="article-util">
                 <ul class="article-util-list">
                     <li>
                         <!-- 수정, 삭제 API 연결 필요 -->
-                        <a class="link-modify-article" href="/questions/423/form">수정</a>
+                        <c:choose>
+                            <c:when test="${sessionScope.user.getName() eq question.writer}">
+                                <a class="link-modify-article"
+                                   href="/qna/update?questionId=${question.questionId}">수정</a>
+                            </c:when>
+                        </c:choose>
                     </li>
                     <li>
                         <!-- 수정, 삭제 API 연결 필요 -->
-                        <form class="form-delete" action="/questions/423" method="POST">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button class="link-delete-article" type="submit">삭제</button>
-                        </form>
+                        <c:choose>
+                            <c:when test="${sessionScope.user.getName() eq question.writer}">
+                                <form class="form-delete" action="/questions/423" method="POST">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button class="link-delete-article" type="submit">삭제</button>
+                                </form>
+                            </c:when>
+                        </c:choose>
+
                     </li>
                     <li>
                         <a class="link-modify-article" href="/">목록</a>
@@ -121,7 +131,7 @@
                             <textarea class="form-control" placeholder="Update your status"></textarea>
                         </div>
                         <button class="btn btn-primary pull-right" type="button">답변하기</button>
-                        <div class="clearfix" />
+                        <div class="clearfix"/>
                     </form>
                 </div>
             </div>
