@@ -6,7 +6,7 @@ import java.time.LocalDate;
 public class Question {
     private final String writer;
     private final Date createdDate;
-    private final int countOfAnswer;
+    private int countOfAnswer;
     private String title;
     private String contents;
     private int questionId;
@@ -67,5 +67,9 @@ public class Question {
 
     public int getCountOfAnswer() {
         return countOfAnswer;
+    }
+
+    public void setCountOfAnswer(int countOfAnswer) {
+        this.countOfAnswer = countOfAnswer;
     }
 }
