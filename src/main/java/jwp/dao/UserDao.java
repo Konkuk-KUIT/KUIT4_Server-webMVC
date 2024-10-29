@@ -32,6 +32,7 @@ public class UserDao {
         // pstmtSetter의 setParameters 구현 (by익명함수, 람다식)
         // pstmt : PreparedStatement타입의 매개변수 (setParameters 원형의)
         // Pstmt를 받으면 괄호처럼 행동해라
+        // pstmtSetter.setParameter(pstmt)
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, user.getUserId());
             pstmt.setString(2, user.getPassword());
@@ -48,6 +49,7 @@ public class UserDao {
     // update method
     public void update(User user) throws SQLException {
         String sql = "UPDATE USERS SET password = ?, name = ?, email = ? WHERE userId = ?";
+        // PreparedStatementSetter : placeholder에 데이터 세팅
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, user.getPassword());
             pstmt.setString(2, user.getName());
@@ -70,7 +72,7 @@ public class UserDao {
     // Todo 2. findAll, findByUserId
     public List<User> findAll() throws SQLException {
         String sql = "SELECT * FROM USERS";
-
+        // ResultSet의 각 행을 User객체로 매핑
         RowMapper rowMapper = rs -> new User(rs.getString("userId"),
                 rs.getString("password"),
                 rs.getString("name"),
@@ -84,6 +86,7 @@ public class UserDao {
         String sql = "SELECT userId password, name, email FROM USERS WHERE userId = ?";
 
         PreparedStatementSetter pstmtSetter = pstmt -> {
+            // userId 매개변수를 placeholder에 넘긴다
             pstmt.setString(1, userId);
         };
 

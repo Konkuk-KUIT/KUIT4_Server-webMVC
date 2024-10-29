@@ -9,9 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-// 중복되는 부분 구현
-// -> DB에 데이터 삽입 및 업데이트 하는 공통로직구현
-
+// DB에 추가, 삭제, 수정하는 것
 // todo <User>라고 되어있는 의존성 제거 -> Generic문법 이용
 public class JdbcTemplate<T>{
 
@@ -37,13 +35,18 @@ public class JdbcTemplate<T>{
 
         // try resource : 예외발생 시 자원 자동해제
         try (Connection conn = ConnectionManager.getConnection();
+             // PreapredStatement에 SQL쿼리 객체를 담는다
+             // PreparedStatement : SQL쿼리를 DB에 제출하여 실행하는 객체
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            // placeholder에 데이터 삽입
             pstmtSetter.setParameters(pstmt);
+            // 실제로 SQL쿼리 실행
             pstmt.executeUpdate();
         }
 
     }
 
+    // sql 쿼리 실행 후 결과를 리스트형태로 가져오기
     public <T>List<T> query(String sql, RowMapper<T> rowMapper) throws SQLException {
         // sql 쿼리의 결과를 저장
         List<T> objects = new ArrayList<>();
@@ -52,7 +55,9 @@ public class JdbcTemplate<T>{
              PreparedStatement pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();) {
                 while (rs.next()) {
+                    // 각 sql의 단어를 추출해서 User생성자에 대입
                     T object = rowMapper.mapRow(rs);
+                    // 그렇게 만들어진 인스턴스 add
                     objects.add(object);
                 }
         }
@@ -60,18 +65,24 @@ public class JdbcTemplate<T>{
         return objects;
     }
 
+    // sql쿼리 실행 후 단일 객체반환
     public T queryForObject(String sql, PreparedStatementSetter pstmtSetter, RowMapper<T> rowMapper) throws SQLException {
-        // todo ResultSet을 따로 분리 한 이유 알아보기
+        // todo ResultSet을 따로 분리 한 이유 알아보기 (try resource에 포함 안시키고)
+        // 단일 행만을 다루므로, 찾지못할 경우를 대비, null을 대입하여 명시적으로 닫기
         ResultSet rs = null;
         T user = null;
 
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);) {
+            // sql문 완성
             pstmtSetter.setParameters(pstmt);
             rs = pstmt.executeQuery();
+
+            // 만약 userId가 존재한다면
             if (rs.next()) {
                 user = rowMapper.mapRow(rs);
             }
+
         } finally {
             if(rs != null)
                 rs.close();
