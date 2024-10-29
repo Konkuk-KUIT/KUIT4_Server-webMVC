@@ -43,11 +43,7 @@
                                 </form>
                             </li>
                             <li>
-<<<<<<< HEAD:webapp/qna/show.html
-                                <a class="link-modify-article" href="../home.jsp">목록</a>
-=======
                                 <a class="link-modify-article" href="/">목록</a>
->>>>>>> 71712f932257569f12cd69a1f6d9c4fc2587288d:webapp/qna/show.jsp
                             </li>
                         </ul>
                     </div>
