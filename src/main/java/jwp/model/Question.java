@@ -11,9 +11,6 @@ public class Question {
     private LocalDateTime createdDate;
     private int countOfAnswer;
 
-    public Question() {
-    }
-
     public Question(String writer, String title, String contents, LocalDateTime createdDate, int countOfAnswer) {
         this.writer = writer;
         this.title = title;
@@ -74,17 +71,5 @@ public class Question {
 
     public void setCountOfAnswer(int countOfAnswer) {
         this.countOfAnswer = countOfAnswer;
-    }
-
-    @Override
-    public String toString() {
-        return "Question{" +
-                "questionId=" + questionId +
-                ", writer='" + writer + '\'' +
-                ", title='" + title + '\'' +
-                ", contents='" + contents + '\'' +
-                ", createdDate=" + createdDate +
-                ", countOfAnswer=" + countOfAnswer +
-                '}';
     }
 }
