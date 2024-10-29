@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!doctype html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -56,6 +57,16 @@
         </div>
     </header>
 </div>
+=======
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!doctype html>
+<html lang="ko">
+<%@ include file="/include/header.jspf" %>
+<body>
+<%@ include file="/include/navigation.jspf" %>
+>>>>>>> 71712f932257569f12cd69a1f6d9c4fc2587288d
 
 <div class="container" id="main">
     <h2>Q&A</h2>
@@ -65,7 +76,11 @@
                 <div class="wrap">
                     <div class="main">
                         <strong class="subject">
+<<<<<<< HEAD
                             <a href="./qna/show.html"> 객체지향을 가장 잘 다룬 책이 뭐가 있나요? </a>
+=======
+                            <a href="qna/show"> 객체지향을 가장 잘 다룬 책이 뭐가 있나요? </a>
+>>>>>>> 71712f932257569f12cd69a1f6d9c4fc2587288d
                         </strong>
                         <div class="auth-info">
                             <i class="icon-add-comment"></i>
@@ -84,7 +99,11 @@
                 <div class="wrap">
                     <div class="main">
                         <strong class="subject">
+<<<<<<< HEAD
                             <a href="./qna/show.html"> 객체지향에서 가장 중요하다고 생각하는 것이 무엇인가요? </a>
+=======
+                            <a href="qna/show"> 객체지향에서 가장 중요하다고 생각하는 것이 무엇인가요? </a>
+>>>>>>> 71712f932257569f12cd69a1f6d9c4fc2587288d
                         </strong>
                         <div class="auth-info">
                             <i class="icon-add-comment"></i>
@@ -118,7 +137,11 @@
                 </ul>
             </div>
             <div class="col-md-2 qna-write">
+<<<<<<< HEAD
                 <a href="./qna/form.html" class="btn btn-primary pull-right" role="button">질문하기</a>
+=======
+                <a href="/qna/form" class="btn btn-primary pull-right" role="button">질문하기</a>
+>>>>>>> 71712f932257569f12cd69a1f6d9c4fc2587288d
             </div>
         </div>
     </div>
