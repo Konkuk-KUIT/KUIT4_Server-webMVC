@@ -8,8 +8,9 @@ public class RequestMapper {
 
     public RequestMapper() {
         controllerMap = new HashMap<>();
-        controllerMap.put("/user/signup", (Controller) new CreateUserController());
-        controllerMap.put("/user/list", (Controller) new ListUserController());
+        controllerMap.put("/user/signup", new CreateUserController());
+        controllerMap.put("/user/list", new ListUserController());
+        controllerMap.put("/", new HomeController());
     }
     public Controller getController(String url) {
         return controllerMap.get(url);

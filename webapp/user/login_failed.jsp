@@ -1,3 +1,7 @@
+// jsp
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+// jstl
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!doctype html>
 <html lang="ko">
   <head>
@@ -45,13 +49,16 @@
         </ul>
 
         <div class="col-md-3 text-end">
-          <a href="/user/login.html" type="button" class="btn btn-outline-primary me-2">Login</a>
-          <a href="/user/form.html" type="button" class="btn btn-primary">Sign-up</a>
+          <a href="/user/login.jsp" type="button" class="btn btn-outline-primary me-2">Login</a>
+          <a href="/user/form.jsp" type="button" class="btn btn-primary">Sign-up</a>
         </div>
       </header>
     </div>
     <div class="container">
       <main class="form-signin">
+        <div>
+          ID와 비밀번호가 틀렸습니다.
+        </div>
         <form name="login" method="post" action="/user/login">
           <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
       
