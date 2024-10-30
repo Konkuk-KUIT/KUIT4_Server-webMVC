@@ -8,7 +8,6 @@ import jwp.model.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
 
 public class UpdateQuestionController implements Controller {
 
@@ -34,7 +33,7 @@ public class UpdateQuestionController implements Controller {
                 loggedInUser.getUserId(),
                 title,
                 contents,
-                LocalDateTime.now(),
+                question.getCreatedDate(),
                 question.getCountOfAnswer()
         );
 
