@@ -5,17 +5,17 @@ import java.sql.Timestamp;
 public class Question {
     private String writer;
     private String title;
-    private Timestamp createdDate;
+    private final Timestamp createdDate;
     private String contents;
     private int countOfAnswer;
 
-    public Question(String writer, String title, Timestamp createdDate, String contents, int countOfAnswer) {
-        this.writer = writer;
-        this.title = title;
-        this.createdDate = createdDate;
-        this.contents = contents;
-        this.countOfAnswer = countOfAnswer;
-    }
+//    public Question(String writer, String title, String contents, Timestamp createdDate,  int countOfAnswer) {
+//        this.writer = writer;
+//        this.title = title;
+//        this.contents = contents;
+//        this.createdDate = createdDate;
+//        this.countOfAnswer = countOfAnswer;
+//    }
 
     public Question(String writer, String title, String contents, int countOfAnswer) {
         this.writer = writer;
@@ -23,6 +23,22 @@ public class Question {
         this.createdDate = new Timestamp(System.currentTimeMillis());
         this.contents = contents;
         this.countOfAnswer = countOfAnswer;
+    }
+
+//    public Question(String writer, String title, Timestamp createdDate, String contents) {
+//        this.writer = writer;
+//        this.title = title;
+//        this.createdDate = createdDate;
+//        this.contents = contents;
+//        this.countOfAnswer = 0;
+//    }
+//
+    public Question(String writer, String title, String contents) {
+        this.writer = writer;
+        this.title = title;
+        this.createdDate = new Timestamp(System.currentTimeMillis());
+        this.contents = contents;
+        this.countOfAnswer = 0;
     }
 
 //    public int getQuestionId() {

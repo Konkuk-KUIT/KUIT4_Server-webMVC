@@ -12,7 +12,7 @@ public class QuestionDao {
     public int insert(Question question) throws SQLException {
         KeyHolder keyHolder = new KeyHolder();
 
-        String sql = "INSERT INTO Questions VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Questions (writer, title, contents, createdDate, countOfAnswer) VALUES (?, ?, ?, ?, ?);";
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, question.getWriter());
             pstmt.setString(2, question.getTitle());
@@ -68,9 +68,8 @@ public class QuestionDao {
         String sql = "SELECT * FROM Questions";
         RowMapper<Question> rowMapper = rs ->
                 new Question(
-                        rs.getString("title"),
                         rs.getString("writer"),
-                        rs.getTimestamp("createdDate"),
+                        rs.getString("title"),
                         rs.getString("contents"),
                         rs.getInt("countOfAnswer")
                 );
@@ -79,15 +78,14 @@ public class QuestionDao {
     }
 
     public Question findById(int questionId) throws SQLException {
-        String sql = "SELECT title, writer, createdDate, contents FROM Questions WHERE questionId=?";
+        String sql = "SELECT title, writer, createdDate, contents, countOfAnswer FROM Questions WHERE questionId=?";
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setInt(1, questionId);
         };
         RowMapper<Question> rowMapper = rs ->
                 new Question(
-                        rs.getString("title"),
                         rs.getString("writer"),
-                        rs.getTimestamp("createdDate"),
+                        rs.getString("title"),
                         rs.getString("contents"),
                         rs.getInt("countOfAnswer")
                 );
@@ -96,15 +94,14 @@ public class QuestionDao {
     }
 
     public List<Question> findByWriter(String writer) throws SQLException {
-        String sql = "SELECT title, writer, createdDate, contents FROM Questions WHERE writer=?";
+        String sql = "SELECT title, writer, createdDate, contents, countOfAnswer FROM Questions WHERE writer=?";
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, writer);
         };
         RowMapper<Question> rowMapper= rs ->
                 new Question(
-                        rs.getString("title"),
                         rs.getString("writer"),
-                        rs.getTimestamp("createdDate"),
+                        rs.getString("title"),
                         rs.getString("contents"),
                         rs.getInt("countOfAnswer")
                 );
@@ -113,14 +110,13 @@ public class QuestionDao {
     }
 
     public List<Question> findByTitle(String title) throws SQLException {
-        String sql = "SELECT title, writer, createdDate, contents FROM Questions WHERE title LIKE '%?%'";
+        String sql = "SELECT title, writer, createdDate, contents, countOfAnswer FROM Questions WHERE title LIKE '%?%'";
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, title);
         };
         RowMapper<Question> rowMapper = rs -> new Question(
-                rs.getString("title"),
                 rs.getString("writer"),
-                rs.getTimestamp("createdDate"),
+                rs.getString("title"),
                 rs.getString("contents"),
                 rs.getInt("countOfAnswer")
         );

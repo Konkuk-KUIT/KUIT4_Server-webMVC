@@ -23,7 +23,7 @@
                     <label for="contents">내용</label>
                     <textarea name="contents" id="contents" rows="5" class="form-control"></textarea>
                 </div>
-                <a href="/qna/create" class="btn btn-success clearfix pull-right" role="button">질문하기</a>
+                <button type="submit" class="btn btn-success clearfix pull-right">질문하기</button>
                 <div class="clearfix" />
             </form>
         </div>

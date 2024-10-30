@@ -13,7 +13,7 @@ import java.util.List;
 public class QuestionDaoTest {
     static QuestionDao questionDao = new QuestionDao();
     static Timestamp timestamp = new Timestamp(0);
-    static Question question = new Question("yuna", "kuit week5", timestamp, "너무 어려워요 ㅠㅠ");
+    static Question question = new Question("yuna", "kuit week5", "너무 어려워요 ㅠㅠ");
 
     @BeforeEach
     void insertQuestion() throws SQLException {
