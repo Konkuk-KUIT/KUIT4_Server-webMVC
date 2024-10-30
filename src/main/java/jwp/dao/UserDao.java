@@ -30,13 +30,13 @@ public class UserDao {
         jdbcTemplate.update(sql, pstmtSetter);
     }
 
-    public void update(User user) throws SQLException
+    public void update(User user, User newUser) throws SQLException
     {
         String sql = "UPDATE USERS SET password=?, name=?, email=? WHERE userId=?";
         PreparedStatementSetter pstmtSetter = pstmt -> {
-            pstmt.setString(1, user.getPassword());
-            pstmt.setString(2, user.getName());
-            pstmt.setString(3, user.getEmail());
+            pstmt.setString(1, newUser.getPassword());
+            pstmt.setString(2, newUser.getName());
+            pstmt.setString(3, newUser.getEmail());
             pstmt.setString(4, user.getUserId());
         };
 
@@ -62,7 +62,7 @@ public class UserDao {
                         rs.getString("name"),
                         rs.getString("email"));
 
-        return jdbcTemplate.query(sql, rowMapper);
+        return jdbcTemplate.queryAll(sql, rowMapper);
     }
 
     public User findByUserId(String userId) throws SQLException {
