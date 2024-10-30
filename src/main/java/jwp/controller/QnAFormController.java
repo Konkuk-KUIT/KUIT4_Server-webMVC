@@ -25,8 +25,7 @@ public class QnAFormController implements Controller {
         if (UserSessionUtils.isLogined(session)) {
             return forwardUrl;
         } else {
-            HomeController homeController = new HomeController();
-            return homeController.execute(req, resp);
+            return "redirect:/";
         }
     }
 }
