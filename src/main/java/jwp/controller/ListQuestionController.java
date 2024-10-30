@@ -15,7 +15,9 @@ public class ListQuestionController implements Controller {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws SQLException {
-        List<Question> questionList = questionDao.showQuestionList();
+        List<Question> questions = questionDao.showQuestionList();
+        // questions라는 key로 home.jsp에 전달
+        req.setAttribute("questions", questions);
         return "/home.jsp";
     }
 }

@@ -10,7 +10,8 @@ public class RequestMapping {
     private static final Map<String, Controller> controllers = new HashMap<>();
 
     static {
-        controllers.put("/", new HomeController());
+        // controllers.put("/", new HomeController());
+        controllers.put("/", new ListQuestionController());
         controllers.put("/user/signup", new CreateUserController());
         controllers.put("/user/list", new ListUserController());
         controllers.put("/user/login", new LoginController());
@@ -24,6 +25,8 @@ public class RequestMapping {
 
         controllers.put("/qna/form", new ForwardController("/qna/form.jsp"));
         controllers.put("/qna/show", new ForwardController("/qna/show.jsp"));
+
+        // 접근하는 주소 추가 (
 
     }
 

@@ -23,9 +23,9 @@ public class DispatcherServlet extends HttpServlet {
         String url = req.getRequestURI();
         Controller controller = requestMapping.getController(url);
         try {
-            // 각 컨트롤러는 String을 반환한다.
+            // 각 컨트롤러의 execute메소드 실행 후 반환
             String viewName = controller.execute(req, resp);
-            // viewresolver로 찾자
+            // forward or redirect 처리
             move(viewName, req, resp);
         } catch (Exception e) {
             System.out.println(e.getMessage());
