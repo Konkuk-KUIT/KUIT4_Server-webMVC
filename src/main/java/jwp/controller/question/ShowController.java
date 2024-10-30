@@ -1,5 +1,6 @@
 package jwp.controller.question;
 
+import core.db.DBAnswerRepository;
 import core.db.DBQuestionRepository;
 import core.mvc.Controller;
 
@@ -12,6 +13,7 @@ public class ShowController implements Controller {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         Long questionId = Long.valueOf(req.getParameter("questionId"));
         req.setAttribute("question", DBQuestionRepository.getInstance().findQuestionById(questionId));
+        req.setAttribute("answers", DBAnswerRepository.getInstance().findAllByQuestionId(questionId));
         return "/qna/show.jsp";
     }
 }
