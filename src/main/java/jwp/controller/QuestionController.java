@@ -13,13 +13,19 @@ public class QuestionController implements Controller {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         HttpSession session = req.getSession();
-        if ( session != null) {
+        if (session != null) {
             Question question = (Question) session.getAttribute("question");
+            if (question == null) {
+                return "redirect:/";
+            }
+
             QuestionDao questionDao = new QuestionDao();
+            int questionId = questionDao.insert(question);
 
-            questionDao.insert(question);
-
-            return "/qna/create";
+            Question questionCheck = questionDao.findById(questionId);
+            if (questionCheck != null) {
+                return "/qna/form";
+            }
         }
         return "redirect:/";
     }

@@ -13,6 +13,7 @@ public class HomeController implements Controller {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         QuestionDao questionDao = new QuestionDao();
+
         List<Question> questions = questionDao.findAll();
 
         req.setAttribute("questions", questions);
