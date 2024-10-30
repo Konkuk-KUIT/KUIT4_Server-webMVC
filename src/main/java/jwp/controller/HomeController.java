@@ -1,6 +1,6 @@
 package jwp.controller;
 
-import core.db.DBQuestionRepository;
+import core.db.question.DBQuestionRepository;
 import core.mvc.Controller;
 
 import javax.servlet.http.HttpServletRequest;

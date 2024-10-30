@@ -1,7 +1,7 @@
 package jwp.controller.question;
 
-import core.db.DBQuestionRepository;
-import core.db.DBUserRepository;
+import core.db.question.DBQuestionRepository;
+import core.db.user.DBUserRepository;
 import core.mvc.Controller;
 import jwp.model.Question;
 import jwp.model.User;

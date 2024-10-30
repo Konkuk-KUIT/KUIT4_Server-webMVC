@@ -1,6 +1,6 @@
 package jwp.controller;
 
-import core.db.DBUserRepository;
+import core.db.user.DBUserRepository;
 import core.mvc.Controller;
 import jwp.model.User;
 

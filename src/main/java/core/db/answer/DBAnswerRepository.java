@@ -1,4 +1,4 @@
-package core.db;
+package core.db.answer;
 
 import jwp.dao.AnswerDao;
 import jwp.model.Answer;

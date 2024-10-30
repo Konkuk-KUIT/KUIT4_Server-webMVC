@@ -1,6 +1,6 @@
 package jwp.controller.question;
 
-import core.db.DBQuestionRepository;
+import core.db.question.DBQuestionRepository;
 import core.mvc.Controller;
 import jwp.model.Question;
 
