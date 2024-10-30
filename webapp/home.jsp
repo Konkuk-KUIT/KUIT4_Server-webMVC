@@ -16,7 +16,7 @@
                     <div class="wrap">
                         <div class="main">
                             <strong class="subject">
-                                <a href="qna/show">
+                                <a href="qna/show?questionId=${question.questionId}">
                                         ${question.title}
                                 </a>
                             </strong>

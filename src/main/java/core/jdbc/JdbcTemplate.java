@@ -1,11 +1,10 @@
 package core.jdbc;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import jwp.util.KeyHolder;
 
 public class JdbcTemplate<T> {
     public void update(String sql, PreparedStatementSetter pstmtSetter) throws SQLException {
@@ -16,6 +15,21 @@ public class JdbcTemplate<T> {
             pstmt.executeUpdate();
         }
     }
+
+    public void update(String sql, PreparedStatementSetter pstmtSetter, KeyHolder keyHolder) throws SQLException {
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            pstmtSetter.setParameters(pstmt);
+            pstmt.executeUpdate();
+
+            try (ResultSet rs = pstmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    keyHolder.setId(rs.getInt(1));  // KeyHolder에 생성된 ID 값 설정
+                }
+            }
+        }
+    }
+
 
     public <T> List<T> query(String sql, RowMapper<T> rowMapper) throws SQLException {
 
