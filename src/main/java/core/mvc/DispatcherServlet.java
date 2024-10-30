@@ -37,6 +37,7 @@ public class DispatcherServlet extends HttpServlet {
             return;
         }
         RequestDispatcher rd = req.getRequestDispatcher(viewName);
+
         rd.forward(req, resp);
     }
 }

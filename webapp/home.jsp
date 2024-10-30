@@ -30,25 +30,27 @@
                     </div>
                 </div>
             </li>
+            <c:forEach items="${questions}" var="question">
             <li>
                 <div class="wrap">
                     <div class="main">
-                        <strong class="subject">
-                            <a href="qna/show"> 객체지향에서 가장 중요하다고 생각하는 것이 무엇인가요? </a>
-                        </strong>
-                        <div class="auth-info">
-                            <i class="icon-add-comment"></i>
-                            <span class="time">2024-09-29 23:55</span>
-                            <span class="author">이윤정</span>
-                            <!-- <a href="./user/profile.html" class="author">이윤정</a> -->
-                        </div>
-                        <div class="reply" title="댓글">
-                            <i class="icon-reply"></i>
-                            <span class="point">8</span>
-                        </div>
+                            <strong class="subject">
+                                <a href="qna/show"> ${question.title} </a>
+                            </strong>
+                            <div class="auth-info">
+                                <i class="icon-add-comment"></i>
+                                <span class="time">${question.createdDate}</span>
+                                <span class="author">${question.writer}</span>
+                                <!-- <a href="./user/profile.html" class="author">이윤정</a> -->
+                            </div>
+                            <div class="reply" title="댓글">
+                                <i class="icon-reply"></i>
+                                <span class="point">${question.countOfAnswer}</span>
+                            </div>
                     </div>
                 </div>
             </li>
+            </c:forEach>
         </ul>
         <div class="row">
             <div class="col-md-5"></div>

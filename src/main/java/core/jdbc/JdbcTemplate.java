@@ -22,18 +22,18 @@ public class JdbcTemplate<T> {
     public <T> List<T> query(String sql, RowMapper<T> rowMapper) throws SQLException {
 
         ResultSet rs = null;
-        List<T> users = new ArrayList<>();
+        List<T> Objects = new ArrayList<>();
 
         try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);){
 
             rs = pstmt.executeQuery(); // 파라미터를 세팅하기도 전에 쿼리가 실행되서 결과가 반환됨
             while (rs.next()) {
                 T object = rowMapper.mapRow(rs);
-                users.add(object);
+                Objects.add(object);
             }
         }
 
-        return users;
+        return Objects;
     }
 
     public T queryForObject(String sql, PreparedStatementSetter pstmtSetter, RowMapper<T> rowMapper) throws SQLException {
