@@ -43,4 +43,22 @@ public class QuestionDao {
 
         return jdbcTemplate.query(sql, rowMapper);
     }
+
+    public Question findById(String questionId) throws SQLException {
+        String sql = "SELECT * FROM QUESTIONS WHERE questionId=?";
+        PreparedStatementSetter pstmtSetter = pstmt -> {
+            pstmt.setString(1, questionId);
+        };
+
+        RowMapper rowMapper = rs -> new Question(
+                rs.getInt("questionId"),            // bigint -> int
+                rs.getString("writer"),              // varchar -> String
+                rs.getString("title"),               // varchar -> String
+                rs.getString("contents"),            // varchar -> String
+                rs.getTimestamp("createdDate"),      // timestamp -> java.sql.Timestamp
+                rs.getInt("countOfAnswer")
+        );
+
+        return jdbcTemplate.queryForObject(sql,pstmtSetter,rowMapper);
+    }
 }

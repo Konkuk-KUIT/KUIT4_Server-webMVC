@@ -23,6 +23,6 @@ public class CreateQuestionController implements Controller {
         );
         QuestionDao questionDao = new QuestionDao();
         questionDao.insert(question);
-        return "/qna/show.jsp";
+        return "redirect:/";
     }
 }

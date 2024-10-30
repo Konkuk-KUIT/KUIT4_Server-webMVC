@@ -10,20 +10,12 @@ import javax.servlet.http.HttpSession;
 
 public class QnAFormController implements Controller {
 
-    private final String forwardUrl;
-
-    public QnAFormController(String forwardUrl) {
-        this.forwardUrl = forwardUrl;
-        if (forwardUrl == null) {
-            throw new NullPointerException("forwardUrl is null");
-        }
-    }
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         HttpSession session = req.getSession();
         if (UserSessionUtils.isLogined(session)) {
-            return forwardUrl;
+            return "/qna/form.jsp";
         } else {
             return "redirect:/";
         }
