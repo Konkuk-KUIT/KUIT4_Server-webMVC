@@ -1,7 +1,6 @@
-package core.db;
+package core.db.answer;
 
 import jwp.model.Answer;
-import jwp.model.Question;
 
 import java.sql.SQLException;
 import java.util.Collection;
