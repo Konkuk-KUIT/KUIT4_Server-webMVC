@@ -6,18 +6,19 @@ import jwp.model.Question;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-public class ShowController implements Controller {
-
+public class EditQuestionController implements Controller {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        String questionId = req.getParameter("questionId");
+
 
         QuestionDao questionDao = new QuestionDao();
-        Question foundQuestion = questionDao.findById(questionId);
+        Question editingQuestion = questionDao.findById(req.getParameter("questionId"));
+        editingQuestion.setTitle(req.getParameter("title"));
+        editingQuestion.setContents(req.getParameter("contents"));
 
-        req.setAttribute("question", foundQuestion);
-        return "/qna/show.jsp";
+        questionDao.update(editingQuestion);
+
+        return "redirect:/";
     }
 }

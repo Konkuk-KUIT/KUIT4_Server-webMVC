@@ -28,6 +28,20 @@ public class QuestionDao {
         jdbcTemplate.update(sql, pstmtSetter);
     }
 
+    public void update(Question question) throws SQLException {
+        String sql = "UPDATE QUESTIONS SET writer=?, title=?, contents=?, createdDate=?, countOfAnswer=? WHERE questionId=?";
+        PreparedStatementSetter pstmtSetter = pstmt -> {
+            pstmt.setString(1, question.getWriter());
+            pstmt.setString(2, question.getTitle());
+            pstmt.setString(3, question.getContents());
+            pstmt.setTimestamp(4, question.getCreatedDate());
+            pstmt.setInt(5, question.getCountOfAnswer());
+            pstmt.setInt(6, question.getQuestionId());
+        };
+        jdbcTemplate.update(sql,pstmtSetter);
+
+    }
+
     public List<Question> getAllQuestion() throws SQLException {
         String sql = "SELECT * FROM QUESTIONS";
         List<Question> questions = new ArrayList<>();

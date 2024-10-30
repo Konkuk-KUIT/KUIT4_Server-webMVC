@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="jwp.model.User" %>
+<%@ page import="jwp.model.Question" %>
 
 <!doctype html>
 <html lang="ko">
@@ -30,9 +32,15 @@
                     </div>
                     <div class="article-util">
                         <ul class="article-util-list">
+                            <%
+                                User loginedUser = (User) session.getAttribute("user");
+                                Question question = (Question) request.getAttribute("question");
+                                if(loginedUser != null && loginedUser.getUserId().equals(question.getWriter())){
+                            %>
+
                             <li>
                               <!-- 수정, 삭제 API 연결 필요 -->
-                                <a class="link-modify-article" href="/questions/423/form">수정</a>
+                                <a class="link-modify-article" href="/qna/editform?questionId=${question.questionId}">수정</a>
                             </li>
                             <li>
                               <!-- 수정, 삭제 API 연결 필요 -->
@@ -41,6 +49,9 @@
                                     <button class="link-delete-article" type="submit">삭제</button>
                                 </form>
                             </li>
+                            <%
+                                }
+                            %>
                             <li>
                                 <a class="link-modify-article" href="/">목록</a>
                             </li>
