@@ -1,8 +1,10 @@
 package jwp.dao;
 
 import core.jdbc.JdbcTemplate;
+import core.jdbc.PreparedStatementSetter;
 import core.jdbc.RowMapper;
 import jwp.model.Question;
+import jwp.model.User;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,6 +13,20 @@ import java.util.List;
 public class QuestionDao {
 
     private final JdbcTemplate<Question> jdbcTemplate = new JdbcTemplate<>();
+
+    public void insert(Question question) throws SQLException {
+        String sql = "INSERT INTO QUESTIONS (writer, title, contents, createdDate, countOfAnswer) VALUES (?, ?, ?, ?, ?)";
+
+        PreparedStatementSetter pstmtSetter = pstmt -> {
+            pstmt.setString(1, question.getWriter());
+            pstmt.setString(2, question.getTitle());
+            pstmt.setString(3, question.getContents());
+            pstmt.setTimestamp(4, question.getCreatedDate());
+            pstmt.setInt(5, question.getCountOfAnswer());
+        };
+
+        jdbcTemplate.update(sql, pstmtSetter);
+    }
 
     public List<Question> getAllQuestion() throws SQLException {
         String sql = "SELECT * FROM QUESTIONS";

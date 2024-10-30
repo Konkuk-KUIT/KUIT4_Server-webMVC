@@ -1,5 +1,6 @@
 package jwp.model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Question {
@@ -7,10 +8,10 @@ public class Question {
     private String writer;
     private String title;
     private String contents;
-    private Date createdDate;
+    private Timestamp createdDate;
     private int countOfAnswer;
 
-    public Question(int questionId, String writer, String title, String contents, Date createdDate, int countOfAnswer) {
+    public Question(int questionId, String writer, String title, String contents, Timestamp createdDate, int countOfAnswer) {
         this.questionId = questionId;
         this.writer = writer;
         this.title = title;
@@ -23,9 +24,8 @@ public class Question {
         return countOfAnswer;
     }
 
-    public String getCreatedDate() {
-        String[] parts = createdDate.toString().split(":");
-        return parts[0] + ":" + parts[1];
+    public Timestamp getCreatedDate() {
+        return createdDate;
     }
 
     public String getContents() {
@@ -60,7 +60,7 @@ public class Question {
         this.contents = contents;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(Timestamp createdDate) {
         this.createdDate = createdDate;
     }
 
