@@ -6,6 +6,7 @@ import jwp.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class UpdateUserController implements Controller {
 
@@ -13,12 +14,15 @@ public class UpdateUserController implements Controller {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        HttpSession session = req.getSession();
         User modifiedUser = new User(
                 req.getParameter("userId"),
                 req.getParameter("password"),
                 req.getParameter("name"),
                 req.getParameter("email"));
         userDao.update(modifiedUser);
+        session.removeAttribute("user");
+        session.setAttribute("user", modifiedUser);
         return "redirect:/user/list";
     }
 }
