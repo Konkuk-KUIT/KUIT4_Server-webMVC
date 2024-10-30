@@ -59,4 +59,17 @@ public class QuestionDao {
         );
         return jdbcTemplete.query(sql, rowMapper);
     }
+
+    public void update(Question question) throws SQLException {
+        String sql = "UPDATE QUESTIONS SET title = ?, contents = ?, createdDate = ? WHERE questionId = ?";
+
+        PreparedStatementSetter pstmtSetter = pstmt -> {
+            pstmt.setString(1, question.getTitle());
+            pstmt.setString(2, question.getContents());
+            pstmt.setObject(3, question.getCreatedDate());
+            pstmt.setLong(4, question.getQuestionId());
+        };
+
+        jdbcTemplete.update(sql, pstmtSetter);
+    }
 }

@@ -58,7 +58,7 @@
                             </strong>
                             <div class="auth-info">
                                 <i class="icon-add-comment"></i>
-                                <span class="time">${question.createdDate}</span>
+                                <span class="time">${question.formattedCreatedDate}</span>
                                 <span class="author">${question.writer}</span>
                             </div>
                             <div class="reply" title="댓글">

@@ -1,6 +1,7 @@
 package jwp.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Question {
     private Long questionId;
@@ -45,6 +46,11 @@ public class Question {
 
     public LocalDateTime getCreatedDate() {
         return createdDate;
+    }
+
+    public String getFormattedCreatedDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return createdDate.format(formatter);
     }
 
     public int getCountOfAnswer() {

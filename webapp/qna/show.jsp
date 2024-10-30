@@ -30,17 +30,19 @@
                     </div>
                     <div class="article-util">
                         <ul class="article-util-list">
-                            <li>
-                              <!-- 수정, 삭제 API 연결 필요 -->
-                                <a class="link-modify-article" href="/questions/${question.questionId}/form">수정</a>
-                            </li>
-                            <li>
-                              <!-- 수정, 삭제 API 연결 필요 -->
-                                <form class="form-delete" action="/questions/${question.questionId}" method="POST">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button class="link-delete-article" type="submit">삭제</button>
-                                </form>
-                            </li>
+                            <c:if test="${sessionScope.user.userId == question.writer}">
+                                <li>
+                                  <!-- 수정, 삭제 API 연결 필요 -->
+                                    <a class="link-modify-article" href="/qna/updateForm?questionId=${question.questionId}">수정</a>
+                                </li>
+                                <li>
+                                  <!-- 수정, 삭제 API 연결 필요 -->
+                                    <form class="form-delete" action="/qna/delete?questionId=${question.questionId}" method="POST">
+<%--                                        <input type="hidden" name="_method" value="DELETE">--%>
+                                        <button class="link-delete-article" type="submit">삭제</button>
+                                    </form>
+                                </li>
+                            </c:if>
                             <li>
                                 <a class="link-modify-article" href="/">목록</a>
                             </li>
