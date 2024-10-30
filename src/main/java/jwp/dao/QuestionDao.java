@@ -14,11 +14,11 @@ public class QuestionDao {
     public List<Question> showQuestionList() throws SQLException {
         String sql = "select * from QUESTIONS";
 
-        RowMapper rowMapper = rs -> new Question(rs.getString("writer"),
+        RowMapper<Question> rowMapper = rs -> new Question(rs.getString("writer"),
                 rs.getString("title"),
                 rs.getString("contents"),
                 rs.getString("createdDate"),
-                rs.getString("countOfAnswer")
+                rs.getInt("countOfAnswer")
         );
 
         return jdbcTemplate.query(sql, rowMapper);

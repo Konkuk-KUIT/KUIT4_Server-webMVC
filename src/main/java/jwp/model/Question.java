@@ -5,9 +5,9 @@ public class Question {
     private String title;
     private String contents;
     private String createDate;
-    private String countOfAnswer;
+    private int countOfAnswer;
 
-    public Question(String writer, String title, String contents, String createDate, String countOfAnswer) {
+    public Question(String writer, String title, String contents, String createDate, int countOfAnswer) {
         this.writer = writer;
         this.title = title;
         this.contents = contents;
@@ -31,7 +31,7 @@ public class Question {
         return createDate;
     }
 
-    public String getCountOfAnswer() {
+    public int getCountOfAnswer() {
         return countOfAnswer;
     }
 
