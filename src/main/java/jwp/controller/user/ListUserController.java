@@ -1,5 +1,6 @@
-package jwp.controller.question;
+package jwp.controller.user;
 
+import core.db.user.DBUserRepository;
 import core.mvc.Controller;
 import jwp.util.UserSessionUtils;
 
@@ -7,13 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class QuestionFormController implements Controller {
+public class ListUserController implements Controller {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         HttpSession session = req.getSession();
         if (UserSessionUtils.isLogined(session)) {
-            return "/qna/form.jsp";
+            req.setAttribute("users", DBUserRepository.getInstance().findAll());
+            return "/user/list.jsp";
         }
         return "redirect:/user/loginForm";
     }

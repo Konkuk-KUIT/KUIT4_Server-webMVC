@@ -1,15 +1,16 @@
-package jwp.controller.question;
+package jwp.controller.qna;
 
 import core.db.question.DBQuestionRepository;
 import core.db.user.DBUserRepository;
 import core.mvc.Controller;
+import jwp.model.Question;
 import jwp.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class DeleteQuestionController implements Controller {
+public class UpdateQuestionFormController implements Controller {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
@@ -26,13 +27,12 @@ public class DeleteQuestionController implements Controller {
 
         if (user != null && value != null) {
             if (user.equals(value)) {
-                DBQuestionRepository.getInstance().delete(questionId);
-                System.out.println("question 삭제 완료");
-                return "redirect:/";
+                Question foundQuestion = DBQuestionRepository.getInstance().findQuestionById(questionId);
+                req.setAttribute("question", foundQuestion);
+                return "/qna/updateForm.jsp";
             }
         }
 
-        System.out.println("question 삭제 실패");
         return "redirect:/";
     }
 }

@@ -1,7 +1,8 @@
 package core.mvc;
 
 import jwp.controller.*;
-import jwp.controller.question.*;
+import jwp.controller.qna.*;
+import jwp.controller.user.*;
 
 import java.util.HashMap;
 import java.util.Map;

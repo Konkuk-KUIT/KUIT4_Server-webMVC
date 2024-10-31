@@ -1,4 +1,4 @@
-package jwp.controller;
+package jwp.controller.qna;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.mvc.Controller;

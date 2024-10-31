@@ -1,4 +1,4 @@
-package jwp.controller.question;
+package jwp.controller.qna;
 
 import core.db.question.DBQuestionRepository;
 import core.mvc.Controller;
