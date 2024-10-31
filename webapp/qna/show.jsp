@@ -75,35 +75,41 @@
                                     </div>
                                     <div class="article-util">
                                         <ul class="article-util-list">
-                                            <li>
-                                              <!-- 수정, 삭제 API 연결 필요 -->
-                                                <a class="link-modify-article" href="/questions/1/answers/1/form">수정</a>
-                                            </li>
-                                            <li>
-                                              <!-- 수정, 삭제 API 연결 필요 -->
-                                                <form class="delete-answer-form" action="/questions/1/answers/1" method="POST">
-                                                    <input type="hidden" name="_method" value="DELETE">
-                                                    <button type="submit" class="delete-answer-button">삭제</button>
-                                                </form>
-                                            </li>
+                                            <c:if test="${not empty sessionScope.user}">
+                                                <c:if test="${sessionScope.user.name == answer.writer}">
+                                                    <li>
+                                                      <!-- 수정, 삭제 API 연결 필요 -->
+                                                        <a class="link-modify-article" href="/questions/1/answers/1/form">수정</a>
+                                                    </li>
+                                                    <li>
+                                                      <!-- 수정, 삭제 API 연결 필요 -->
+                                                        <form class="delete-answer-form" action="/questions/1/answers/1" method="POST">
+                                                            <input type="hidden" name="_method" value="DELETE">
+                                                            <button type="submit" class="delete-answer-button">삭제</button>
+                                                        </form>
+                                                    </li>
+                                                </c:if>
+                                            </c:if>
                                         </ul>
                                     </div>
                                 </article>
                             </c:forEach>
-                            <div class="answerWrite">
-                                <form class="submit-write">
-                                    <input type="hidden" name="questionId" value="${question.questionId}">
-                                    <div class="form-group col-lg-4" style="padding-top:10px;">
-                                        <input class="form-control" id="writer" name="writer" placeholder="이름"
-                                               value="${sessionScope.user.name}" readonly>
-                                   </div>
-                                    <div class="form-group col-lg-12">
-                                       <textarea name="contents" id="contents" class="form-control" placeholder=""></textarea>
-                                   </div>
-                                   <input class="btn btn-success pull-right" id="askButton" type="submit" value="답변하기">
-                                   <div class="clearfix"/>
-                                </form>
-                            </div>
+                            <c:if test="${not empty sessionScope.user}">
+                                <div class="answerWrite">
+                                    <form class="submit-write">
+                                        <input type="hidden" name="questionId" value="${question.questionId}">
+                                        <div class="form-group col-lg-4" style="padding-top:10px;">
+                                            <input class="form-control" id="writer" name="writer" placeholder="이름"
+                                                   value="${sessionScope.user.name}" readonly>
+                                       </div>
+                                        <div class="form-group col-lg-12">
+                                           <textarea name="contents" id="contents" class="form-control" placeholder=""></textarea>
+                                       </div>
+                                       <input class="btn btn-success pull-right" id="askButton" type="submit" value="답변하기">
+                                       <div class="clearfix"/>
+                                    </form>
+                                </div>
+                            </c:if>
                         </div>
                     </div>
                 </div>

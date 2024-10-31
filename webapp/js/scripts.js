@@ -1,5 +1,5 @@
-$("#askButton").click(addAnswer);
-//document.querySelector("#askButton").addEventListener("click", (e) => addAnswer(e));
+$(".answerWrite input[type=submit]").click(addAnswer);
+//$("#askButton").click(addAnswer);
 
 function addAnswer(e) {
     e.preventDefault();
