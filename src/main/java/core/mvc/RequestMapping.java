@@ -21,7 +21,6 @@ public class RequestMapping {
 
         controllers.put("/qna/show", new ShowController());
         controllers.put("/qna/form", new QuestionFormController());
-        controllers.put("/qna/addAnswer", new AddAnswerController());
         controllers.put("/question/create", new CreateQuestionController());
         controllers.put("/question/delete", new DeleteQuestionController());
         controllers.put("/question/update", new UpdateQuestionController());
@@ -31,8 +30,7 @@ public class RequestMapping {
         controllers.put("/user/loginForm", new ForwardController("/user/login.jsp"));
         controllers.put("/user/loginFailed", new ForwardController("/user/loginFailed.jsp"));
 
-        //controllers.put("/qna/form", new ForwardController("/qna/form.jsp"));
-        //controllers.put("/qna/show", new ForwardController("/qna/show.jsp"));
+        controllers.put("/api/qna/addAnswer", new AddAnswerController());
     }
 
     public Controller getController(String url) {

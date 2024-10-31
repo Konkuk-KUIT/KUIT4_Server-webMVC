@@ -25,7 +25,6 @@ public class AnswerDao {
         };
 
         jdbcTemplate.update(sql, pstmtSetter, keyHolder);
-        System.out.println("키홀더 ID: "+keyHolder.getId());
         return findByAnswerId(keyHolder.getId());
     }
 
