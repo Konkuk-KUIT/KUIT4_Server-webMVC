@@ -21,6 +21,9 @@ public class UpdateUserFormController implements Controller {
         HttpSession session = req.getSession();                    // 수정하는 user
         User sessionUser = (User) session.getAttribute("user");
 
+        // session을 변경하기 (수정되는 정보가 올바르게 수정되기 위함)
+        session.removeAttribute("user");
+        session.setAttribute("user", user);
         if (user != null && sessionUser != null && user.equals(sessionUser)) {
             return "/user/updateForm.jsp";
         }
