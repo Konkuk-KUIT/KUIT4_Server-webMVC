@@ -25,6 +25,9 @@ public class RequestMapping {
         controllers.put("/qna/form", new QuestionFormController());  // 로그인 확인 후 폼 접근
         controllers.put("/qna/show", new ShowQuestionController());
         controllers.put("/qna/create", new CreateQuestionController());
+
+        controllers.put("/qna/updateForm", new UpdateQuestionFormController()); // 수정 폼으로 이동
+        controllers.put("/qna/update", new UpdateQuestionController()); // 실제 질문 수정
     }
 
     public Controller getController(String url) {

@@ -29,6 +29,16 @@ public class QuestionDao {
         return findByQuestionId(keyHolder.getId());
     }
 
+    public void update(Question question) throws SQLException {
+        String sql = "UPDATE QUESTIONS SET title = ?, contents = ? WHERE questionId = ?";
+        PreparedStatementSetter pstmtSetter = pstmt -> {
+            pstmt.setString(1, question.getTitle());
+            pstmt.setString(2, question.getContents());
+            pstmt.setLong(3, question.getQuestionId());
+        };
+        jdbcTemplate.update(sql, pstmtSetter);
+    }
+
     public List<Question> findAll() throws SQLException {
         String sql = "SELECT * FROM QUESTIONS";
         RowMapper rowMapper = rs -> new Question(

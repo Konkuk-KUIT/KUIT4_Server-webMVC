@@ -33,4 +33,11 @@ public class Question {
     public String getContents() { return contents; }
     public Timestamp getCreatedDate() { return createdDate; }
     public int getCountOfAnswer() { return countOfAnswer; }
+
+    public void update(Question updateQuestion) {
+        this.title = updateQuestion.title;
+        this.contents = updateQuestion.contents;
+    }
+
+
 }
