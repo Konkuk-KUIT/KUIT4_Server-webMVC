@@ -1,8 +1,5 @@
 package core.jdbc;
 
-import jwp.model.User;
-import org.springframework.jdbc.support.KeyHolder;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +13,22 @@ public class JdbcTemplate<T> {
             PreparedStatement pstmt = conn.prepareStatement(sql)){
             pstmtSetter.setParameters(pstmt);
             pstmt.executeUpdate();
+        }
+    }
+
+    public void update(String sql, PreparedStatementSetter pstmtSetter, KeyHolder keyHolder) throws SQLException {
+        ResultSet rs = null;
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            pstmtSetter.setParameters(pstmt);
+            pstmt.executeUpdate();
+            rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                keyHolder.setId(rs.getLong(1));
+            }
+        } finally {
+            if (rs != null)
+                rs.close();
         }
     }
 
