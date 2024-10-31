@@ -1,23 +1,29 @@
 package controller;
 
-import core.db.MemoryUserRepository;
-import jwp.model.User;
+import jwp.dao.QuestionDao;
+import jwp.model.Question;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
+import java.sql.SQLException;
+import java.util.List;
 
 public class HomeController  implements Controller {
-
+    QuestionDao questionDao =new QuestionDao();
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-//        RequestDispatcher rd =req.getRequestDispatcher("/home.jsp");
-//        rd.forward(req,resp);
+
+        List<Question> questions= null;
+        try {
+            questions = questionDao.readAll();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println(questions.size());
+        req.setAttribute("questions",questions);
         return "/home.jsp";
     }
 }

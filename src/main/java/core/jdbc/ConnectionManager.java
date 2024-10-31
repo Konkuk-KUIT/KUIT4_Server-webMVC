@@ -14,6 +14,7 @@ public class ConnectionManager {
 
     private static BasicDataSource ds;
     public static DataSource getDataSource() {
+        //db 정보 설정
         if (ds == null) {
             ds = new BasicDataSource();
             ds.setDriverClassName(DB_DRIVER);

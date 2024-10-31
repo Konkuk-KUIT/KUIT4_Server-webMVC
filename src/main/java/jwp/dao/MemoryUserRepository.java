@@ -1,4 +1,4 @@
-package core.db;
+package jwp.dao;
 
 import jwp.model.User;
 

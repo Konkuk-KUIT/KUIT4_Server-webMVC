@@ -59,7 +59,8 @@
     </header>
 </div>
 
-<div class="container" id="main">
+<div class
+             ="container" id="main">
     <h2>Q&A</h2>
     <div class="qna-list">
         <ul class="list">
@@ -82,6 +83,7 @@
                     </div>
                 </div>
             </li>
+
             <li>
                 <div class="wrap">
                     <div class="main">
@@ -101,6 +103,8 @@
                     </div>
                 </div>
             </li>
+
+
         </ul>
         <div class="row">
             <div class="col-md-5"></div>
