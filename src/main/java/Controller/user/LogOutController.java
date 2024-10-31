@@ -1,4 +1,6 @@
-package Controller;
+package Controller.user;
+
+import Controller.Controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

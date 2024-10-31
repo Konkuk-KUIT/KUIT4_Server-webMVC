@@ -1,6 +1,4 @@
-// jsp
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-// jstl
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!doctype html>
@@ -59,10 +57,10 @@
     <div class="container" id="main">
       <div class="col-md-12 col-sm-12 col-lg-10 col-lg-offset-1">
          <div class="panel panel-default content-main">
-             <form name="question" method="post" action="">
+             <form name="question" method="post" action="/qna/create">
                  <div class="form-group">
                      <label for="writer">글쓴이</label>
-                     <input class="form-control" id="writer" name="writer" placeholder="글쓴이"/>
+                     <input type="text" class="form-control" value="${sessionScope.user.userId}" id="writer" name="writer" placeholder="글쓴이" readonly/>
                  </div>
                  <div class="form-group">
                      <label for="title">제목</label>

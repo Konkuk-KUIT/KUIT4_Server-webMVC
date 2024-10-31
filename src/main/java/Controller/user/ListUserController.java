@@ -1,5 +1,6 @@
-package Controller;
+package Controller.user;
 
+import Controller.Controller;
 import core.db.MemoryUserRepository;
 import jwp.model.User;
 
