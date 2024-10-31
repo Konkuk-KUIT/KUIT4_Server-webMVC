@@ -14,13 +14,18 @@ public class UpdateQuestionController implements Controller {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+
+        Long questionId = Long.parseLong(req.getParameter("questionId"));
+
+        Question findQuestion = questionDao.findByQuestionId(questionId);
+
         Question modifiedQuestion = new Question(
                 Long.parseLong(req.getParameter("questionId")),
                 req.getParameter("writer"),
                 req.getParameter("title"),
                 req.getParameter("contents"),
                 new Timestamp(System.currentTimeMillis()),
-                0);
+                findQuestion.getCountOfAnswer());  // update를 하더라도 답글 개수가 유지되도록
 
         questionDao.update(modifiedQuestion);
         return "redirect:/";

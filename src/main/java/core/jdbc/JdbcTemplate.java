@@ -5,6 +5,8 @@ import jwp.model.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public class JdbcTemplate<T> {
 

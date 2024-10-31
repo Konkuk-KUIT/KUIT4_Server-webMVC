@@ -19,10 +19,10 @@ public class UpdateUserFormController implements Controller {
         User user = userDao.findByUserId(userId);
 
         HttpSession session = req.getSession();                    // 수정하는 user
-        Object value = session.getAttribute("user");
+        User currentUser = (User)session.getAttribute("user");
 
-        if (user != null && value != null) {
-            if (user.equals(value)) {            // 수정되는 user와 수정하는 user가 동일한 경우
+        if (user != null && currentUser != null) {
+            if (user.isSameUser(currentUser)) {            // 수정되는 user와 수정하는 user가 동일한 경우
                 return "/user/updateForm.jsp";
             }
         }

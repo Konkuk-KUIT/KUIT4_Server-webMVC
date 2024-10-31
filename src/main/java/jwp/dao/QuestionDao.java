@@ -79,4 +79,13 @@ public class QuestionDao {
 
         return jdbcTemplate.queryForObject(sql, pstmtSetter, rowMapper);
     }
+
+    public void updateCountOfAnswer(Question question) throws SQLException {
+        String sql = "UPDATE QUESTIONS SET countOfAnswer = ? WHERE questionId = ?";
+        PreparedStatementSetter pstmtSetter = pstmt -> {
+            pstmt.setInt(1, question.getCountOfAnswer());
+            pstmt.setLong(2, question.getQuestionId());
+        };
+        jdbcTemplate.update(sql, pstmtSetter);
+    }
 }
