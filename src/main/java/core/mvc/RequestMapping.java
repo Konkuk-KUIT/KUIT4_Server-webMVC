@@ -27,9 +27,12 @@ public class RequestMapping {
         controllers.put("/qna/create", new CreateQnaController());
         controllers.put("/qna/updateForm", new UpdateQuestionFormController());
         controllers.put("/qna/update", new UpdateQuestionController());
+
+        controllers.put("/api/qna/addAnswer", new AddAnswerController());
     }
 
     public Controller getController(String url) {
+        System.out.println("[RequestMapping] url = " + url);
         return controllers.get(url);
     }
 }

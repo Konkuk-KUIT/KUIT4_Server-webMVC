@@ -5,6 +5,8 @@ import core.jdbc.KeyHolder;
 import core.jdbc.PreparedStatementSetter;
 import core.jdbc.RowMapper;
 import jwp.model.Question;
+import jwp.model.User;
+
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
@@ -77,4 +79,14 @@ public class QuestionDao {
         });
     }
 
+    public void updateCountOfAnswer(Question question) throws SQLException {
+        String sql = "UPDATE QUESTIONS SET countOfAnswer = ? WHERE questionId = ?";
+
+        PreparedStatementSetter pstmtSetter = pstmt -> {
+            pstmt.setInt(1, question.getCountOfAnswer());
+            pstmt.setInt(2, question.getQuestionId());
+        };
+
+        jdbcTemplate.update(sql, pstmtSetter);
+    }
 }

@@ -53,7 +53,7 @@ public class UserDao {
     }
 
     public User findByUserId(String userId) throws SQLException {
-        String sql = "SELECT userId, password, name, email FROM USERS WHRER userId=?";
+        String sql = "SELECT userId, password, name, email FROM USERS WHERE userId=?";
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, userId);
         };

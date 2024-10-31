@@ -33,7 +33,7 @@ public class AnswerDao {
         return jdbcTemplate.queryForList(sql, pstmtSetter, rowMapper);
     }
 
-    public void insert(Answer answer) throws SQLException {
+    public Answer insert(Answer answer) throws SQLException {
         String sql = "INSERT INTO ANSWERS (writer, contents, createdDate, questionId) VALUES (?, ?, ?, ?)";
         KeyHolder keyHolder = new KeyHolder();
 
@@ -43,7 +43,8 @@ public class AnswerDao {
             pstmt.setTimestamp(3, Timestamp.valueOf(answer.getCreatedDate()));
             pstmt.setInt(4, answer.getQuestionId());
         }, keyHolder);
-    }
 
+        return answer;
+    }
 
 }

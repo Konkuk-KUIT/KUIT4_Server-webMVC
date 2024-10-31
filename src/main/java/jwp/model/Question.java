@@ -72,4 +72,8 @@ public class Question {
     public void setCountOfAnswer(int countOfAnswer) {
         this.countOfAnswer = countOfAnswer;
     }
+
+    public void increaseCountOfAnswer() {
+        this.countOfAnswer++;
+    }
 }
