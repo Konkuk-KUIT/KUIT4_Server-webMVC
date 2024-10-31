@@ -1,10 +1,8 @@
 package jwp.dao;
 
-import core.jdbc.ConnectionManager;
-import core.jdbc.JdbcTemplate;
-import core.jdbc.PreparedStatementSetter;
-import core.jdbc.RowMapper;
+import core.jdbc.*;
 import jwp.model.User;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +14,7 @@ import java.util.List;
 public class UserDao {
 
     private final JdbcTemplate<User> jdbcTemplate = new JdbcTemplate();
+    private final KeyHolder keyHolder = new KeyHolder();
 
     public void insert(User user) throws SQLException {
         String sql = "INSERT INTO USERS VALUES (?, ?, ?, ?)";
@@ -25,7 +24,7 @@ public class UserDao {
             pstmt.setString(3, user.getName());
             pstmt.setString(4, user.getEmail());
         };
-        jdbcTemplate.update(sql,pstmtSetter);
+        jdbcTemplate.update(sql,pstmtSetter,keyHolder);
     }
 
     public void update(User user) throws SQLException {
@@ -36,7 +35,7 @@ public class UserDao {
             pstmt.setString(3, user.getEmail());
             pstmt.setString(4, user.getUserId());
         };
-        jdbcTemplate.update(sql,pstmtSetter);
+        jdbcTemplate.update(sql,pstmtSetter,keyHolder);
 
 //        Connection conn = null;
 //        PreparedStatement pstmt = null;
@@ -66,7 +65,7 @@ public class UserDao {
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, user.getUserId());
         };
-        jdbcTemplate.update(sql,pstmtSetter);
+        jdbcTemplate.update(sql,pstmtSetter,keyHolder);
 
 //        Connection conn = null;
 //        PreparedStatement pstmt = null;

@@ -25,7 +25,8 @@ public class AnswerDao {
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setInt(1, answerId);
         };
-        jdbcTemplate.update(sql, pstmtSetter);
+        KeyHolder keyHolder = new KeyHolder();
+        jdbcTemplate.update(sql, pstmtSetter, keyHolder);
     }
     public List<Answer> findAllByQuestionId(int questionId) throws SQLException {
         String sql = "SELECT * FROM ANSWERS WHERE questionId=? ORDER BY answerId";

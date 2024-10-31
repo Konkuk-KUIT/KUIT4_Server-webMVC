@@ -19,7 +19,7 @@ public class CreateAnswerController implements Controller {
                 req.getParameter("writer"),
                 req.getParameter("contents"));
         Answer savedAnswer = answerDao.insert(answer);
-        Question question = questionDao.findByQuestionId(questionId);
+        Question question = questionDao.findById(String.valueOf(questionId));
         question.increaseCountOfAnswer();
         questionDao.updateCountOfAnswer(question);
         ObjectMapper objectMapper = new ObjectMapper();
