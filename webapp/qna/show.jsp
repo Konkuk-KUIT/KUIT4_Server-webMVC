@@ -18,9 +18,10 @@
                     <img src="../img/picture.jpeg" class="article-author-thumb" alt="">
                 </div>
                 <div class="article-header-text">
-                    <!-- 사용자 프로필 추가 할거면 span -> a 태그로 바꾸고 API 연결 -->
                     <span class="article-author-name">${question.writer}</span>
                     <span class="article-header-time">${question.createdDate}</span>
+                    <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${question.createdDate}"/>
+                    <i class="icon-link"></i>
                 </div>
             </div>
             <div class="article-doc">
@@ -30,16 +31,12 @@
                 <ul class="article-util-list">
                     <c:if test="${sessionScope.user.userId == question.writer}">
                         <li>
-                            <!-- 수정, 삭제 API 연결 필요 -->
                             <a class="link-modify-article"
                                href="/qna/updateForm?questionId=${question.questionId}">수정</a>
                         </li>
                         <li>
-                            <!-- 수정, 삭제 API 연결 필요 -->
-                            <form class="form-delete" action="/questions/423" method="POST">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button class="link-delete-article" type="submit">삭제</button>
-                            </form>
+                            <a class="link-modify-article"
+                               href="/qna/delete?questionId=${question.questionId}">삭제</a>
                         </li>
                     </c:if>
                     <li>
