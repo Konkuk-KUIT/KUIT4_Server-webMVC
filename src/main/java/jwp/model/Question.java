@@ -85,4 +85,6 @@ public class Question {
         if (user == null) return false;
         return writer.equals(user.getUserId());
     }
+
+
 }
