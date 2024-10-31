@@ -3,9 +3,9 @@
 
 <!doctype html>
 <html lang="ko">
-<%@ include file="/include/header.jspf" %>
+<%@ include file="/webapp/include/header.jspf" %>
 <body>
-<%@ include file="/include/navigation.jspf" %>
+<%@ include file="/webapp/include/navigation.jspf" %>
 
 <div class="container" id="main">
     <h2>Q&A</h2>

@@ -12,6 +12,6 @@ public class CreateQuestionController implements Controller {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
-
+        return " ";
     }
 }

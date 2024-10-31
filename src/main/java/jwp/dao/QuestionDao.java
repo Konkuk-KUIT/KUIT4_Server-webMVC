@@ -26,7 +26,7 @@ public class QuestionDao {
         return jdbcTemplate.query(sql, rowMapper);
     }
 
-    public Question insert(Question question) throws SQLException {
+    public void insert(Question question) throws SQLException {
         String sql = "INSERT INTO QUESTIONS VALUES (?, ?, ?, ?)";
 
         PreparedStatementSetter pstmtSetter = pstmt -> {
@@ -37,6 +37,6 @@ public class QuestionDao {
         };
         jdbcTemplate.update(sql, pstmtSetter);
 
-        return
+        // return
     }
 }
