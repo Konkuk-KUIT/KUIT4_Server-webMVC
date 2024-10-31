@@ -1,3 +1,7 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <!doctype html>
 <html lang="ko">
   <head>
@@ -38,15 +42,15 @@
         </a>
 
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="/index.html" class="nav-link px-2 link-secondary">Q&A</a></li>
+          <li><a href="/index.jsp" class="nav-link px-2 link-secondary">Q&A</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
           <li><a href="/user/userList" class="nav-link px-2 link-dark">User List</a></li>
           <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
         </ul>
 
         <div class="col-md-3 text-end">
-          <a href="/user/login.html" type="button" class="btn btn-outline-primary me-2">Login</a>
-          <a href="/user/form.html" type="button" class="btn btn-primary">Sign-up</a>
+          <a href="/user/login.jsp" type="button" class="btn btn-outline-primary me-2">Login</a>
+          <a href="/user/form.jsp" type="button" class="btn btn-primary">Sign-up</a>
         </div>
       </header>
     </div>
