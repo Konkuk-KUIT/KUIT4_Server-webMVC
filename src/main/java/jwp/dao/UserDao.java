@@ -9,7 +9,7 @@ import java.util.List;
 
 public class UserDao {
 
-    private final JdbcTemplate<User> jdbcTemplate = new JdbcTemplate();
+    private final JdbcTemplate<User> jdbcTemplate = new JdbcTemplate<>();
 
     // TODO 1. insert, update, delete
     public void insert(User user) throws SQLException {
