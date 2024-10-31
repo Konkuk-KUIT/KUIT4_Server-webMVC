@@ -75,5 +75,4 @@ public class UserDao {
 
         return jdbcTemplate.queryForObject(sql, pstmtSetter, rowMapper);
     }
-
 }
