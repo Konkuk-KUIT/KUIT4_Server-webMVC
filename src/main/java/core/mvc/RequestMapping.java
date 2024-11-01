@@ -3,7 +3,6 @@ package core.mvc;
 // import jwp.controller.qna.CreateQuestionController;
 import jwp.controller.HomeController;
 import jwp.controller.qna.CreateQuestionController;
-import jwp.controller.qna.ListQuestionController;
 import jwp.controller.qna.ViewQuestionController;
 import jwp.controller.user.*;
 
@@ -16,7 +15,6 @@ public class RequestMapping {
 
     static {
         controllers.put("/", new HomeController());
-        // controllers.put("/", new ListQuestionController());
         controllers.put("/user/signup", new CreateUserController());
         controllers.put("/user/list", new ListUserController());
         controllers.put("/user/login", new LoginController());
@@ -32,7 +30,6 @@ public class RequestMapping {
         controllers.put("/qna/create", new CreateQuestionController());
         controllers.put("/qna/show", new ForwardController("/qna/show.jsp"));
 
-        // 접근하는 주소 추가 (
 
     }
 

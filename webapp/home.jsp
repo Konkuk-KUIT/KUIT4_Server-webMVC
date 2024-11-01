@@ -3,26 +3,27 @@
 
 <!doctype html>
 <html lang="ko">
-<%@ include file="/webapp/include/header.jspf" %>
+<%@ include file="/include/header.jspf" %>
 <body>
-<%@ include file="/webapp/include/navigation.jspf" %>
+<%@ include file="/include/navigation.jspf" %>
 
 <div class="container" id="main">
     <h2>Q&A</h2>
     <div class="qna-list">
         <ul class="list">
-            <c:forEach var="question" items="${questions}">
+            <c:forEach items="${questions}" var="question" varStatus="status">
                 <li>
                     <div class="wrap">
                         <div class="main">
                             <strong class="subject">
-                                <!-- todo 1. href수정해야 -->
-                                <a href="qna/show?questionId=${question.id}">${question.title}</a>
+                                <a href="qna/show?questionId=${question.questionId}">${question.title}</a>
                             </strong>
                             <div class="auth-info">
                                 <i class="icon-add-comment"></i>
                                 <span class="time">${question.createdDate}</span>
-                                <span class="author">${question.writer}</span>
+                                <span clas="author">${question.writer}</span>
+                                    <%-- profile 관련 api 구현 --%>
+                                    <%-- <a href="./user/profile.jsp" class="author">${question.writer}</a> --%>
                             </div>
                             <div class="reply" title="댓글">
                                 <i class="icon-reply"></i>
@@ -32,8 +33,23 @@
                     </div>
                 </li>
             </c:forEach>
-
         </ul>
+        <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-5">
+                <ul class="pagination" style="display:align-items-center;">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
             </div>
             <div class="col-md-2 qna-write">
                 <a href="/qna/form" class="btn btn-primary pull-right" role="button">질문하기</a>

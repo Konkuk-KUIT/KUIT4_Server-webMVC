@@ -12,10 +12,11 @@ public class ViewQuestionController implements Controller {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
-        if(! UserSessionUtils.isLogined(session)) {
-            return "redirect:/user/login";
+        if(UserSessionUtils.isLogined(session)) {
+            return "/qna/form.jsp";
+
         }
-        return "/qna/form.jsp";
+        return "redirect:/user/login";
     }
 
 }

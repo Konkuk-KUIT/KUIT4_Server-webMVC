@@ -30,20 +30,33 @@ public class JdbcTemplate<T>{
     // sql문, placeholder("?")에 인터페이스에 세팅된 데이터들 삽입
     public void update(String sql, PreparedStatementSetter pstmtSetter) throws SQLException {
         // connection : DB와의 연결담당
-        // SQL문 미리 컴파일
-        // 실제 SQL쿼리를 실행하는 역할
-
-        // try resource : 예외발생 시 자원 자동해제
-        try (Connection conn = ConnectionManager.getConnection();
-             // PreapredStatement에 SQL쿼리 객체를 담는다
-             // PreparedStatement : SQL쿼리를 DB에 제출하여 실행하는 객체
+        try (Connection conn = ConnectionManager.getConnection();  // try resource : 예외발생 시 자원 자동해제
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            // placeholder에 데이터 삽입
+            // PreapredStatement에 SQL쿼리 객체를 담는다
+            // PreparedStatement : SQL쿼리를 DB에 제출하여 실행하는 객체
             pstmtSetter.setParameters(pstmt);
-            // 실제로 SQL쿼리 실행
+            // placeholder에 데이터 삽입
             pstmt.executeUpdate();
+            // 실제로 SQL쿼리 실행
         }
 
+    }
+
+    // 미션 1단계 (2)
+    public void update(String sql, PreparedStatementSetter pstmtSetter, KeyHolder keyHolder) throws SQLException {
+        ResultSet rs = null;
+        try (Connection conn = ConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            pstmtSetter.setParameters(pstmt);
+            pstmt.executeUpdate();
+            rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                keyHolder.setId((int) rs.getLong(1));
+            }
+        } finally {
+            if (rs != null)
+                rs.close();
+        }
     }
 
     // sql 쿼리 실행 후 결과를 리스트형태로 가져오기
