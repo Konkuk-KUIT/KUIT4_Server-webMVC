@@ -2,6 +2,7 @@ package jwp.controller;
 
 import core.db.MemoryUserRepository;
 import core.mvc.Controller;
+import jwp.dao.UserDao;
 import jwp.util.UserSessionUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class ListUserController implements Controller {
+    private final UserDao userDao = new UserDao();
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {

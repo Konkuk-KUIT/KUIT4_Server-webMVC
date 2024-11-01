@@ -17,7 +17,7 @@ public class QuestionDao {
                 rs.getString("writer"),
                 rs.getString("title"),
                 rs.getString("contents"),
-                rs.getTimestamp("createdDate"),
+                rs.getDate("createdDate"),
                 rs.getInt("countOfAnswer")
         );
         return jdbcTemplate.query(sql, rowMapper);
@@ -33,6 +33,7 @@ public class QuestionDao {
             pstmt.setString(1, question.getWriter());
             pstmt.setString(2, question.getTitle());
             pstmt.setString(3, question.getContents());
+            pstmt.setObject(4, question.getCreatedDate());
             pstmt.executeUpdate();
 
             // 생성된 키(자동 증가 ID)를 얻어와서 KeyHolder에 저장
@@ -78,7 +79,7 @@ public class QuestionDao {
                 rs.getString("writer"),
                 rs.getString("title"),
                 rs.getString("contents"),
-                rs.getTimestamp("createdDate"),
+                rs.getDate("createdDate"),
                 rs.getInt("countOfAnswer"));
         return jdbcTemplate.queryForObject(sql, pstmtSetter, rowMapper);
     }
