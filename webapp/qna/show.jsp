@@ -1,59 +1,15 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!doctype html>
 <html lang="ko">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>KUIT</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/styles.css" rel="stylesheet">
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Fourth navbar example">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/"> KUIT </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-  
-        <div class="collapse navbar-collapse" id="navbarsExample04">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
-              <ul class="dropdown-menu" aria-labelledby="dropdown04">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-              </ul>
-            </li>
-          </ul>
-          <form>
-            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-          </form>
-        </div>
-      </div>
-    </nav>
-    <div class="navbar-default">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-            </a>
-
-            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/index.html" class="nav-link px-2 link-secondary">Q&A</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
-                <li><a href="/user/userList" class="nav-link px-2 link-dark">User List</a></li>
-                <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
-            </ul>
-
-            <div class="col-md-3 text-end">
-                <a href="/user/login.html" type="button" class="btn btn-outline-primary me-2">Login</a>
-                <a href="/user/form.html" type="button" class="btn btn-primary">Sign-up</a>
-            </div>
-        </header>
-    </div>
+<%@ include file="/include/header.jspf"%>
+<body>
+<%@ include file="/include/navigation.jspf" %>
 
     <div class="container" id="main">
             <header class="qna-header">
-                <h2 class="qna-title">객체지향을 가장 잘 다룬 책이 뭐가 있나요?</h2>
+                <h2 class="qna-title">${question.title}</h2>
             </header>
             <div class="content-main">
                 <article class="article">
@@ -63,31 +19,34 @@
                         </div>
                         <div class="article-header-text">
                           <!-- 사용자 프로필 추가 할거면 span -> a 태그로 바꾸고 API 연결 -->
-                            <span class="article-author-name">이영선</span>
+                            <span class="article-author-name">${question.writer}</span>
                             <span class="article-header-time">
-                              2024-09-29 22:11
+                              ${question.createdDate}
                             </span>
                         </div>
                     </div>
                     <div class="article-doc">
-                        <p>저는 지금 '객체지향의 사실과 오해' 라는 책을 읽고 있는데 정말 좋아요</p>
-                        <p>이해가 쏙쏙 됩니다!</p>
+                        <p>${question.contents}</p>
                     </div>
                     <div class="article-util">
                         <ul class="article-util-list">
+                            <c:if test="${not empty sessionScope.user}">
+                                <c:if test="${sessionScope.user.name == question.writer}">
+                                    <li>
+                                      <!-- 수정, 삭제 API 연결 필요 -->
+                                        <a class="link-modify-article" href="/qna/form?questionId=${question.questionId}">수정</a>
+                                    </li>
+                                    <li>
+                                      <!-- 수정, 삭제 API 연결 필요 -->
+                                        <form class="form-delete" action="/questions/423" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button class="link-delete-article" type="submit">삭제</button>
+                                        </form>
+                                    </li>
+                                </c:if>
+                            </c:if>
                             <li>
-                              <!-- 수정, 삭제 API 연결 필요 -->
-                                <a class="link-modify-article" href="/questions/423/form">수정</a>
-                            </li>
-                            <li>
-                              <!-- 수정, 삭제 API 연결 필요 -->
-                                <form class="form-delete" action="/questions/423" method="POST">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button class="link-delete-article" type="submit">삭제</button>
-                                </form>
-                            </li>
-                            <li>
-                                <a class="link-modify-article" href="../index.html">목록</a>
+                                <a class="link-modify-article" href="/">목록</a>
                             </li>
                         </ul>
                     </div>
