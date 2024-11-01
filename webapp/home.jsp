@@ -30,25 +30,27 @@
                     </div>
                 </div>
             </li>
+            <c:forEach items="${questions}" var="question">                 <%--  서버에서 전달되는 데이터: items="${questions}",  반복에서 사용할 변수: var="question"  --%>
             <li>
                 <div class="wrap">
                     <div class="main">
                         <strong class="subject">
-                            <a href="qna/show"> 객체지향에서 가장 중요하다고 생각하는 것이 무엇인가요? </a>
+                            <a href="qna/show"> ${question.title} </a>          <%--  서버에서 전달된 데이터를 ${} 로 감싸서 사용, getter() 자동으로 인식*사용  --%>
                         </strong>
                         <div class="auth-info">
                             <i class="icon-add-comment"></i>
-                            <span class="time">2024-09-29 23:55</span>
-                            <span class="author">이윤정</span>
+                            <span class="time">${question.createdDate}</span>
+                            <span class="author">${question.writer}</span>
                             <!-- <a href="./user/profile.html" class="author">이윤정</a> -->
                         </div>
                         <div class="reply" title="댓글">
                             <i class="icon-reply"></i>
-                            <span class="point">8</span>
+                            <span class="point">${question.countOfAnswer}</span>
                         </div>
                     </div>
                 </div>
             </li>
+            </c:forEach>
         </ul>
         <div class="row">
             <div class="col-md-5"></div>

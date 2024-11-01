@@ -29,7 +29,7 @@ public class UserDao {
     }
 
     public void update(User user) throws SQLException {
-            String sql = "UPDATE USERS SET password = ?, name = ?, email = ?, userId = ?";
+            String sql = "UPDATE USERS SET password = ?, name = ?, email = ?, userId = ? WHERE userId = ?";
 
             PreparedStatementSetter pstmtSetter = pstmt -> {
                 pstmt.setString(1, user.getPassword());
