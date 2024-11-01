@@ -27,7 +27,7 @@ public class RequestMapping {
         controllers.put("/qna/show", new ShowController());
 
         controllers.put("/qna/modify", new UpdateQuestionFormController());
-        controllers.put("/qna/delete", new DeleteQuestionController());
+        //controllers.put("/qna/delete", new DeleteQuestionController());
 
         controllers.put("/qna/update", new UpdateQuestionController());
     }

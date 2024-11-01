@@ -26,11 +26,10 @@ public class QuestionDao {
         return keyHolder.getId();
     }
 
-    public void update(Question question) throws SQLException {
+    public void update(int questionId, Question question) throws SQLException {
         Connection conn = ConnectionManager.getConnection();
 
-        String sql = "UPDATE FROM Questions SET title=?, contents=? WHERE questionId=?";
-        int questionId = findId(question);
+        String sql = "UPDATE Questions SET title=?, contents=? WHERE questionId=?";
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, question.getTitle());
             pstmt.setString(2, question.getContents().toString());

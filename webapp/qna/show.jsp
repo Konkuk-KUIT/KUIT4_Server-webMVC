@@ -35,11 +35,11 @@
                     <c:if test="${isMine==true}">
                     <li>
                         <!-- 수정, 삭제 API 연결 필요 -->
-                        <a class="link-modify-article" href="/qna/modify?${questionId}">수정</a>
+                        <a class="link-modify-article" href="/qna/modify?questionId=${questionId}">수정</a>
                     </li>
                     <li>
                         <!-- 수정, 삭제 API 연결 필요 -->
-                        <form class="form-delete" action="/qna/delete?${questionId}" method="POST">
+                        <form class="form-delete" action="/qna/delete?questionId=${questionId}" method="POST">
                             <input type="hidden" name="_method" value="DELETE">
                             <button class="link-delete-article" type="submit">삭제</button>
                         </form>
