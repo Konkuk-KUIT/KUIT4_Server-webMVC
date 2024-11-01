@@ -1,4 +1,4 @@
-package core.db;
+package core.db.user;
 
 import jwp.model.User;
 
@@ -37,5 +37,10 @@ public class MemoryUserRepository {
         if (users.get(user.getUserId()) != null) {
             users.put(user.getUserId(), user);
         }
+    }
+
+    public void update(User user) {
+        User repoUser = users.get(user.getUserId());
+        repoUser.update(user);
     }
 }
