@@ -1,20 +1,23 @@
 package controller;
 
+import core.db.UserDAO;
 import jwp.model.User;
 import core.db.MemoryUserRepository;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class UpdateUserController implements Controller {
 
     private static final String USER_SESSION_KEY = "user";
-    private final MemoryUserRepository userRepository = MemoryUserRepository.getInstance();
+    private final UserDAO userDAO = new UserDAO();
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute(USER_SESSION_KEY);
 
@@ -34,14 +37,18 @@ public class UpdateUserController implements Controller {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
 
-        // 유저 정보 객체 생성 및 업데이트
-        User updatedUser = new User(userId, password, name, email);
-        userRepository.changeUserInfo(updatedUser);
+        try {
+            // 유저 정보 객체 생성 및 업데이트
+            User updatedUser = new User(userId, password, name, email);
+            userDAO.update(updatedUser);
 
-        // 세션의 사용자 정보도 업데이트
-        session.setAttribute(USER_SESSION_KEY, updatedUser);
+            // 세션의 사용자 정보도 업데이트
+            session.setAttribute(USER_SESSION_KEY, updatedUser);
 
-        // 업데이트 후, 사용자 목록으로 리다이렉트
-        return "redirect:/user/userList";
+            // 업데이트 후, 사용자 목록으로 리다이렉트
+            return "redirect:/user/userList";
+        }catch (SQLException e) {
+            throw new ServletException("서블릿 오류", e);
+        }
     }
 }

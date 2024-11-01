@@ -11,6 +11,11 @@ public class RequestMapper {
             case "/user/logout" -> new LogoutController();
             case "/user/updateForm" -> new UpdateUserFormController();
             case "/user/update" -> new UpdateUserController();
+            case "/qna/form" -> new QuestionController();
+            case "/qna/create" -> new QuestionCreateController();
+            case "/qna/show" -> new ShowController();
+            case "/qna/updateForm" -> new QuestionEditFormController();
+            case "/qna/update" -> new QuestionEditController();
             default -> new HomeController();
         };
     }
