@@ -26,6 +26,9 @@ public class RequestMapping {
         controllers.put("/qna/create", new QnaCreatController());
         controllers.put("/qna/show", new ShowController());
 
+        controllers.put("/qna/update", new QnaUpdateController());
+        controllers.put("/qna/updateForm", new QnaUpdateFormController());
+
     }
 
     public Controller getController(String url) {

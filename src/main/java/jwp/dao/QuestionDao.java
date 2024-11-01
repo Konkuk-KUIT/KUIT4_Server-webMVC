@@ -28,18 +28,19 @@ public class QuestionDao {
         return findByQuestionId(keyHolder.getId());
     }
 
-//    public void update(Question question) throws SQLException {
-//        String sql = "UPDATE USERS SET password = ?, name = ?, email = ?, userId = ? WHERE userId = ?";
-//
-//        PreparedStatementSetter pstmtSetter = pstmt -> {
-//            pstmt.setString(1, question.getPassword());
-//            pstmt.setString(2, question.getName());
-//            pstmt.setString(3, question.getEmail());
-//            pstmt.setString(4, question.getUserId());
-//        };
-//
-//        jdbcTemplate.update(sql, pstmtSetter);
-//    }
+    public void update(Question question) throws SQLException {
+        String sql = "UPDATE QUESTIONS SET writer=?, title=?, contents=?, createdDate=?, countOfAnswer=? WHERE questionId=?";
+        PreparedStatementSetter pstmtSetter = pstmt -> {
+            pstmt.setString(1, question.getWriter());
+            pstmt.setString(2, question.getTitle());
+            pstmt.setString(3, question.getContents());
+            pstmt.setTimestamp(4, question.getCreatedDate());
+            pstmt.setInt(5, question.getCountOfAnswer());
+            pstmt.setLong(6, question.getQuestionId());
+        };
+
+        jdbcTemplate.update(sql,pstmtSetter);
+    }
 
 //    public void delete(Question question) throws SQLException {
 //        String sql = "DELETE FROM USERS WHERE userId = ?";

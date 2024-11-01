@@ -30,8 +30,8 @@
 
             <div class="article-util">
                 <ul class="article-util-list">
-                    <c:if test="${not empty sessionScope.user}">
-                        <c:if test="${sessionScope.user.name == question.writer}">
+                    <%--<c:if test="${not empty sessionScope.user}">
+                        <c:if test="${sessionScope.user.name == question.writer}">--%>
                             <li>
                                 <a class="link-modify-article"
                                    href="/qna/updateForm?questionId=${question.questionId}">수정</a>
@@ -40,8 +40,8 @@
                                 <a class="link-modify-article"
                                    href="/qna/delete?questionId=${question.questionId}">삭제</a>
                             </li>
-                        </c:if>
-                    </c:if>
+                        <%--</c:if>
+                    </c:if>--%>
                     <li>
                         <a class="link-modify-article" href="/">목록</a>
                     </li>
@@ -137,7 +137,7 @@
         </div>
     </article>
 </script>
-<script src="/js/jquery-3.7.1.min.js"></script>
+<script src="/js/jquery-2.2.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/js/scripts.js"></script>
 </body>

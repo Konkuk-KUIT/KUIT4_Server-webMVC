@@ -16,7 +16,7 @@
                 <div class="wrap">
                     <div class="main">
                         <strong class="subject">
-                            <a href="/qna/show?questionId=${question.questionId}">${question.title}</a>          <%--  서버에서 전달된 데이터를 ${} 로 감싸서 사용, getter() 자동으로 인식*사용 , 왜 404에러가 뜨냐? --%>
+                            <a href="/qna/show?questionId=${question.questionId}">${question.title}</a>          <%--  서버에서 전달된 데이터를 ${} 로 감싸서 사용, getter() 자동으로 인식*사용 --%>
                         </strong>
                         <div class="auth-info">
                             <i class="icon-add-comment"></i>

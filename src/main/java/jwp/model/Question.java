@@ -51,6 +51,14 @@ public class Question {
     public int getCountOfAnswer() {
         return countOfAnswer;
     }
+
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }
 
 
