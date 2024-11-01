@@ -49,7 +49,7 @@ public class QuestionDao {
         jdbcTemplate.update(sql, pstmtSetter);
     }
 
-    // TODO 2. findAll, findByUserId
+    // TODO 2. findAll, findByQuestionId
     public List<Question> findAll() throws SQLException {
         String sql = "SELECT * FROM QUESTIONS ORDER BY questionId";
         RowMapper rowMapper = rs -> new Question(rs.getInt("questionId"),

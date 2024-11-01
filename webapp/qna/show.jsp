@@ -20,7 +20,7 @@
                 <div class="article-header-text">
                     <span class="article-author-name">${question.writer}</span>
                     <span class="article-header-time">${question.createdDate}</span>
-                    <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${question.createdDate}"/>
+                    <fmt:formatDate pattern="yyyy-MM-dd" value="${question.createdDate}"/>
                     <i class="icon-link"></i>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                                 <div class="article-header-text">
                                         ${each.writer}
                                     <div class="article-header-time">
-                                        <fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${each.createdDate}"/>
+                                        <fmt:formatDate pattern="yyyy-MM-dd" value="${each.createdDate}"/>
                                     </div>
                                 </div>
                             </div>
@@ -137,6 +137,7 @@
         </div>
     </article>
 </script>
+
 <script src="/js/jquery-2.2.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/js/scripts.js"></script>

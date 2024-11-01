@@ -1,4 +1,4 @@
-package jwp.controller;
+package jwp.controller.question;
 
 import core.mvc.Controller;
 import jwp.dao.QuestionDao;
@@ -7,11 +7,11 @@ import jwp.model.Question;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class QuestionCreateController implements Controller {
+public class CreateQuestionController implements Controller {
 
     private final QuestionDao questionDao;
 
-    public QuestionCreateController(QuestionDao questionDao) {
+    public CreateQuestionController(QuestionDao questionDao) {
         this.questionDao = questionDao;
     }
 

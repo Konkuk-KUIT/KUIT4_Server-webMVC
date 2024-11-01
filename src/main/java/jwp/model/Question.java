@@ -57,4 +57,12 @@ public class Question {
         this.title = title;
         this.contents = contents;
     }
+
+    public void updateCountOfAnswer(int countOfAnswer) {
+        this.countOfAnswer = countOfAnswer;
+    }
+
+    public void increaseCountOfAnswer() {
+        this.countOfAnswer++;
+    }
 }

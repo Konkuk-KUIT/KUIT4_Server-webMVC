@@ -14,7 +14,7 @@ public class DispatcherServlet extends HttpServlet {
     private static final String REDIRECT_PREFIX = "redirect:";
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         requestMapping = new RequestMapping();
     }
 
@@ -24,6 +24,9 @@ public class DispatcherServlet extends HttpServlet {
         Controller controller = requestMapping.getController(url);
         try {
             String viewName = controller.execute(req, resp);
+            if (viewName == null) {
+                return;
+            }
             move(viewName, req, resp);
         } catch (Exception e) {
             System.out.println(e.getMessage());
