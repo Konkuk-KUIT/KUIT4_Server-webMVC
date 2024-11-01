@@ -15,9 +15,10 @@ public class ShowController implements Controller {
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         int questionId = Integer.parseInt(req.getParameter("questionId"));
         Question question = questionDao.findByQuestionId(questionId);
+        System.out.println(questionId);
 
-        req.setAttribute("question", question);
+        req.setAttribute("question", question);     //question값을 못찾는것 같은데 왜지?
 
-        return "qna/show.jsp";
+        return "/qna/show.jsp";
     }
 }

@@ -34,7 +34,7 @@
                         <c:if test="${sessionScope.user.name == question.writer}">
                             <li>
                                 <a class="link-modify-article"
-                                   href="/qna/form?questionId=${question.questionId}">수정</a>
+                                   href="/qna/updateForm?questionId=${question.questionId}">수정</a>
                             </li>
                             <li>
                                 <a class="link-modify-article"
@@ -137,7 +137,7 @@
         </div>
     </article>
 </script>
-<script src="/js/jquery-2.2.0.min.js"></script>
+<script src="/js/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/js/scripts.js"></script>
 </body>

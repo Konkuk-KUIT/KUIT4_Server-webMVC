@@ -11,31 +11,12 @@
     <h2>Q&A</h2>
     <div class="qna-list">
         <ul class="list">
-            <li>
-                <div class="wrap">
-                    <div class="main">
-                        <strong class="subject">
-                            <a href="qna/show"> 객체지향을 가장 잘 다룬 책이 뭐가 있나요? </a>
-                        </strong>
-                        <div class="auth-info">
-                            <i class="icon-add-comment"></i>
-                            <span class="time">2024-09-29 23:11</span>
-                            <span class="author">이영선</span>
-                            <!-- <a href="./user/profile.html" class="author">이영선</a> -->
-                        </div>
-                        <div class="reply" title="댓글">
-                            <i class="icon-reply"></i>
-                            <span class="point">12</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
             <c:forEach items="${questions}" var="question">                 <%--  서버에서 전달되는 데이터: items="${questions}",  반복에서 사용할 변수: var="question"  --%>
             <li>
                 <div class="wrap">
                     <div class="main">
                         <strong class="subject">
-                            <a href="/qna/show?questionId=${question.questionId}">${question.title}</a>          <%--  서버에서 전달된 데이터를 ${} 로 감싸서 사용, getter() 자동으로 인식*사용  --%>
+                            <a href="/qna/show?questionId=${question.questionId}">${question.title}</a>          <%--  서버에서 전달된 데이터를 ${} 로 감싸서 사용, getter() 자동으로 인식*사용 , 왜 404에러가 뜨냐? --%>
                         </strong>
                         <div class="auth-info">
                             <i class="icon-add-comment"></i>
