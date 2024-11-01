@@ -22,7 +22,7 @@ public class QnaCreatController implements Controller {
         Question question = new Question(writer, title, contents, timeStamp, countOfAnswer);
 
         Question savedQuestion = questionDao.insert(question);
-        System.out.println("saved question id= " + savedQuestion.getQuestionId());      //정상 insert 확인
+        System.out.println("saved question id = " + savedQuestion.getQuestionId());      //정상 insert 확인 안되네?
 
         return "redirect:/";
     }

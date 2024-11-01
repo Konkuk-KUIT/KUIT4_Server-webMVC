@@ -14,8 +14,8 @@ public class QnaUpdateController implements Controller {
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
-        QuestionDao questionDao = new QuestionDao();
         Question question = questionDao.findByQuestionId(Integer.parseInt(req.getParameter("questionId")));
+        System.out.println(question.getQuestionId());
 
         question.setTitle(req.getParameter("title"));
         question.setContents(req.getParameter("contents"));
