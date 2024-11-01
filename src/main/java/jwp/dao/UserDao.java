@@ -42,7 +42,7 @@ public class UserDao {
 
     public List<User> findAll() throws SQLException{
         String sql="SELECT * FROM USERES";
-        RowMapper rowMapper = rs ->new User(rs.getString("userId"),
+        RowMapper<User> rowMapper = rs ->new User(rs.getString("userId"),
                 rs.getString("password"),
                 rs.getString("name"),
                 rs.getString("email"));
@@ -55,12 +55,11 @@ public class UserDao {
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, userId);
         };
-        RowMapper rowMapper = rs -> new User(rs.getString("userId"),
+        RowMapper<User> rowMapper = rs -> new User(rs.getString("userId"),
                 rs.getString("password"),
                 rs.getString("name"),
                 rs.getString("email"));
         return jdbcTemplate.queryforObject(sql, pstmtSetter, rowMapper);
-
     }
 }
 

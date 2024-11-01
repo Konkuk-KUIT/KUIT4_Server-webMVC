@@ -31,13 +31,19 @@ public class DispatcherServlet extends HttpServlet {
         Controller controller = requestMapper.getController(requestUri);
 
         if (controller != null) {
-            String result = controller.execute(req, resp);
+            String result = null;
+            try {
+                result = controller.execute(req, resp);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             if (result.startsWith("redirect:")) {
                 String redirectUrl = result.substring("redirect:".length());
                 resp.sendRedirect(redirectUrl);
                 return; // 종료
             }
             req.getRequestDispatcher(result).forward(req, resp);
+
         } else {
             resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Controller does not exist");
         }

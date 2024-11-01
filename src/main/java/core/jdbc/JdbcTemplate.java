@@ -17,6 +17,21 @@ public class JdbcTemplate<T> {
             pstmt.executeUpdate();
         }
     }
+    public void update(String sql, PreparedStatementSetter pstmtSetter, KeyHolder holder) {
+        try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            pstmtSetter.setParameters(pstmt);
+            pstmt.executeUpdate();
+
+            ResultSet rs = pstmt.getGeneratedKeys();
+            if (rs.next()) {
+                holder.setId((int) rs.getLong(1));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public<T> List<T> query(String sql, RowMapper<T> rowMapper) throws SQLException{
        List<T> objects=new ArrayList<>();
         try (Connection conn = ConnectionManager.getConnection();
@@ -30,10 +45,8 @@ public class JdbcTemplate<T> {
         return objects;
     }
     public T queryforObject(String sql, PreparedStatementSetter pstmtSetter,RowMapper<T> rowMapper) throws SQLException{
-
         ResultSet rs=null;
         T object=null;
-
         try (Connection conn = ConnectionManager.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql);){
              pstmtSetter.setParameters(pstmt);

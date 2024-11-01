@@ -1,46 +1,73 @@
 package jwp.dao;
 
-import core.jdbc.ConnectionManager;
-import core.jdbc.JdbcTemplate;
-import core.jdbc.RowMapper;
+import core.jdbc.*;
 import jwp.model.Question;
 import jwp.model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class QuestionDao {
     private final JdbcTemplate<Question> jdbcTemplate = new JdbcTemplate();
+
     public List<Question> findAll() throws SQLException {
         String sql = "SELECT * FROM QUESTIONS";
-        RowMapper<Question> rowMapper = rs -> {
-            Question question = new Question(
-                    rs.getString("writer"),
-                    rs.getString("title"),
-                    rs.getString("contents"),
-                    rs.getTimestamp("createdDate").toLocalDateTime(),
-                    rs.getInt("countOfAnswer")
-            );
-            question.setQuestionId(rs.getInt("questionId")); // 이 줄을 추가
-            return question;
-        };
-        return jdbcTemplate.query(sql, rowMapper);
-    }
 
-
-    public List<Question> readAll() throws SQLException {
-        String sql = "SELECT * FROM QUESTIONS";
-        RowMapper rowMapper = rs -> new Question(rs.getString("writer"),
+        //todo 이건 questionId 까지 가져와야하지않나 흐으으음
+        RowMapper<Question> rowMapper = rs -> new Question(
+                rs.getInt("questionId"),
+                rs.getString("writer"),
                 rs.getString("title"),
                 rs.getString("contents"),
                 rs.getTimestamp("createdDate").toLocalDateTime(),
                 rs.getInt("countOfAnswer"));
 
         return jdbcTemplate.query(sql, rowMapper);
-
     }
+    public Question insert(Question question) throws SQLException {
+        KeyHolder keyHolder=new KeyHolder();
+        String sql = "INSERT INTO QUESTIONS (writer, title, contents, createdDate, countOfAnswer) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatementSetter pstmtSetter= pstmt->{
+            pstmt.setString(1,question.getWriter());
+            pstmt.setString(2,question.getTitle());
+            pstmt.setString(3,question.getContents());
+            pstmt.setTimestamp(4, Timestamp.valueOf(question.getCreatedDate()));
+            pstmt.setInt(5, question.getCountOfAnswer());
+        };
+        jdbcTemplate.update(sql,pstmtSetter,keyHolder);
+
+        return findQuestionById(keyHolder.getId());
+    }
+
+
+
+    public Question findQuestionById(int questionId) throws SQLException {
+        String sql = "SELECT questionId ,writer, title, contents, createdDate, countOfAnswer FROM QUESTIONS WHERE questionId = ?";
+        PreparedStatementSetter pstmtSetter = pstmt -> {
+            pstmt.setInt(1, questionId);
+        };
+        //객체 반환
+
+        //todo questionId 까지 ??
+        RowMapper<Question> rowMapper = rs ->  new Question(
+                    rs.getInt("questionId"),
+                    rs.getString("writer"),
+                    rs.getString("title"),
+                    rs.getString("contents"),
+                    rs.getTimestamp("createdDate").toLocalDateTime(),
+                    rs.getInt("countOfAnswer")
+            );
+        return jdbcTemplate.queryforObject(sql, pstmtSetter, rowMapper);
+    }
+    public void update(Question question) throws SQLException {
+        String sql="UPDATE QUESTIONS SET writer = ?, title = ? WHERE questionId = ?";
+        PreparedStatementSetter pstmtSetter=pstmt->{
+            pstmt.setString(2,question.getWriter());
+            pstmt.setString(3,question.getTitle());
+        };
+        //todo: title과 contents만 고칠 수 있게 하자
+        jdbcTemplate.update(sql,pstmtSetter);
+    }
+
 }

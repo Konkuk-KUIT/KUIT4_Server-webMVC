@@ -17,7 +17,6 @@ public class CreateUserController   implements Controller{
                 req.getParameter("email"));
         MemoryUserRepository.getInstance().addUser(user);
 
-//        resp.sendRedirect("/user/userList");
         return "redirect:/user/userList";
     }
 

@@ -7,5 +7,4 @@ import java.sql.SQLException;
 public interface PreparedStatementSetter {
     //함수형 인터페이스
     void setParameters(PreparedStatement ps )throws SQLException;
-
 }

@@ -17,12 +17,11 @@ public class HomeController  implements Controller {
 
         List<Question> questions= null;
         try {
-            questions = questionDao.readAll();
+            questions = questionDao.findAll();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        System.out.println(questions.size());
         req.setAttribute("questions",questions);
         return "/home.jsp";
     }

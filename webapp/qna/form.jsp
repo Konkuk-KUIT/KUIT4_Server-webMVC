@@ -14,7 +14,7 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-  
+
         <div class="collapse navbar-collapse" id="navbarsExample04">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item dropdown">
@@ -45,8 +45,8 @@
             </ul>
 
             <div class="col-md-3 text-end">
-                <a href="/user/login.html" type="button" class="btn btn-outline-primary me-2">Login</a>
-                <a href="/user/form.html" type="button" class="btn btn-primary">Sign-up</a>
+                <a href="/user/login" type="button" class="btn btn-outline-primary me-2">Login</a>
+                <a href="/user/form" type="button" class="btn btn-primary">Sign-up</a>
             </div>
         </header>
     </div>
@@ -54,26 +54,26 @@
     <div class="container" id="main">
       <div class="col-md-12 col-sm-12 col-lg-10 col-lg-offset-1">
          <div class="panel panel-default content-main">
-             <form name="question" method="post" action="">
+             <form name="question" method="post" action="/qna/create">
                  <div class="form-group">
-                     <label for="writer">글쓴이</label>
-                     <input class="form-control" id="writer" name="writer" placeholder="글쓴이"/>
+                     <label for="writer">writer</label>
+                     <input type="text" class="form-control" value="${sessionScope.user.userId}" id="writer" name="writer" placeholder="글쓴이" readonly/>
                  </div>
                  <div class="form-group">
-                     <label for="title">제목</label>
+                     <label for="title">title</label>
                      <input type="text" class="form-control" id="title" name="title" placeholder="제목"/>
                  </div>
                  <div class="form-group">
-                     <label for="contents">내용</label>
+                     <label for="contents">contents</label>
                      <textarea name="contents" id="contents" rows="5" class="form-control"></textarea>
                  </div>
-                 <button type="submit" class="btn btn-primary clearfix pull-right" style="margin-top:10px;">질문하기</button>
+                 <button type="submit" class="btn btn-primary clearfix pull-right" style="margin-top:10px;">submit</button>
                  <div class="clearfix" />
              </form>
            </div>
        </div>
    </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/scripts.js"></script>
   </body>

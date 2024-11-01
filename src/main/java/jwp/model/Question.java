@@ -10,6 +10,14 @@ public class Question {
     private String contents;
     private LocalDateTime createdDate;
     private int countOfAnswer;
+    public Question(int questionId,String writer, String title, String contents, LocalDateTime createdDate, int countOfAnswer) {
+        this.questionId=questionId;
+        this.writer = writer;
+        this.title = title;
+        this.contents = contents;
+        this.createdDate = createdDate;
+        this.countOfAnswer = countOfAnswer;
+    }
 
     public Question(String writer, String title, String contents, LocalDateTime createdDate, int countOfAnswer) {
         this.writer = writer;
