@@ -8,7 +8,6 @@ import jwp.model.Question;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.List;
 
 public class QnaShowController implements Controller {
@@ -18,13 +17,7 @@ public class QnaShowController implements Controller {
         QuestionDao questionDao = new QuestionDao();
         int questionId = Integer.parseInt(req.getParameter("questionId"));
         AnswerDao answerDao = new AnswerDao();
-        List<Answer> readAnswers = answerDao.read();
-        List<Answer> answers = new ArrayList<>();
-        for (Answer readAnswer : readAnswers) {
-            if (readAnswer.getQuestionId() == questionId) {
-                answers.add(readAnswer);
-            }
-        }
+        List<Answer> answers = answerDao.read(questionId);
         Question question = questionDao.findByQuestionId(questionId);
         question.setCountOfAnswer(answers.size());
         req.setAttribute("answers", answers);

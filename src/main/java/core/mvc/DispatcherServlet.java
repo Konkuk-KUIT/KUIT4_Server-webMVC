@@ -10,8 +10,8 @@ import java.io.IOException;
 
 @WebServlet(name = "dispatcher", urlPatterns = "/", loadOnStartup = 1)
 public class DispatcherServlet extends HttpServlet {
-    private RequestMapping requestMapping;
     private static final String REDIRECT_PREFIX = "redirect:";
+    private RequestMapping requestMapping;
 
     @Override
     public void init() throws ServletException {
@@ -24,6 +24,9 @@ public class DispatcherServlet extends HttpServlet {
         Controller controller = requestMapping.getController(url);
         try {
             String viewName = controller.execute(req, resp);
+            if (viewName == null) {
+                return;
+            }
             move(viewName, req, resp);
         } catch (Exception e) {
             System.out.println(e.getMessage());

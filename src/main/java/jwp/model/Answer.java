@@ -7,14 +7,22 @@ public class Answer {
     private final int questionId;
     private final String writer;
     private final String contents;
-    private final Date createdDated;
+    private final Date createdDate;
     private int answerId;
 
     public Answer(int questionId, String writer, String contents) {
         this.questionId = questionId;
         this.writer = writer;
         this.contents = contents;
-        this.createdDated = Date.valueOf(LocalDate.now());
+        this.createdDate = Date.valueOf(LocalDate.now());
+    }
+
+    public Answer(int questionId, String writer, String contents, Date createdDate, int answerId) {
+        this.questionId = questionId;
+        this.writer = writer;
+        this.contents = contents;
+        this.createdDate = createdDate;
+        this.answerId = answerId;
     }
 
     public Answer(int answerId, int questionId, String writer, String contents) {
@@ -22,7 +30,7 @@ public class Answer {
         this.questionId = questionId;
         this.writer = writer;
         this.contents = contents;
-        this.createdDated = Date.valueOf(LocalDate.now());
+        this.createdDate = Date.valueOf(LocalDate.now());
     }
 
     public void setquestionId(int questionId) {
@@ -41,8 +49,8 @@ public class Answer {
         return contents;
     }
 
-    public Date getCreatedDated() {
-        return createdDated;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
     public int getAnswerId() {

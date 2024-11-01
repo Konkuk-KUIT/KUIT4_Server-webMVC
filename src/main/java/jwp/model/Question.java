@@ -65,6 +65,10 @@ public class Question {
         return createdDate;
     }
 
+    public void increaseCountOfAnswer() {
+        this.countOfAnswer++;
+    }
+
     public int getCountOfAnswer() {
         return countOfAnswer;
     }
