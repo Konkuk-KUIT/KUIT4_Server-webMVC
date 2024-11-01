@@ -1,20 +1,25 @@
-package jwp.controller;
+package jwp.controller.user;
 
+import core.db.MemoryUserRepository;
 import core.mvc.Controller;
+import jwp.dao.UserDao;
 import jwp.util.UserSessionUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class QnaFormController implements Controller {
+public class ListUserController implements Controller {
+
+    private final UserDao userDao = new UserDao();
+
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         HttpSession session = req.getSession();
         if (UserSessionUtils.isLogined(session)) {
-            return "/qna/form.jsp";
+            req.setAttribute("users", userDao.findAll());
+            return "/user/list.jsp";
         }
-
-        return "redirect:/user/loginForm";          //로그인 되어 있지 않은 경우
+        return "redirect:/user/loginForm";
     }
 }

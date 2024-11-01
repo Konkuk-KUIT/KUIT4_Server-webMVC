@@ -42,16 +42,6 @@ public class QuestionDao {
         jdbcTemplate.update(sql,pstmtSetter);
     }
 
-//    public void delete(Question question) throws SQLException {
-//        String sql = "DELETE FROM USERS WHERE userId = ?";
-//
-//        PreparedStatementSetter pstmtSetter = pstmt -> {
-//            pstmt.setString(1, question.getUserId());
-//        };
-//
-//        jdbcTemplate.update(sql, pstmtSetter);
-//    }
-
     public List<Question> findAll() throws SQLException {
         String sql = "SELECT * FROM QUESTIONS";
         RowMapper rowMapper = rs -> new Question(rs.getLong("questionId"),
@@ -78,6 +68,15 @@ public class QuestionDao {
                 rs.getInt("countOfAnswer"));
 
         return jdbcTemplate.queryForObject(sql, pstmtSetter, rowMapper);
+    }
+
+    public void updateCountOfAnswer(Question question) throws SQLException {
+        String sql = "UPDATE QUESTIONS SET countOfAnswer=? WHERE questionId=?";
+        PreparedStatementSetter pstmtSetter = pstmt -> {
+            pstmt.setInt(1, question.getCountOfAnswer());
+            pstmt.setLong(2, question.getQuestionId());
+        };
+        jdbcTemplate.update(sql, pstmtSetter);
     }
 }
 

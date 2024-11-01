@@ -60,6 +60,10 @@ public class Question {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public void increaseCountOfAnswer() {
+        this.countOfAnswer++;
+    }
 }
 
 

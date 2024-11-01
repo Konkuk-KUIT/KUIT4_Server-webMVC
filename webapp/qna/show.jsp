@@ -88,7 +88,7 @@
                         </article>
                     </c:forEach>
                     <div class="answerWrite">
-                        <form class="submit-write">
+                        <form class="submit-write" action="/api/qna/addAnswer" method="post">               <%-- question 이 비어있다고 또 죽네 --%>
                             <input type="hidden" name="questionId" value="${question.questionId}">
                             <div class="form-group col-lg-4" style="padding-top:10px;">
                                 <input class="form-control" id="writer" name="writer" placeholder="이름"
