@@ -27,8 +27,6 @@ public class QuestionDao {
     }
 
     public void update(int questionId, Question question) throws SQLException {
-        Connection conn = ConnectionManager.getConnection();
-
         String sql = "UPDATE Questions SET title=?, contents=? WHERE questionId=?";
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, question.getTitle());

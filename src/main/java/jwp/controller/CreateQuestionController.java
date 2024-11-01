@@ -15,7 +15,7 @@ public class CreateQuestionController implements Controller {
         HttpSession session = req.getSession();
         QuestionDao questionDao = new QuestionDao();
 
-        if (session != null) {
+        if (session != null && session.getAttribute("user") != null) {
             Question question = new Question(
                     req.getParameter("writer"),
                     req.getParameter("title"),
