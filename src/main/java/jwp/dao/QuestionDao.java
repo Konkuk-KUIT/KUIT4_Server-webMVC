@@ -72,4 +72,10 @@ public class QuestionDao {
 
         jdbcTemplete.update(sql, pstmtSetter);
     }
+
+    public void delete(int questionId) throws SQLException {
+        String sql = "DELETE FROM QUESTIONS WHERE questionId = ?";
+        PreparedStatementSetter pstmtSetter = pstmt -> pstmt.setInt(1, questionId);
+        jdbcTemplete.update(sql, pstmtSetter);
+    }
 }
