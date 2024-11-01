@@ -1,5 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!doctype html>
 <html lang="ko">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,8 +53,16 @@
         </ul>
 
         <div class="col-md-3 text-end">
-            <a href="/user/login.html" type="button" class="btn btn-outline-primary me-2">Login</a>
-            <a href="/user/form.html" type="button" class="btn btn-primary">Sign-up</a>
+            <c:choose>
+                <c:when test="${not empty sessionScope.user}">
+                    <a href="/user/logout" role="button" class="btn btn-outline-primary me-2">Log-Out</a>
+                    <a href="/user/updateForm?userId=${sessionScope.user.userId}" role="button" class="btn btn-primary" >개인정보수정</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="/user/login.jsp" type="button" class="btn btn-outline-primary me-2">Log-In</a>
+                    <a href="/user/form.jsp" type="button" class="btn btn-primary">Sign-up</a>
+                </c:otherwise>
+            </c:choose>
         </div>
     </header>
 </div>
@@ -59,44 +71,26 @@
     <h2>Q&A</h2>
     <div class="qna-list">
         <ul class="list">
-            <li>
-                <div class="wrap">
-                    <div class="main">
-                        <strong class="subject">
-                            <a href="./qna/show.html"> 객체지향을 가장 잘 다룬 책이 뭐가 있나요? </a>
-                        </strong>
-                        <div class="auth-info">
-                            <i class="icon-add-comment"></i>
-                            <span class="time">2024-09-29 23:11</span>
-                            <span clas="author">이영선</span>
-                            <!-- <a href="./user/profile.html" class="author">이영선</a> -->
-                        </div>
-                        <div class="reply" title="댓글">
-                            <i class="icon-reply"></i>
-                            <span class="point">12</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="wrap">
-                    <div class="main">
-                        <strong class="subject">
-                            <a href="./qna/show.html"> 객체지향에서 가장 중요하다고 생각하는 것이 무엇인가요? </a>
-                        </strong>
-                        <div class="auth-info">
-                            <i class="icon-add-comment"></i>
-                            <span class="time">2024-09-29 23:55</span>
-                            <span class="author">이윤정</span>
-                            <!-- <a href="./user/profile.html" class="author">이윤정</a> -->
-                        </div>
-                        <div class="reply" title="댓글">
-                            <i class="icon-reply"></i>
-                            <span class="point">8</span>
+            <c:forEach items="${questions}" var="question">
+                <li>
+                    <div class="wrap">
+                        <div class="main">
+                            <strong class="subject">
+                                <a href="qna/show?questionId=${question.questionId}"> ${question.title} </a>
+                            </strong>
+                            <div class="auth-info">
+                                <i class="icon-add-comment"></i>
+                                <span class="time">${question.createdDate}</span>
+                                <span class="author">${question.writer}</span>
+                            </div>
+                            <div class="reply" title="댓글">
+                                <i class="icon-reply"></i>
+                                <span class="point">${question.countOfAnswer}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            </c:forEach>
         </ul>
         <div class="row">
             <div class="col-md-5"></div>
@@ -116,7 +110,7 @@
                 </ul>
             </div>
             <div class="col-md-2 qna-write">
-                <a href="./qna/form.html" class="btn btn-primary pull-right" role="button">질문하기</a>
+                <a href="qna/form" class="btn btn-primary pull-right" role="button">질문하기</a>
             </div>
         </div>
     </div>
