@@ -37,9 +37,9 @@ public class QuestionDao {
         jdbcTemplate.update(sql, pstmtSetter);
     }
 
-    public void delete(Question question) throws SQLException {
+    public void delete(int questionId) throws SQLException {
         String sql = "DELETE FROM Questions WHERE questionId=?";
-        int questionId = findId(question);
+        //int questionId = findId(question);
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setInt(1, questionId);
         };

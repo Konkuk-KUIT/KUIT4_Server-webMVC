@@ -22,7 +22,7 @@ public class QuestionDaoTest {
 
     @AfterAll
     static void deleteQuestion() throws SQLException {
-        questionDao.delete(question);
+        questionDao.delete(questionDao.findId(question));
     }
 
 //    @Test
