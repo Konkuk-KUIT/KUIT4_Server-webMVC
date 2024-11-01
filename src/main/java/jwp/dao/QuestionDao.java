@@ -44,7 +44,8 @@ public class QuestionDao {
 
     public List<Question> findAll() throws SQLException {
         String sql = "SELECT * FROM QUESTIONS";
-        RowMapper rowMapper = rs -> new Question(rs.getLong("questionId"),
+        RowMapper rowMapper = rs -> new Question(
+                rs.getLong("questionId"),
                 rs.getString("writer"),
                 rs.getString("title"),
                 rs.getString("contents"),
@@ -55,13 +56,15 @@ public class QuestionDao {
     }
 
     public Question findByQuestionId(int questionId) throws SQLException{
-        String sql = "SELECT writer, title, contents, createdDate, countOfAnswer FROM QUESTIONS WHERE questionId=?";
+        String sql = "SELECT questionId, writer, title, contents, createdDate, countOfAnswer FROM QUESTIONS WHERE questionId=?";
 
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setInt(1, questionId);
         };
 
-        RowMapper rowMapper = rs -> new Question(rs.getString("writer"),
+        RowMapper rowMapper = rs -> new Question(
+                rs.getLong("questionId"),
+                rs.getString("writer"),
                 rs.getString("title"),
                 rs.getString("contents"),
                 rs.getTimestamp("createdDate"),

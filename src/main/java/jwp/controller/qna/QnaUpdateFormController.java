@@ -20,8 +20,8 @@ public class QnaUpdateFormController implements Controller {
         User user = (User)session.getAttribute("user");
         int questionId = Integer.parseInt(req.getParameter("questionId"));
 
-        System.out.println(user.getUserId());
-        System.out.println(questionId);
+        System.out.println("질문글 수정 접근");
+        System.out.println("userId : " + user.getUserId() + ", questionId : " + questionId);
 
         Question question = questionDao.findByQuestionId(questionId);
         if(question != null && !Objects.equals(question.getWriter(), user.getUserId())) {

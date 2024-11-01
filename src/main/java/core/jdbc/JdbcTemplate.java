@@ -15,7 +15,7 @@ public class JdbcTemplate<T> {      //db 작업을 위함 템플릿 제공
 
         }
     }
-    public void update(String sql, PreparedStatementSetter pstmtSetter, KeyHolder holder)  {        //KeyHolder를 위한 update()
+    public void update(String sql, PreparedStatementSetter pstmtSetter, KeyHolder holder)  {        //KeyHolder를 위한 update(), 임시로 넣어둔 questionId update?
         try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             pstmtSetter.setParameters(pstmt);
             pstmt.executeUpdate();

@@ -30,8 +30,8 @@
 
             <div class="article-util">
                 <ul class="article-util-list">
-                    <%--<c:if test="${not empty sessionScope.user}">
-                        <c:if test="${sessionScope.user.name == question.writer}">--%>                  <%--if문을 통과하지 못함 --%>
+                    <c:if test="${not empty sessionScope.user}">
+                        <c:if test="${sessionScope.user.name == question.writer}">                <%--if문을 통과하지 못함 --%>
                             <li>
                                 <a class="link-modify-article"
                                    href="/qna/updateForm?questionId=${question.questionId}">수정</a>    <%--해당 위치에서 questionId 입력이 안되는것 같은데 이유를 모르겠음 --%>
@@ -40,8 +40,8 @@
                                 <a class="link-modify-article"
                                    href="/qna/delete?questionId=${question.questionId}">삭제</a>
                             </li>
-                        <%--</c:if>
-                    </c:if>--%>
+                        </c:if>
+                    </c:if>
                     <li>
                         <a class="link-modify-article" href="/">목록</a>
                     </li>

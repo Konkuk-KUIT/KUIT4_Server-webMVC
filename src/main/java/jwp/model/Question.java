@@ -21,7 +21,7 @@ public class Question {
     }
 
     public Question(String writer, String title, String contents, Timestamp createdDate, int countOfAnswer) {
-        this.questionId = 0L;
+        this.questionId = 0L;       //임시로 '0'을 넣어 줌
         this.writer = writer;
         this.title = title;
         this.contents = contents;
