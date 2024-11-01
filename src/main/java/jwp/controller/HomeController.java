@@ -10,6 +10,8 @@ import java.util.List;
 
 public class HomeController implements Controller {
 
+    private final QuestionDao questionDao = new QuestionDao();
+
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         QuestionDao questionDao = new QuestionDao();

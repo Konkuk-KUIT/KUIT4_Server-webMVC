@@ -10,14 +10,10 @@ import java.util.List;
 public class JdbcTemplate<T> {
 
     public void update(String sql, PreparedStatementSetter pstmtSetter) throws SQLException {
-
-
         try(Connection conn = ConnectionManager.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);){
             pstmtSetter.setParameters(pstmt);
-
             pstmt.executeUpdate(); // 쿼리문 실행
-
         }
     }
 
