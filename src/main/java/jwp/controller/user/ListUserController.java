@@ -1,6 +1,5 @@
 package jwp.controller.user;
 
-import core.db.MemoryUserRepository;
 import core.mvc.Controller;
 import jwp.dao.UserDao;
 import jwp.util.UserSessionUtils;
