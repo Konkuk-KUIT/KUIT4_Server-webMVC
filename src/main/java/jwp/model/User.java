@@ -1,7 +1,7 @@
 package jwp.model;
 
 public class User {
-    private String userId;
+    private final String userId;
     private String password;
     private String name;
     private String email;
@@ -54,6 +54,10 @@ public class User {
 
     public boolean isSameUser(String userId, String password) {
         return userId.equals(this.userId) && matchPassword(password);
+    }
+
+    public boolean isWriterOf(Question question) {
+        return userId.equals(question.getWriter());
     }
 
     @Override

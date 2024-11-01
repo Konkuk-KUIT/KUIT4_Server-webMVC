@@ -9,25 +9,26 @@
 
 <div class="container" id="main">
 
-    <main class="form-question-create">
+    <main class="form-question-update">
 
-        <form name="question-create" method="post" action="/qna/create">
+        <form name="question-update" method="post" action="/qna/update">
+            <input type="hidden" name="questionId" value="${question.questionId}" />
             <div class="form-floating">
-                <input type="text" class="form-control" value="${sessionScope.user.userId}" id="writer" name="writer" placeholder="글쓴이" readonly/>
+                <input type="text" class="form-control" value="${question.writer}" id="writer" name="writer" placeholder="글쓴이" readonly/>
                 <label for="writer">글쓴이</label>
             </div>
             <div class="form-floating">
-                <input type="text" class="form-control" id="title" name="title" placeholder="제목">
+                <input type="text" class="form-control" id="title" name="title" placeholder="제목" value="${question.title}">
                 <label for="title">제목</label>
             </div>
             <div class="form-floating">
                 내용
-                <textarea class="form-control" id="contents" name="contents" placeholder="내용"></textarea>
+                <textarea class="form-control" id="contents" name="contents" placeholder="내용">${question.contents}</textarea>
                 <label for="contents"></label>
             </div>
             <div style="height:10px;">
             </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">질문 등록</button>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">질문 수정</button>
         </form>
     </main>
 </div>
