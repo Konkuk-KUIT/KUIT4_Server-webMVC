@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class QuestionController implements Controller {
+public class CreateQuestionController implements Controller {
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
@@ -27,9 +27,9 @@ public class QuestionController implements Controller {
 
             Question questionCheck = questionDao.findById(questionId);
             if (questionCheck != null) {
-                return "/qna/show";
+                req.setAttribute("question", questionCheck);
+                return "/";
             }
-
             return "redirect:/qna/form";
         }
         return "redirect:/";

@@ -17,18 +17,18 @@
                         <div class="main">
                             <strong class="subject">
                                 <!-- 질문 제목과 링크 -->
-                                <a href="qna/show"> ${question.title} </a>
+                                <a href="/qna/show?questionId=${question.key}"> ${question.value.title} </a>
                             </strong>
                             <div class="auth-info">
                                 <i class="icon-add-comment"></i>
                                 <!-- 질문 작성 시간과 작성자 -->
-                                <span class="time">${question.createdDate}</span>
-                                <span class="author">${question.writer}</span>
+                                <span class="time">${question.value.createdDate}</span>
+                                <span class="author">${question.value.writer}</span>
                             </div>
                             <div class="reply" title="댓글">
                                 <i class="icon-reply"></i>
                                 <!-- 댓글 수 (countOfAnswer) -->
-                                <span class="point">${question.countOfAnswer}</span>
+                                <span class="point">${question.value.countOfAnswer}</span>
                             </div>
                         </div>
                     </div>

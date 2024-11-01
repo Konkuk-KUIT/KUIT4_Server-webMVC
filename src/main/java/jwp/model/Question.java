@@ -1,38 +1,39 @@
 package jwp.model;
 
+
 import java.sql.Timestamp;
 
 public class Question {
     private String writer;
     private String title;
-    private final Timestamp createdDate;
+    private final Timestamp createdDate;        // 유지 못하나.. / 못한대...
     private String contents;
     private int countOfAnswer;
 
-//    public Question(String writer, String title, String contents, Timestamp createdDate,  int countOfAnswer) {
-//        this.writer = writer;
-//        this.title = title;
-//        this.contents = contents;
-//        this.createdDate = createdDate;
-//        this.countOfAnswer = countOfAnswer;
-//    }
-
-    public Question(String writer, String title, String contents, int countOfAnswer) {
+    public Question(String writer, String title, String contents, Timestamp createdDate,  int countOfAnswer) {
         this.writer = writer;
         this.title = title;
-        this.createdDate = new Timestamp(System.currentTimeMillis());
         this.contents = contents;
+        this.createdDate = createdDate;
         this.countOfAnswer = countOfAnswer;
     }
 
-//    public Question(String writer, String title, Timestamp createdDate, String contents) {
+//    public Question(String writer, String title, String contents, int countOfAnswer) {
 //        this.writer = writer;
 //        this.title = title;
-//        this.createdDate = createdDate;
+//        this.createdDate = new Timestamp(System.currentTimeMillis());       // 이거 말고 받아야 될 듯
 //        this.contents = contents;
-//        this.countOfAnswer = 0;
+//        this.countOfAnswer = countOfAnswer;
 //    }
-//
+
+    public Question(String writer, String title, String contents, Timestamp createdDate) {
+        this.writer = writer;
+        this.title = title;
+        this.createdDate = createdDate;
+        this.contents = contents;
+        this.countOfAnswer = 0;
+    }
+
     public Question(String writer, String title, String contents) {
         this.writer = writer;
         this.title = title;

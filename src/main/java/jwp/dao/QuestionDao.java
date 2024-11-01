@@ -16,7 +16,7 @@ public class QuestionDao {
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, question.getWriter());
             pstmt.setString(2, question.getTitle());
-            pstmt.setString(3, question.getContents().toString());
+            pstmt.setString(3, question.getContents());
             pstmt.setTimestamp(4, question.getCreatedDate());
             pstmt.setInt(5, question.getCountOfAnswer());
         };
@@ -26,14 +26,14 @@ public class QuestionDao {
         return keyHolder.getId();
     }
 
-    public void update(Question question, Question newQuestion) throws SQLException {
+    public void update(Question question) throws SQLException {
         Connection conn = ConnectionManager.getConnection();
 
         String sql = "UPDATE FROM Questions SET title=?, contents=? WHERE questionId=?";
         int questionId = findId(question);
         PreparedStatementSetter pstmtSetter = pstmt -> {
-            pstmt.setString(1, newQuestion.getTitle());
-            pstmt.setString(2, newQuestion.getContents().toString());
+            pstmt.setString(1, question.getTitle());
+            pstmt.setString(2, question.getContents().toString());
             pstmt.setInt(3, questionId);
         };
 
@@ -53,10 +53,11 @@ public class QuestionDao {
 
 
     public int findId(Question question) throws SQLException {
-        String sql = "SELECT questionId FROM Questions WHERE writer=? AND createdDate=?";
+        String sql = "SELECT questionId FROM Questions WHERE writer=? AND createdDate=? AND title=?";       // 나중에 시간 유지 되면 제목은 빼고 싶음
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, question.getWriter());
             pstmt.setTimestamp(2, new Timestamp(question.getCreatedDate().getTime()));
+            pstmt.setString(3, question.getTitle());
         };
         RowMapper<Integer> rowMapper = rs ->
             rs.getInt("questionId");
@@ -71,6 +72,7 @@ public class QuestionDao {
                         rs.getString("writer"),
                         rs.getString("title"),
                         rs.getString("contents"),
+                        rs.getTimestamp("createdDate"),
                         rs.getInt("countOfAnswer")
                 );
 
@@ -78,7 +80,7 @@ public class QuestionDao {
     }
 
     public Question findById(int questionId) throws SQLException {
-        String sql = "SELECT title, writer, createdDate, contents, countOfAnswer FROM Questions WHERE questionId=?";
+        String sql = "SELECT writer, title, createdDate, contents, countOfAnswer FROM Questions WHERE questionId=?";
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setInt(1, questionId);
         };
@@ -87,6 +89,7 @@ public class QuestionDao {
                         rs.getString("writer"),
                         rs.getString("title"),
                         rs.getString("contents"),
+                        rs.getTimestamp("createdDate"),
                         rs.getInt("countOfAnswer")
                 );
 
@@ -94,7 +97,7 @@ public class QuestionDao {
     }
 
     public List<Question> findByWriter(String writer) throws SQLException {
-        String sql = "SELECT title, writer, createdDate, contents, countOfAnswer FROM Questions WHERE writer=?";
+        String sql = "SELECT writer, title, createdDate, contents, countOfAnswer FROM Questions WHERE writer=?";
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, writer);
         };
@@ -103,6 +106,7 @@ public class QuestionDao {
                         rs.getString("writer"),
                         rs.getString("title"),
                         rs.getString("contents"),
+                        rs.getTimestamp("createdDate"),
                         rs.getInt("countOfAnswer")
                 );
 
@@ -118,6 +122,7 @@ public class QuestionDao {
                 rs.getString("writer"),
                 rs.getString("title"),
                 rs.getString("contents"),
+                rs.getTimestamp("createdDate"),
                 rs.getInt("countOfAnswer")
         );
 
