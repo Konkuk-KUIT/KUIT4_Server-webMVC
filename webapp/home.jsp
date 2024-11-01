@@ -20,7 +20,7 @@
                         <div class="auth-info">
                             <i class="icon-add-comment"></i>
                             <span class="time">2024-09-29 23:11</span>
-                            <span clas="author">이영선</span>
+                            <span class="author">이영선</span>
                             <!-- <a href="./user/profile.html" class="author">이영선</a> -->
                         </div>
                         <div class="reply" title="댓글">
@@ -35,7 +35,7 @@
                 <div class="wrap">
                     <div class="main">
                         <strong class="subject">
-                            <a href="qna/show"> ${question.title} </a>          <%--  서버에서 전달된 데이터를 ${} 로 감싸서 사용, getter() 자동으로 인식*사용  --%>
+                            <a href="/qna/show?questionId=${question.questionId}">${question.title}</a>          <%--  서버에서 전달된 데이터를 ${} 로 감싸서 사용, getter() 자동으로 인식*사용  --%>
                         </strong>
                         <div class="auth-info">
                             <i class="icon-add-comment"></i>
