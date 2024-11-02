@@ -25,9 +25,9 @@ public class UpdateQuestionFormController extends AbstractController {
         String questionId = req.getParameter("questionId");
         Question question = questionDao.findByQuestionId(Integer.parseInt(questionId));
         User user = UserSessionUtils.getUserFromSession(session);
-        if (!question.isSameUser(user)) {
+        /*if (!question.isSameUser(user)) {
             throw new IllegalArgumentException();
-        }
+        }*/
 
         return jspView("/qna/updateForm.jsp")
                 .addObject("question", question);
