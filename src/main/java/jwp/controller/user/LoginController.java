@@ -1,6 +1,8 @@
 package jwp.controller.user;
 
 import core.mvc.Controller;
+import core.mvc.view.JspView;
+import core.mvc.view.View;
 import jwp.dao.UserDao;
 import jwp.model.User;
 
@@ -13,7 +15,7 @@ public class LoginController implements Controller {
     private final UserDao userDao = new UserDao();
 
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         HttpSession session = req.getSession();
         String userId = req.getParameter("userId");
         String password = req.getParameter("password");
@@ -23,8 +25,8 @@ public class LoginController implements Controller {
 
         if (user != null && user.isSameUser(loginUser)) {
             session.setAttribute("user", user);
-            return "redirect:/";
+            return new JspView("redirect:/");
         }
-        return "redirect:/user/loginFailed";
+        return new JspView("redirect:/user/loginFailed");
     }
 }
