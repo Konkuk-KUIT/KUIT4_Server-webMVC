@@ -1,7 +1,9 @@
 package jwp.controller.qna;
 
+import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.view.JspView;
+import core.mvc.view.ModelAndView;
 import core.mvc.view.View;
 import jwp.dao.QuestionDao;
 import jwp.model.Question;
@@ -13,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class UpdateQuestionFormController implements Controller {
+public class UpdateQuestionFormController extends AbstractController {
 
     private final QuestionDao questionDao = new QuestionDao();
 
@@ -31,6 +33,11 @@ public class UpdateQuestionFormController implements Controller {
         }
         req.setAttribute("question", question);
         return new JspView("/qna/updateForm.jsp");
+    }
+
+    @Override
+    public ModelAndView doExecute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        return null;
     }
 
 }
