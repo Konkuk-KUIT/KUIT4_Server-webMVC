@@ -28,7 +28,6 @@ public class CreateAnswerController extends AbstractController {
         question.increaseCountOfAnswer();
         questionDao.updateCountOfAnswer(question);
 
-        // JsonView를 사용하고 모델에 데이터 추가
         return jsonView()
                 .addObject("answer", savedAnswer);
     }
