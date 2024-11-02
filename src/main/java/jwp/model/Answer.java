@@ -11,10 +11,10 @@ public class Answer {
     private LocalDateTime createdDate;
     private int questionId;
 
-    public Answer(String writer, String contents, LocalDateTime createdDate, int questionId) {
+    public Answer(String writer, String contents, int questionId) {
         this.writer = writer;
         this.contents = contents;
-        this.createdDate = createdDate;
+        this.createdDate = LocalDateTime.now();
         this.questionId = questionId;
     }
 

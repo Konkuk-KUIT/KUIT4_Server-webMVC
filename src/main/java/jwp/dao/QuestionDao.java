@@ -23,7 +23,6 @@ public class QuestionDao {
                     rs.getString("writer"),
                     rs.getString("title"),
                     rs.getString("contents"),
-                    rs.getTimestamp("createdDate").toLocalDateTime(),
                     rs.getInt("countOfAnswer")
             );
             question.setQuestionId(rs.getInt("questionId")); // 이 줄을 추가
@@ -59,7 +58,6 @@ public class QuestionDao {
                 rs.getString("writer"),
                 rs.getString("title"),
                 rs.getString("contents"),
-                rs.getTimestamp("createdDate").toLocalDateTime(),
                 rs.getInt("countOfAnswer")
             );
             question.setQuestionId(rs.getInt("questionId"));

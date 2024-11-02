@@ -23,7 +23,6 @@ public class AnswerDao {
             Answer answer = new Answer(
                     rs.getString("writer"),
                     rs.getString("contents"),
-                    rs.getTimestamp("createdDate").toLocalDateTime(),
                     rs.getInt("questionId")
             );
             answer.setAnswerId(rs.getInt("answerId"));

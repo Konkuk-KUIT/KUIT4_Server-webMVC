@@ -1,6 +1,8 @@
-package jwp.controller;
+package jwp.controller.qna;
 
 import core.mvc.Controller;
+import core.mvc.view.JspView;
+import core.mvc.view.View;
 import jwp.dao.QuestionDao;
 import jwp.model.Question;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +12,7 @@ public class UpdateQuestionController implements Controller {
     private final QuestionDao questionDao = new QuestionDao();
 
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 
         String questionId = req.getParameter("questionId");
         String title = req.getParameter("title");
@@ -21,7 +23,7 @@ public class UpdateQuestionController implements Controller {
         question.setContents(contents);
         questionDao.update(question);
 
-        return "redirect:/";
+        return new JspView("redirect:/");
     }
 
 }

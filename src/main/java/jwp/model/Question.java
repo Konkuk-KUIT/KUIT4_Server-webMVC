@@ -11,11 +11,11 @@ public class Question {
     private LocalDateTime createdDate;
     private int countOfAnswer;
 
-    public Question(String writer, String title, String contents, LocalDateTime createdDate, int countOfAnswer) {
+    public Question(String writer, String title, String contents, int countOfAnswer) {
         this.writer = writer;
         this.title = title;
         this.contents = contents;
-        this.createdDate = createdDate;
+        this.createdDate = LocalDateTime.now();
         this.countOfAnswer = countOfAnswer;
     }
 
