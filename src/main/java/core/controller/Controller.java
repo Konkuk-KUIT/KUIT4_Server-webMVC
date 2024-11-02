@@ -1,8 +1,10 @@
 package core.controller;
 
+import core.mvc.view.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public interface Controller {
-    String handleRequest(HttpServletRequest request, HttpServletResponse response);
+    ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response);
 }
