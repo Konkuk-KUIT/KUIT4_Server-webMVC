@@ -1,6 +1,5 @@
 package jwp.controller.qna;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import core.mvc.Controller;
 import core.mvc.view.JsonView;
 import core.mvc.view.View;
@@ -11,7 +10,6 @@ import jwp.model.Question;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
 
 public class CreateAnswerController implements Controller {
 
