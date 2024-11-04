@@ -11,7 +11,7 @@
     <main class="form-signin">
         <form name="create-question" method="post" action="/qna/create">
             <div class="form-floating">
-                <input type="text" class="form-control" value="${sessionScope.user.userId}" id="writer" name="writer" placeholder="글쓴이" readonly />
+                <input type="text" class="form-control" value="${userId}" id="writer" name="writer" placeholder="글쓴이" readonly />
                 <label for="writer">글쓴이</label>
             </div>
             <div class="form-floating">

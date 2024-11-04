@@ -24,9 +24,12 @@ public class RequestMapping {
         controllers.put("/user/loginFailed", new ForwardController("/user/loginFailed.jsp"));
 
         //controllers.put("/qna/form", new ForwardController("/qna/form.jsp"));
+        //controllers.put("/qna/show", new ForwardController("/qna/show.jsp"));
+
         controllers.put("/qna/form", new QnaFormController());
-        controllers.put("/qna/show", new ForwardController("/qna/show.jsp"));
         controllers.put("/qna/create", new CreateQnaController());  // 새로운 매핑 추가
+        controllers.put("/qna/show", new ShowController());
+
     }
 
     public Controller getController(String url) {
