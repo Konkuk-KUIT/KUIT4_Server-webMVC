@@ -22,6 +22,6 @@ public class CreateUserController extends HttpServlet implements Controller {
             return "redirect:"+ROOT.getUrl();            // redirect
         }
 
-        return FORM_JSP.getUrl();      // forward (회원가입 페이지 출력)
-    }
-}
+        return FORM_JSP.getUrl();      // forward (회원가입 페이지 출력)   front 측에 해당 매커니즘을 전달해줘야 됨 
+    }                                  // (front측과 올바른지 않은 방법으로 의사소통할 가능성이 있음)
+}                                      // 그래서 해당 경로로 접근하는 방법이 없는게 맞음, get*post에 따른 컨트롤러 따로 구현해 주는게 맞음
