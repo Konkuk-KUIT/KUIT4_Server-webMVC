@@ -10,6 +10,7 @@ public class RequestMapping {
     private static final Map<String, Controller> controllers = new HashMap<>();
 
     static {
+
         controllers.put("/", new HomeController());
         controllers.put("/user/signup", new CreateUserController());
         controllers.put("/user/list", new ListUserController());
@@ -22,9 +23,10 @@ public class RequestMapping {
         controllers.put("/user/loginForm", new ForwardController("/user/login.jsp"));
         controllers.put("/user/loginFailed", new ForwardController("/user/loginFailed.jsp"));
 
-        controllers.put("/qna/form", new ForwardController("/qna/form.jsp"));
+        //controllers.put("/qna/form", new ForwardController("/qna/form.jsp"));
+        controllers.put("/qna/form", new QnaFormController());
         controllers.put("/qna/show", new ForwardController("/qna/show.jsp"));
-
+        controllers.put("/qna/create", new CreateQnaController());  // 새로운 매핑 추가
     }
 
     public Controller getController(String url) {
