@@ -6,7 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MemoryUserRepository {
+public class MemoryUserRepository { //유저 정보 싱글톤 클래스
     private Map<String, User> users = new HashMap<>();
     private static MemoryUserRepository memoryUserRepository;
 
@@ -37,5 +37,10 @@ public class MemoryUserRepository {
         if (users.get(user.getUserId()) != null) {
             users.put(user.getUserId(), user);
         }
+    }
+
+    public void update(User user) {
+        User repoUser = users.get(user.getUserId());
+        repoUser.update(user);
     }
 }
