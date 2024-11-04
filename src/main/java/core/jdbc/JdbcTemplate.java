@@ -11,7 +11,7 @@ public class JdbcTemplate<T> {      //db 작업을 위함 템플릿 제공
         try (Connection conn = ConnectionManager.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {  //try with recourse 문
             pstmtSetter.setParameters(pstmt);
 
-            pstmt.executeUpdate();
+            pstmt.executeUpdate();      //쿼리문 실행
 
         }
     }
@@ -22,7 +22,7 @@ public class JdbcTemplate<T> {      //db 작업을 위함 템플릿 제공
 
             ResultSet rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
-                holder.setId((int) rs.getLong(1));
+                holder.setId((int) rs.getLong(1));      //insert시 생성된 id 값 저장 (questionId 등)
             }
             rs.close();
         } catch (SQLException e) {

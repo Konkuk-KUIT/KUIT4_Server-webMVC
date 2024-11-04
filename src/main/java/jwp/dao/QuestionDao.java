@@ -14,7 +14,6 @@ public class QuestionDao {
         String sql = "INSERT INTO QUESTIONS (writer, title, contents, createdDate, countOfAnswer) VALUES (?, ?, ?, ?, ?)";
         KeyHolder keyHolder = new KeyHolder();
 
-
         PreparedStatementSetter pstmtSetter = pstmt -> {
             pstmt.setString(1, question.getWriter());
             pstmt.setString(2, question.getTitle());
@@ -79,6 +78,7 @@ public class QuestionDao {
             pstmt.setInt(1, question.getCountOfAnswer());
             pstmt.setLong(2, question.getQuestionId());
         };
+
         jdbcTemplate.update(sql, pstmtSetter);
     }
 }
