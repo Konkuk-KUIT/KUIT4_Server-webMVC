@@ -7,29 +7,26 @@ import jwp.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Date;
-import java.time.LocalDate;
 
-public class CreateQnaController implements Controller {
+public class UpdateFormController implements Controller {
 
     private final QuestionDao questionDao = new QuestionDao();
 
     @Override
     public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-
         User user = (User) req.getSession().getAttribute("user");
         if (user == null) {
             return "redirect:/user/login";
         }
 
-        String writer = user.getUserId();
+        int questionId = Integer.parseInt(req.getParameter("questionId"));
+        Question question = questionDao.findByQuestionId(questionId);
 
-        String title = req.getParameter("title");
-        String contents = req.getParameter("contents");
+        if (!user.getUserId().equals(question.getWriter())) {
+            throw new IllegalArgumentException("수정 권한이 없습니다.");
+        }
 
-        Question question = new Question(0, writer, title, contents, Date.valueOf(LocalDate.now()), 0);
-        questionDao.insert(question);
-
-        return "redirect:/";
+        req.setAttribute("question", question);
+        return "/qna/updateForm.jsp";
     }
 }

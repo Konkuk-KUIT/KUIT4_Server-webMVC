@@ -9,22 +9,26 @@
 
 <div class="container" id="main">
     <main class="form-signin">
-        <!-- 수정 요청을 처리할 URL로 변경 -->
+
         <form name="update-question" method="post" action="/qna/update">
-            <!-- questionId를 숨겨진 필드로 추가하여 서버로 전송 -->
+
             <input type="hidden" name="questionId" value="${question.questionId}" />
 
             <div class="form-floating">
+
                 <input type="text" class="form-control" value="${sessionScope.user.userId}" id="writer" name="writer" placeholder="글쓴이" readonly />
                 <label for="writer">글쓴이</label>
             </div>
             <div class="form-floating">
+
                 <input type="text" class="form-control" id="title" name="title" value="${question.title}" placeholder="제목" required />
                 <label for="title">제목</label>
             </div>
             <div class="form-group" style="padding:10px 0;">
+
                 <textarea class="form-control" id="contents" name="contents" placeholder="내용" rows="10" required>${question.contents}</textarea>
             </div>
+
             <button class="w-100 btn btn-lg btn-primary" type="submit">수정 완료</button>
         </form>
     </main>

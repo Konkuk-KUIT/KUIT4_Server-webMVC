@@ -20,6 +20,13 @@
             <div class="article-doc">
                 <p>${question.contents}</p>
             </div>
+
+            <c:if test="${user != null && user.userId == question.writer}">
+                <a href="/qna/updateForm?questionId=${question.questionId}" class="link-modify-article">수정</a>
+                <form class="form-delete" action="/qna/delete?questionId=${question.questionId}" method="POST" style="display:inline;">
+                    <button class="link-delete-article" type="submit">삭제</button>
+                </form>
+            </c:if>
         </article>
     </div>
 </div>
