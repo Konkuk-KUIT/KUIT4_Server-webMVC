@@ -1,7 +1,6 @@
-package core.mvc;
+package core.mvc.controller;
 
 import core.mvc.view.ModelAndView;
-import core.mvc.view.View;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

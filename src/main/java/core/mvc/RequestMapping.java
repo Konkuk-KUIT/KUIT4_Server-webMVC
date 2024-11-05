@@ -1,5 +1,7 @@
 package core.mvc;
 
+import core.mvc.controller.Controller;
+import core.mvc.controller.ForwardController;
 import jwp.controller.*;
 import jwp.controller.qna.*;
 import jwp.controller.user.*;

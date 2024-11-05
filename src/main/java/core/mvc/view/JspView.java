@@ -21,6 +21,9 @@ public class JspView implements View {
             response.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));
             return;
         }
+        for (Map.Entry<String, Object> entry : model.entrySet()) {
+            request.setAttribute(entry.getKey(), entry.getValue());
+        }
         RequestDispatcher rd = request.getRequestDispatcher(viewName);
         rd.forward(request, response);
     }
