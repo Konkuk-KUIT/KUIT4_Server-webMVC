@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ModelAndView {
-    View view;
-    Map<String, Object> model = new HashMap<>();
+    private View view;
+    private Map<String, Object> model = new HashMap<>();
 
     public ModelAndView(View view){
         this.view = view;
@@ -18,7 +18,7 @@ public class ModelAndView {
         return this;
     }
 
-    public void render(HttpServletRequest req, HttpServletResponse resp){
-        // view.render(model, req, resp);
+    public void render(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        view.render(model, req, resp);
     }
 }
