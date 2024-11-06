@@ -1,7 +1,9 @@
 package jwp.controller.user;
 
+import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.view.JspView;
+import core.mvc.view.ModelAndView;
 import core.mvc.view.View;
 import jwp.dao.UserDao;
 import jwp.model.User;
@@ -9,24 +11,29 @@ import jwp.model.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
-public class UpdateUserFormController implements Controller {
+public class UpdateUserFormController extends AbstractController {
 
     private final UserDao userDao = new UserDao();
+    private HttpSession session;
 
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-        String userId = req.getParameter("userId");         // 수정되는 user
-        User user = userDao.findByUserId(userId);
+    public void setSession(HttpSession session) {
+        this.session = session;
+    }
 
-        HttpSession session = req.getSession();                    // 수정하는 user
-        Object value = session.getAttribute("user");
+    @Override
+    public ModelAndView execute(Map<String, String> params) throws Exception {
+        String userId = params.get("userId");         // 수정되는 user
+        User user = userDao.findByUserId(userId);
+        Object value = session.getAttribute("user");    // 수정하는 user
 
         if (user != null && value != null) {
             if (user.equals(value)) {            // 수정되는 user와 수정하는 user가 동일한 경우
-                return new JspView("/user/updateForm.jsp");
+                return jspView("/user/updateForm.jsp").addObject("user",user);
             }
         }
-        return new JspView("redirect:/");
+        return jspView("redirect:/");
     }
 }

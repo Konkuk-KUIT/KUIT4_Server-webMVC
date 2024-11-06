@@ -85,4 +85,29 @@ public class Question {
         if (user == null) return false;
         return writer.equals(user.getUserId());
     }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "questionId=" + questionId +
+                ", writer='" + writer + '\'' +
+                ", title='" + title + '\'' +
+                ", contents='" + contents + '\'' +
+                ", createdDate=" + createdDate +
+                ", countOfAnswer=" + countOfAnswer +
+                '}';
+    }
+
+    public void updateCountOfAnswer(Question question){
+        this.countOfAnswer = question.countOfAnswer;
+    }
+
+    public void update(Question question) {
+        this.questionId = question.questionId;
+        this.writer = question.writer;
+        this.title = question.title;
+        this.contents = question.contents;
+        this.createdDate = question.createdDate;
+        this.countOfAnswer = question.countOfAnswer;
+    }
 }

@@ -59,4 +59,15 @@ public class Answer {
     public int hashCode() {
         return Objects.hash(getQuestionId(), getWriter(), getContents(), getCreatedDate());
     }
+
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "answerId=" + answerId +
+                ", questionId=" + questionId +
+                ", writer='" + writer + '\'' +
+                ", contents='" + contents + '\'' +
+                ", createdDate=" + createdDate +
+                '}';
+    }
 }
