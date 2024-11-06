@@ -1,5 +1,6 @@
 package jwp.controller;
 
+import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.view.JspView;
 import core.mvc.view.View;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class HomeController implements Controller {
+public class HomeController extends AbstractController {
 
     private final QuestionDao questionDao = new QuestionDao();
 
