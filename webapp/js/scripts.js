@@ -1,4 +1,4 @@
-$(".answerWrite input[type=submit]").click(addAnswer);
+$(".answerWrite input[type=submit]").click(addAnswer);      //'답변하기' 버튼을 누르면 'addAnswer' 함수를 작동 시킴
 
 function addAnswer(e) {
     e.preventDefault();
@@ -8,7 +8,7 @@ function addAnswer(e) {
         type : 'post',
         url : '/api/qna/addAnswer',
         data : queryString,
-        dataType : 'json',
+        dataType : 'json',      //서버가 json형식으로 데이터 반환
         error: onError,
         success : onSuccess,
     });
