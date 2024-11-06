@@ -36,10 +36,7 @@ public class UpdateQuestionFormController extends AbstractController {
             throw new IllegalArgumentException();
         }
 
-        ModelAndView mav = jspView("/qna/updateForm.jsp");
-        mav.addObject("question", question);
-
-        return mav;
+        return jspView("/qna/updateForm.jsp").addObject("question", question);
     }
 
 }

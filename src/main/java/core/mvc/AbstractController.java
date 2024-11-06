@@ -16,7 +16,4 @@ public abstract class AbstractController implements Controller {
     protected ModelAndView jsonView() {
         return new ModelAndView(new JsonView());
     }
-
-    @Override
-    public abstract ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception;
 }

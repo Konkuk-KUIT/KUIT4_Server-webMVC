@@ -25,10 +25,6 @@ public class ShowQnaController  extends AbstractController {
         Question question = questionDao.findByQuestionId(Integer.parseInt(questionId));
         List<Answer> answers = answerDao.findAllByQuestionId(question.getQuestionId());
 
-        ModelAndView mav = jspView("/qna/show.jsp");
-        mav.addObject("question", question);
-        mav.addObject("answers", answers);
-
-        return mav;
+        return jspView("/qna/show.jsp").addObject("question", question).addObject("answers", answers);
     }
 }

@@ -13,7 +13,6 @@ import jwp.model.Question;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
 
 public class CreateAnswerController extends AbstractController {
 
@@ -34,9 +33,6 @@ public class CreateAnswerController extends AbstractController {
         question.increaseCountOfAnswer();
         questionDao.updateCountOfAnswer(question);
 
-        ModelAndView mav = jsonView();
-        mav.addObject("answer", savedAnswer);
-        
-        return mav;
+        return jsonView().addObject("answer", savedAnswer);
     }
 }

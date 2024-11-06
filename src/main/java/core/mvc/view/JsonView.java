@@ -9,6 +9,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+// answer가 여러 개일 때 고려 (?)
 public class JsonView implements View {
 
     @Override
