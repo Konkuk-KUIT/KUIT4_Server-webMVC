@@ -1,5 +1,6 @@
 package jwp.controller.user;
 
+import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.modelandview.ModelAndView;
 import core.mvc.view.JspView;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class UpdateUserFormController implements Controller {
+public class UpdateUserFormController extends AbstractController {
 
     private final UserDao userDao = new UserDao();
 
@@ -25,9 +26,19 @@ public class UpdateUserFormController implements Controller {
 
         if (user != null && value != null) {
             if (user.equals(value)) {            // 수정되는 user와 수정하는 user가 동일한 경우
-                return new ModelAndView(new JspView("/user/updateForm.jsp"));
+                return jspView("/user/updateForm.jsp");
             }
         }
-        return new ModelAndView(new JspView("redirect:/"));
+        return jspView("redirect:/");
+    }
+
+    @Override
+    protected ModelAndView jspView() {
+        return null;
+    }
+
+    @Override
+    protected ModelAndView jsonView() {
+        return null;
     }
 }

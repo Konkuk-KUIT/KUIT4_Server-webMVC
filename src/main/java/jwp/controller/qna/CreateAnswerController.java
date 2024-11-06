@@ -1,9 +1,8 @@
 package jwp.controller.qna;
 
-import core.mvc.Controller;
+import core.mvc.AbstractController;
 import core.mvc.modelandview.ModelAndView;
 import core.mvc.view.JsonView;
-import core.mvc.view.View;
 import jwp.dao.AnswerDao;
 import jwp.dao.QuestionDao;
 import jwp.model.Answer;
@@ -12,7 +11,7 @@ import jwp.model.Question;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CreateAnswerController implements Controller {
+public class CreateAnswerController extends AbstractController {
 
     private final AnswerDao answerDao = new AnswerDao();
     private final QuestionDao questionDao = new QuestionDao();
@@ -33,7 +32,18 @@ public class CreateAnswerController implements Controller {
 
         //req.setAttribute("answer", savedAnswer);
 
-        return new ModelAndView(new JsonView()).addObject("answer", savedAnswer);
+        return jsonView().addObject("answer", savedAnswer);
     }
 
+
+
+    @Override
+    protected ModelAndView jspView() {
+        return null;
+    }
+
+    @Override
+    protected ModelAndView jsonView() {
+        return new ModelAndView(new JsonView());
+    }
 }

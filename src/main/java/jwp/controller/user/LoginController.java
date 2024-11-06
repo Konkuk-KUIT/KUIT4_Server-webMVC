@@ -1,5 +1,6 @@
 package jwp.controller.user;
 
+import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.modelandview.ModelAndView;
 import core.mvc.view.JspView;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class LoginController implements Controller {
+public class LoginController extends AbstractController {
 
     private final UserDao userDao = new UserDao();
 
@@ -26,8 +27,18 @@ public class LoginController implements Controller {
 
         if (user != null && user.isSameUser(loginUser)) {
             session.setAttribute("user", user);
-            return new ModelAndView(new JspView("redirect:/"));
+            return jspView("redirect:/");
         }
-        return new ModelAndView(new JspView("redirect:/user/loginFailed"));
+        return jspView("redirect:/user/loginFailed");
+    }
+
+    @Override
+    protected ModelAndView jspView() {
+        return null;
+    }
+
+    @Override
+    protected ModelAndView jsonView() {
+        return null;
     }
 }

@@ -1,5 +1,6 @@
 package jwp.controller.user;
 
+import core.mvc.AbstractController;
 import core.mvc.Controller;
 import core.mvc.modelandview.ModelAndView;
 import core.mvc.view.JspView;
@@ -10,7 +11,7 @@ import jwp.model.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class UpdateUserController implements Controller {
+public class UpdateUserController extends AbstractController {
 
     private final UserDao userDao = new UserDao();
 
@@ -22,6 +23,16 @@ public class UpdateUserController implements Controller {
                 req.getParameter("name"),
                 req.getParameter("email"));
         userDao.update(modifiedUser);
+        return jspView();
+    }
+
+    @Override
+    protected ModelAndView jspView() {
         return new ModelAndView(new JspView("redirect:/user/list"));
+    }
+
+    @Override
+    protected ModelAndView jsonView() {
+        return null;
     }
 }
