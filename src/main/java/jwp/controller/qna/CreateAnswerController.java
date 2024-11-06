@@ -1,6 +1,7 @@
 package jwp.controller.qna;
 
 import core.mvc.Controller;
+import core.mvc.modelandview.ModelAndView;
 import core.mvc.view.JsonView;
 import core.mvc.view.View;
 import jwp.dao.AnswerDao;
@@ -17,7 +18,7 @@ public class CreateAnswerController implements Controller {
     private final QuestionDao questionDao = new QuestionDao();
 
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         System.out.println("[CreateAnswerController] 실행");
         int questionId = Integer.parseInt(req.getParameter("questionId"));
         Answer answer = new Answer(questionId,
@@ -30,8 +31,9 @@ public class CreateAnswerController implements Controller {
         question.increaseCountOfAnswer();
         questionDao.updateCountOfAnswer(question);
 
-        req.setAttribute("answer", savedAnswer);
+        //req.setAttribute("answer", savedAnswer);
 
-        return new JsonView();
+        return new ModelAndView(new JsonView()).addObject("answer", savedAnswer);
     }
+
 }

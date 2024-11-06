@@ -1,6 +1,7 @@
 package jwp.controller.qna;
 
 import core.mvc.Controller;
+import core.mvc.modelandview.ModelAndView;
 import core.mvc.view.JspView;
 import core.mvc.view.View;
 import jwp.dao.QuestionDao;
@@ -17,10 +18,10 @@ public class UpdateQuestionController implements Controller {
     private final QuestionDao questionDao = new QuestionDao();
 
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         HttpSession session = req.getSession();
         if (!UserSessionUtils.isLogined(session)) {
-            return new JspView("redirect:/users/loginForm");
+            return new ModelAndView(new JspView("redirect:/users/loginForm"));
         }
 
         User user = UserSessionUtils.getUserFromSession(session);
@@ -32,6 +33,6 @@ public class UpdateQuestionController implements Controller {
         question.updateTitleAndContents(req.getParameter("title"),
                 req.getParameter("contents"));
         questionDao.update(question);
-        return new JspView("redirect:/");
+        return new ModelAndView(new JspView("redirect:/"));
     }
 }

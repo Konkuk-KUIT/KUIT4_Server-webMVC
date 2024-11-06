@@ -1,6 +1,7 @@
 package jwp.controller.user;
 
 import core.mvc.Controller;
+import core.mvc.modelandview.ModelAndView;
 import core.mvc.view.JspView;
 import core.mvc.view.View;
 import jwp.dao.UserDao;
@@ -15,12 +16,11 @@ public class ListUserController implements Controller {
     private final UserDao userDao = new UserDao();
 
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         HttpSession session = req.getSession();
         if (UserSessionUtils.isLogined(session)) {
-            req.setAttribute("users", userDao.findAll());
-            return new JspView("/user/list.jsp");
+            return new ModelAndView(new JspView("/user/list.jsp")).addObject("users", userDao.findAll());
         }
-        return new JspView("redirect:/user/loginForm");
+        return new ModelAndView(new JspView("redirect:/user/loginForm"));
     }
 }
