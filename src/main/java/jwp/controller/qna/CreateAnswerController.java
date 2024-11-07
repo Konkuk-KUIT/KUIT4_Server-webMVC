@@ -2,6 +2,11 @@ package jwp.controller.qna;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.mvc.Controller;
+import core.mvc.view.JsonView;
+import core.mvc.view.JspView;
+import core.mvc.view.ModelAndView;
+import core.mvc.view.View;
+import jwp.controller.AbstractController;
 import jwp.dao.AnswerDao;
 import jwp.dao.QuestionDao;
 import jwp.model.Answer;
@@ -11,13 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 
-public class CreateAnswerController implements Controller {
+public class CreateAnswerController extends AbstractController {
 
     private final AnswerDao answerDao = new AnswerDao();
     private final QuestionDao questionDao = new QuestionDao();
 
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         System.out.println("[CreateAnswerController] 실행");
         int questionId = Integer.parseInt(req.getParameter("questionId"));
         Answer answer = new Answer(questionId,
@@ -30,11 +35,18 @@ public class CreateAnswerController implements Controller {
         question.increaseCountOfAnswer();
         questionDao.updateCountOfAnswer(question);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        resp.setContentType("application/json;charset=utf-8");
-        PrintWriter out = resp.getWriter();
-        out.print(objectMapper.writeValueAsString(savedAnswer));
+        req.setAttribute("answer", savedAnswer);
 
-        return null;
+        return jsonView();
+    }
+
+    @Override
+    public ModelAndView jspView(String viewName) {
+        return new ModelAndView(new JspView(viewName));
+    }
+
+    @Override
+    public ModelAndView jsonView() {
+        return new ModelAndView(new JsonView());
     }
 }
