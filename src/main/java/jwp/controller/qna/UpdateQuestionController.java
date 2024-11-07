@@ -1,16 +1,16 @@
 package jwp.controller.qna;
 
-import core.mvc.AbstractController;
-import core.mvc.view.ModelAndView;
+import core.mvc.Controller;
 import jwp.dao.QuestionDao;
 import jwp.model.Question;
 import jwp.model.User;
 import jwp.util.UserSessionUtils;
 
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.Map;
 
-public class UpdateQuestionController extends AbstractController {
+public class UpdateQuestionController implements Controller {
 
     private final QuestionDao questionDao = new QuestionDao();
     private HttpSession session;
@@ -21,9 +21,9 @@ public class UpdateQuestionController extends AbstractController {
     }
 
     @Override
-    public ModelAndView execute(Map<String, String> params) throws Exception {
+    public String execute(Map<String, String> params, Map<String, Object> model) throws SQLException {
         if (!UserSessionUtils.isLogined(session)) {
-            return jspView("redirect:/users/loginForm");
+            return "redirect:/users/loginForm";
         }
 
         User user = UserSessionUtils.getUserFromSession(session);
@@ -34,6 +34,7 @@ public class UpdateQuestionController extends AbstractController {
         }
         question.updateTitleAndContents(params.get("title"), params.get("contents"));
         questionDao.update(question);
-        return jspView("redirect:/");
+        return "redirect:/";
     }
+
 }

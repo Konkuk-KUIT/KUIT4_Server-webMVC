@@ -1,12 +1,13 @@
 package jwp.controller.user;
 
-import core.mvc.AbstractController;
-import core.mvc.view.ModelAndView;
+import core.mvc.Controller;
 
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.Map;
 
-public class LogoutController extends AbstractController {
+public class LogoutController implements Controller {
+
     private HttpSession session;
 
     @Override
@@ -15,8 +16,8 @@ public class LogoutController extends AbstractController {
     }
 
     @Override
-    public ModelAndView execute(Map<String, String> params) throws Exception {
+    public String execute(Map<String, String> params, Map<String, Object> model) throws SQLException {
         session.removeAttribute("user");
-        return jspView("redirect:/");
+        return "redirect:/";
     }
 }

@@ -1,20 +1,21 @@
 package jwp.controller;
 
-import core.mvc.AbstractController;
-import core.mvc.view.ModelAndView;
+import core.mvc.Controller;
 import jwp.dao.QuestionDao;
 import jwp.model.Question;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public class HomeController extends AbstractController {
+public class HomeController implements Controller {
 
     private final QuestionDao questionDao = new QuestionDao();
 
     @Override
-    public ModelAndView execute(Map<String, String> params) throws Exception {
+    public String execute(Map<String, String> params, Map<String, Object> model) throws SQLException {
         List<Question> questions = questionDao.findAll();
-        return jspView("/home.jsp").addObject("questions", questions);
+        model.put("questions", questions);
+        return "/home";
     }
 }

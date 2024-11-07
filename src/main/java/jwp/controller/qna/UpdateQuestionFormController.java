@@ -1,17 +1,17 @@
 package jwp.controller.qna;
 
-import core.mvc.AbstractController;
-import core.mvc.view.ModelAndView;
+import core.mvc.Controller;
 import jwp.dao.QuestionDao;
 import jwp.model.Question;
 import jwp.model.User;
 import jwp.util.UserSessionUtils;
 
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.Map;
 
 
-public class UpdateQuestionFormController extends AbstractController {
+public class UpdateQuestionFormController implements Controller {
 
     private final QuestionDao questionDao = new QuestionDao();
     private HttpSession session;
@@ -21,12 +21,12 @@ public class UpdateQuestionFormController extends AbstractController {
         this.session = session;
     }
 
-    @Override
-    public ModelAndView execute(Map<String, String> params) throws Exception {
-        if (!UserSessionUtils.isLogined(session)) {
-            return jspView("redirect:/users/loginForm");
-        }
 
+    @Override
+    public String execute(Map<String, String> params, Map<String, Object> model) throws SQLException {
+        if (!UserSessionUtils.isLogined(session)) {
+            return "redirect:/users/loginForm";
+        }
         String questionId = params.get("questionId");
         Question question = questionDao.findByQuestionId(Integer.parseInt(questionId));
         User user = UserSessionUtils.getUserFromSession(session);
@@ -34,7 +34,8 @@ public class UpdateQuestionFormController extends AbstractController {
             throw new IllegalArgumentException();
         }
 
-        return jspView("/qna/updateForm.jsp").addObject("question", question);
+        model.put("question", question);
+        return "/qna/updateForm";
     }
 
 }

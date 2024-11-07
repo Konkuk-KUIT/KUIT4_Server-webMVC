@@ -1,14 +1,14 @@
 package jwp.controller.user;
 
-import core.mvc.AbstractController;
-import core.mvc.view.ModelAndView;
+import core.mvc.Controller;
 import jwp.dao.UserDao;
 import jwp.util.UserSessionUtils;
 
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.Map;
 
-public class ListUserController extends AbstractController {
+public class ListUserController implements Controller {
 
     private final UserDao userDao = new UserDao();
     private HttpSession session;
@@ -19,10 +19,11 @@ public class ListUserController extends AbstractController {
     }
 
     @Override
-    public ModelAndView execute(Map<String, String> params) throws Exception {
+    public String execute(Map<String, String> params, Map<String, Object> model) throws SQLException {
         if (UserSessionUtils.isLogined(session)) {
-            return jspView("/user/list.jsp").addObject("users", userDao.findAll());
+            model.put("users", userDao.findAll());
+            return "/user/list";
         }
-        return jspView("redirect:/user/loginForm");
+        return "redirect:/user/loginForm";
     }
 }

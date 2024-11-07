@@ -1,13 +1,13 @@
 package jwp.controller.qna;
 
-import core.mvc.AbstractController;
-import core.mvc.view.ModelAndView;
+import core.mvc.Controller;
 import jwp.util.UserSessionUtils;
 
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.Map;
 
-public class CreateQuestionFormController extends AbstractController {
+public class CreateQuestionFormController implements Controller {
     private HttpSession session;
 
     @Override
@@ -16,10 +16,10 @@ public class CreateQuestionFormController extends AbstractController {
     }
 
     @Override
-    public ModelAndView execute(Map<String, String> params) throws Exception {
+    public String execute(Map<String, String> params, Map<String, Object> model) throws SQLException {
         if (UserSessionUtils.isLogined(session)) {
-            return jspView("/qna/form.jsp");
+            return "/qna/form";
         }
-        return jspView("redirect:/user/loginForm");
+        return "redirect:/user/loginForm";
     }
 }

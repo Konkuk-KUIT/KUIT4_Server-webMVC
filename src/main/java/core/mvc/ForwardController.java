@@ -1,10 +1,8 @@
 package core.mvc;
 
-import core.mvc.view.ModelAndView;
-
 import java.util.Map;
 
-public class ForwardController extends AbstractController {
+public class ForwardController implements Controller {
 
     private final String forwardUrl;
 
@@ -16,7 +14,7 @@ public class ForwardController extends AbstractController {
     }
 
     @Override
-    public ModelAndView execute(Map<String, String> params) throws Exception {
-        return jspView(forwardUrl);
+    public String execute(Map<String, String> params, Map<String, Object> model) {
+        return forwardUrl;
     }
 }

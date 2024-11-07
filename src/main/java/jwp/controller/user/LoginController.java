@@ -1,14 +1,14 @@
 package jwp.controller.user;
 
-import core.mvc.AbstractController;
-import core.mvc.view.ModelAndView;
+import core.mvc.Controller;
 import jwp.dao.UserDao;
 import jwp.model.User;
 
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.Map;
 
-public class LoginController extends AbstractController {
+public class LoginController implements Controller {
 
     private final UserDao userDao = new UserDao();
     private HttpSession session;
@@ -18,8 +18,9 @@ public class LoginController extends AbstractController {
         this.session = session;
     }
 
+
     @Override
-    public ModelAndView execute(Map<String, String> params) throws Exception {
+    public String execute(Map<String, String> params, Map<String, Object> model) throws SQLException {
         String userId = params.get("userId");
         String password = params.get("password");
         User loginUser = new User(userId, password);
@@ -27,8 +28,8 @@ public class LoginController extends AbstractController {
 
         if (user != null && user.isSameUser(loginUser)) {
             session.setAttribute("user", user);
-            return jspView("redirect:/");
+            return "redirect:/";
         }
-        return jspView("redirect:/user/loginFailed");
+        return "redirect:/user/loginFailed";
     }
 }
