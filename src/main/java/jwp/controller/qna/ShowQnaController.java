@@ -1,6 +1,10 @@
 package jwp.controller.qna;
 
+import core.mvc.AbstractController;
 import core.mvc.Controller;
+import core.mvc.view.JspView;
+import core.mvc.view.ModelAndView;
+import core.mvc.view.View;
 import jwp.dao.AnswerDao;
 import jwp.dao.QuestionDao;
 import jwp.model.Answer;
@@ -10,18 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class ShowQnaController implements Controller {
+public class ShowQnaController extends AbstractController {
 
     private final QuestionDao questionDao = new QuestionDao();
     private final AnswerDao answerDao = new AnswerDao();
 
     @Override
-    public String execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         String questionId = req.getParameter("questionId");
         Question question = questionDao.findByQuestionId(Integer.parseInt(questionId));
         List<Answer> answers = answerDao.findAllByQuestionId(question.getQuestionId());
-        req.setAttribute("question", question);
-        req.setAttribute("answers", answers);
-        return "/qna/show.jsp";
+        return jspView("/qna/show.jsp").addObject("question", question).addObject("answers", answers);
     }
 }

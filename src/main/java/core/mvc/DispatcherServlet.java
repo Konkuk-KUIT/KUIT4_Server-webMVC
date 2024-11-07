@@ -1,5 +1,8 @@
 package core.mvc;
 
+import core.mvc.view.ModelAndView;
+import core.mvc.view.View;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,11 +26,8 @@ public class DispatcherServlet extends HttpServlet {
         String url = req.getRequestURI();
         Controller controller = requestMapping.getController(url);
         try {
-            String viewName = controller.execute(req, resp);
-            if (viewName == null) {
-                return;
-            }
-            move(viewName, req, resp);
+            ModelAndView mav = controller.execute(req, resp);
+            mav.render(req,resp);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new ServletException(e.getMessage());
@@ -42,4 +42,5 @@ public class DispatcherServlet extends HttpServlet {
         RequestDispatcher rd = req.getRequestDispatcher(viewName);
         rd.forward(req, resp);
     }
+
 }
