@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class ListUserController extends AbstractController {
+public class ListUserController implements AbstractController {
 
     private final UserDao userDao = new UserDao();
 

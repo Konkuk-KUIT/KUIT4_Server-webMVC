@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class UpdateQuestionFormController extends AbstractController {
+public class UpdateQuestionFormController implements AbstractController {
 
     private final QuestionDao questionDao = new QuestionDao();
 

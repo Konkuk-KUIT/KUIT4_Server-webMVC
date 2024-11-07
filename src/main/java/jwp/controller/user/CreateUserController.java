@@ -8,7 +8,7 @@ import jwp.model.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CreateUserController extends AbstractController {
+public class CreateUserController implements AbstractController {
 
     private final UserDao userDao = new UserDao();
 

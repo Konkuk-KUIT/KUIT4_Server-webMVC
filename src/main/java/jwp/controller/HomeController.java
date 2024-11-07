@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class HomeController extends AbstractController {
+public class HomeController implements AbstractController {
 
     private final QuestionDao questionDao = new QuestionDao();
 
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         List<Question> questions = questionDao.findAll();
-        req.setAttribute("questions", questions);
+        // req.setAttribute("questions", questions);
         return jspView("/home.jsp").addObject("questions", questions);
     }
 }

@@ -10,7 +10,7 @@ import jwp.model.Question;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CreateAnswerController extends AbstractController {
+public class CreateAnswerController implements AbstractController {
 
     private final AnswerDao answerDao = new AnswerDao();
     private final QuestionDao questionDao = new QuestionDao();
