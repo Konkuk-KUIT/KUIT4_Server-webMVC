@@ -11,7 +11,6 @@ public abstract class AbstractController implements Controller{
         return null;
     }
 
-    //
     protected abstract ModelAndView jspView(String path);
 
     protected abstract ModelAndView jsonView();
