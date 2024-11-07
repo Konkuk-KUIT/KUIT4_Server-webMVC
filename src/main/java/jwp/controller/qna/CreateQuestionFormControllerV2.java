@@ -1,13 +1,13 @@
-package jwp.controller.user;
+package jwp.controller.qna;
 
-import core.mvc.Controller;
+import core.mvc.controller.ControllerV2;
+import jwp.util.UserSessionUtils;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class LogoutController implements Controller {
-
+public class CreateQuestionFormControllerV2 implements ControllerV2 {
     private HttpSession session;
 
     @Override
@@ -17,7 +17,9 @@ public class LogoutController implements Controller {
 
     @Override
     public String execute(Map<String, String> params, Map<String, Object> model) throws SQLException {
-        session.removeAttribute("user");
-        return "redirect:/";
+        if (UserSessionUtils.isLogined(session)) {
+            return "/qna/form";
+        }
+        return "redirect:/user/loginForm";
     }
 }

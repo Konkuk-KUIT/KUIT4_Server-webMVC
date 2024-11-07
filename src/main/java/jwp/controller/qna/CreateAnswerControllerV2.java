@@ -1,6 +1,6 @@
 package jwp.controller.qna;
 
-import core.mvc.Controller;
+import core.mvc.controller.ControllerV2;
 import jwp.dao.AnswerDao;
 import jwp.dao.QuestionDao;
 import jwp.model.Answer;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static core.mvc.ViewResolver.JSON_VIEW_PREFIX;
 
-public class CreateAnswerController implements Controller {
+public class CreateAnswerControllerV2 implements ControllerV2 {
 
     private final AnswerDao answerDao = new AnswerDao();
     private final QuestionDao questionDao = new QuestionDao();

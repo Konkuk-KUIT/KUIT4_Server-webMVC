@@ -1,10 +1,8 @@
-package core.mvc;
+package core.mvc.controller;
 
 import jwp.model.User;
 
 import javax.servlet.http.HttpSession;
-import java.sql.SQLException;
-import java.util.Map;
 
 public interface Controller {
 
@@ -13,6 +11,4 @@ public interface Controller {
 
     default void setUserFromSession(User user) {
     }
-
-    String execute(Map<String, String> params, Map<String, Object> model) throws SQLException;
 }

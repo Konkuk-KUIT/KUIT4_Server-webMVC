@@ -1,6 +1,6 @@
 package jwp.controller.qna;
 
-import core.mvc.Controller;
+import core.mvc.controller.ControllerV2;
 import jwp.dao.QuestionDao;
 import jwp.model.Question;
 import jwp.model.User;
@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 
-public class UpdateQuestionFormController implements Controller {
+public class UpdateQuestionFormControllerV2 implements ControllerV2 {
 
     private final QuestionDao questionDao = new QuestionDao();
     private HttpSession session;

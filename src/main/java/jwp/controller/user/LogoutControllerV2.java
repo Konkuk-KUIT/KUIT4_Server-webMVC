@@ -1,16 +1,13 @@
 package jwp.controller.user;
 
-import core.mvc.Controller;
-import jwp.dao.UserDao;
-import jwp.util.UserSessionUtils;
+import core.mvc.controller.ControllerV2;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class ListUserController implements Controller {
+public class LogoutControllerV2 implements ControllerV2 {
 
-    private final UserDao userDao = new UserDao();
     private HttpSession session;
 
     @Override
@@ -20,10 +17,7 @@ public class ListUserController implements Controller {
 
     @Override
     public String execute(Map<String, String> params, Map<String, Object> model) throws SQLException {
-        if (UserSessionUtils.isLogined(session)) {
-            model.put("users", userDao.findAll());
-            return "/user/list";
-        }
-        return "redirect:/user/loginForm";
+        session.removeAttribute("user");
+        return "redirect:/";
     }
 }

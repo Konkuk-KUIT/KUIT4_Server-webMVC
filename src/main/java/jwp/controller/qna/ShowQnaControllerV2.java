@@ -1,6 +1,6 @@
 package jwp.controller.qna;
 
-import core.mvc.Controller;
+import core.mvc.controller.ControllerV2;
 import jwp.dao.AnswerDao;
 import jwp.dao.QuestionDao;
 import jwp.model.Answer;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public class ShowQnaController implements Controller {
+public class ShowQnaControllerV2 implements ControllerV2 {
 
     private final QuestionDao questionDao = new QuestionDao();
     private final AnswerDao answerDao = new AnswerDao();

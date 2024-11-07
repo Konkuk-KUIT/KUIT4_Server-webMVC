@@ -1,13 +1,13 @@
 package jwp.controller.user;
 
-import core.mvc.Controller;
+import core.mvc.controller.ControllerV2;
 import jwp.dao.UserDao;
 import jwp.model.User;
 
 import java.sql.SQLException;
 import java.util.Map;
 
-public class UpdateUserController implements Controller {
+public class UpdateUserControllerV2 implements ControllerV2 {
 
     private final UserDao userDao = new UserDao();
 

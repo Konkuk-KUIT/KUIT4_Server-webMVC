@@ -1,6 +1,6 @@
 package jwp.controller.user;
 
-import core.mvc.Controller;
+import core.mvc.controller.ControllerV2;
 import jwp.dao.UserDao;
 import jwp.model.User;
 
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.Map;
 
-public class UpdateUserFormController implements Controller {
+public class LoginControllerV2 implements ControllerV2 {
 
     private final UserDao userDao = new UserDao();
     private HttpSession session;
@@ -18,19 +18,18 @@ public class UpdateUserFormController implements Controller {
         this.session = session;
     }
 
+
     @Override
     public String execute(Map<String, String> params, Map<String, Object> model) throws SQLException {
-        String userId = params.get("userId");              // 수정되는 user
+        String userId = params.get("userId");
+        String password = params.get("password");
+        User loginUser = new User(userId, password);
         User user = userDao.findByUserId(userId);
-        Object value = session.getAttribute("user");    // 수정하는 user
 
-        if (user != null && value != null) {
-            if (user.equals(value)) {            // 수정되는 user와 수정하는 user가 동일한 경우
-                model.put("user", user);
-                return "/user/updateForm";
-            }
+        if (user != null && user.isSameUser(loginUser)) {
+            session.setAttribute("user", user);
+            return "redirect:/";
         }
-        return "redirect:/";
+        return "redirect:/user/loginFailed";
     }
-
 }

@@ -1,6 +1,6 @@
 package jwp.controller;
 
-import core.mvc.Controller;
+import core.mvc.controller.ControllerV2;
 import jwp.dao.QuestionDao;
 import jwp.model.Question;
 
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public class HomeController implements Controller {
+public class HomeControllerV2 implements ControllerV2 {
 
     private final QuestionDao questionDao = new QuestionDao();
 
