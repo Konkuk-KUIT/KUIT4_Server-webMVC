@@ -1,8 +1,8 @@
 package jwp.controller.qna;
 
-import core.mvc.Controller;
+import core.mvc.AbstractController;
 import core.mvc.view.JsonView;
-import core.mvc.view.View;
+import core.mvc.view.ModelAndView;
 import jwp.dao.AnswerDao;
 import jwp.dao.QuestionDao;
 import jwp.model.Answer;
@@ -11,13 +11,13 @@ import jwp.model.Question;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CreateAnswerController implements Controller {
+public class CreateAnswerController implements AbstractController {
 
     private final AnswerDao answerDao = new AnswerDao();
     private final QuestionDao questionDao = new QuestionDao();
 
     @Override
-    public View execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+    public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         System.out.println("[CreateAnswerController] 실행");
         int questionId = Integer.parseInt(req.getParameter("questionId"));
         Answer answer = new Answer(questionId,
@@ -30,8 +30,18 @@ public class CreateAnswerController implements Controller {
         question.increaseCountOfAnswer();
         questionDao.updateCountOfAnswer(question);
 
-        req.setAttribute("answer", savedAnswer);
+        //req.setAttribute("answer", savedAnswer);
 
-        return new JsonView();
+        return jsonView().addObject("answer", savedAnswer);
+    }
+
+    @Override
+    public ModelAndView jspView(String viewName) {
+        return null;
+    }
+
+    @Override
+    public ModelAndView jsonView() {
+        return new ModelAndView(new JsonView());
     }
 }
