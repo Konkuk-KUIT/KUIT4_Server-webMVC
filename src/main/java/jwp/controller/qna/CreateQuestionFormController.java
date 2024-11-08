@@ -22,14 +22,4 @@ public class CreateQuestionFormController extends AbstractController {
         }
         return jspView("redirect:/user/loginForm");
     }
-
-    @Override
-    public ModelAndView jspView(String viewName) {
-        return new ModelAndView(new JspView(viewName));
-    }
-
-    @Override
-    public ModelAndView jsonView() {
-        return new ModelAndView(new JsonView());
-    }
 }

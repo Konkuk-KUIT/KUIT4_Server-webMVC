@@ -19,14 +19,4 @@ public class LogoutController extends AbstractController {
         session.removeAttribute("user");
         return jspView("redirect:/");
     }
-
-    @Override
-    public ModelAndView jspView(String viewName) {
-        return new ModelAndView(new JspView(viewName));
-    }
-
-    @Override
-    public ModelAndView jsonView() {
-        return new ModelAndView(new JsonView());
-    }
 }

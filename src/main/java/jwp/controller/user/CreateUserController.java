@@ -26,14 +26,4 @@ public class CreateUserController extends AbstractController {
         System.out.println("user 회원가입 완료");
         return jspView("redirect:/user/list");
     }
-
-    @Override
-    public ModelAndView jspView(String viewName) {
-        return new ModelAndView(new JspView(viewName));
-    }
-
-    @Override
-    public ModelAndView jsonView() {
-        return new ModelAndView(new JsonView());
-    }
 }

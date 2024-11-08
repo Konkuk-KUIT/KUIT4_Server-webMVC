@@ -22,14 +22,4 @@ public class HomeController extends AbstractController {
         req.setAttribute("questions", questions);
         return jspView("/home.jsp");
     }
-
-    @Override
-    public ModelAndView jspView(String viewName) {
-        return new ModelAndView(new JspView(viewName));
-    }
-
-    @Override
-    public ModelAndView jsonView() {
-        return new ModelAndView(new JsonView());
-    }
 }

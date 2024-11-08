@@ -18,6 +18,7 @@ public class JsonView implements View {
         out.print(objectMapper.writeValueAsString(model));
     }
 
+    /*
     private static Map<String, Object> createModel(HttpServletRequest req) {
         Enumeration<String> names = req.getHeaderNames();
         Map<String, Object> model = new HashMap<>();
@@ -27,4 +28,6 @@ public class JsonView implements View {
         }
         return model;
     }
+    이렇게 하면 다 넣게 된다?
+     */
 }

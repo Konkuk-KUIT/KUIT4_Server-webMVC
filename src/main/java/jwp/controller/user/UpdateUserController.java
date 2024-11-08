@@ -27,14 +27,4 @@ public class UpdateUserController extends AbstractController {
         userDao.update(modifiedUser);
         return jspView("redirect:/user/list");
     }
-
-    @Override
-    public ModelAndView jspView(String viewName) {
-        return new ModelAndView(new JspView(viewName));
-    }
-
-    @Override
-    public ModelAndView jsonView() {
-        return new ModelAndView(new JsonView());
-    }
 }

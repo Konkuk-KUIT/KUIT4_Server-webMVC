@@ -25,15 +25,4 @@ public class CreateQuestionController extends AbstractController {
         System.out.println("saved question id= " + savedQuestion.getQuestionId());
         return jspView("redirect:/");
     }
-
-    @Override
-    public ModelAndView jspView(String viewName) {
-        return new ModelAndView(new JspView(viewName));
-    }
-
-    @Override
-    public ModelAndView jsonView() {
-        return new ModelAndView(new JsonView());
-    }
-
 }

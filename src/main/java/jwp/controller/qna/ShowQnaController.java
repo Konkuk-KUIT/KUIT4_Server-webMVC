@@ -29,14 +29,4 @@ public class ShowQnaController extends AbstractController {
         req.setAttribute("answers", answers);
         return jspView("/qna/show.jsp");
     }
-
-    @Override
-    public ModelAndView jspView(String viewName) {
-        return new ModelAndView(new JspView(viewName));
-    }
-
-    @Override
-    public ModelAndView jsonView() {
-        return new ModelAndView(new JsonView());
-    }
 }
