@@ -20,15 +20,15 @@ public class QnaUpdateFormController implements Controller {
         User user = (User)session.getAttribute("user");
         int questionId = Integer.parseInt(req.getParameter("questionId"));
 
-        System.out.println("질문글 수정 접근");
-        System.out.println("userId : " + user.getUserId() + ", questionId : " + questionId);
+//        System.out.println("질문글 수정 접근");
+//        System.out.println("userId : " + user.getUserId() + ", questionId : " + questionId);
 
         Question question = questionDao.findByQuestionId(questionId);
         if(question != null && !Objects.equals(question.getWriter(), user.getUserId())) {
             throw new IllegalArgumentException();
         }
 
-        req.setAttribute("question", question);     //안넘어 간다는 건가? 자꾸 jsp 파일에서 qestionID를 못읽는데?
+        req.setAttribute("question", question);
         return "/qna/update.jsp";
     }
 }

@@ -36,7 +36,7 @@ public class DispatcherServlet extends HttpServlet {
 
     private void move(String viewName, HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         if (viewName.startsWith(REDIRECT_PREFIX)) {
-            resp.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));
+            resp.sendRedirect(viewName.substring(REDIRECT_PREFIX.length()));        //리다이렉트는 resp 통해서 접근
             return;
         }
         RequestDispatcher rd = req.getRequestDispatcher(viewName);

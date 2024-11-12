@@ -19,7 +19,7 @@ public class UserDao {
         String sql = "INSERT INTO USERS VALUES (?, ?, ?, ?)";
 
         PreparedStatementSetter pstmtSetter = pstmt -> {
-            pstmt.setString(1, user.getUserId());
+            pstmt.setString(1, user.getUserId());           //pstmt 와 관련이 없는 user.getUserId() 등은 람다를 넘겨주기 전에 실행 되어 string 형식으로 전달되는 느낌?
             pstmt.setString(2, user.getPassword());
             pstmt.setString(3, user.getName());
             pstmt.setString(4, user.getEmail());

@@ -22,11 +22,11 @@ public class ShowController implements Controller {
         int questionId = Integer.parseInt(req.getParameter("questionId"));
         Question question = questionDao.findByQuestionId(questionId);
 
-        if(question != null){
-            HttpSession session = req.getSession();
-            User user = (User) session.getAttribute("user");
-            System.out.println("질문글 접근, questionId : " + questionId + ", userId : " + user.getUserId());
-        }
+//        if(question != null){
+//            HttpSession session = req.getSession();
+//            User user = (User) session.getAttribute("user");
+//            System.out.println("질문글 접근, questionId : " + questionId + ", userId : " + user.getUserId());
+//        }
 
         req.setAttribute("question", question);
 
