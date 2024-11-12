@@ -30,9 +30,8 @@ public class CreateAnswerController implements AbstractController {
         question.increaseCountOfAnswer();
         questionDao.updateCountOfAnswer(question);
 
-        //req.setAttribute("answer", savedAnswer);
-
-        return jsonView().addObject("answer", savedAnswer);
+        return jsonView()
+                .addObject("answer", savedAnswer);
     }
 
     @Override

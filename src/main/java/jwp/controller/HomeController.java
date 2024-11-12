@@ -17,8 +17,8 @@ public class HomeController implements AbstractController {
     @Override
     public ModelAndView execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         List<Question> questions = questionDao.findAll();
-        req.setAttribute("questions", questions);
-        return jspView("/home.jsp");
+        return jspView("/home.jsp")
+                .addObject("questions", questions);
     }
 
     @Override
