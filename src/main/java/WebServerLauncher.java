@@ -10,6 +10,7 @@ public class WebServerLauncher {
     public static void main(String[] args) throws Exception {
         String webappDirLocation = "./webapp/";
         Tomcat tomcat = new Tomcat();
+
         tomcat.setPort(8080);
         tomcat.getConnector();
 
